@@ -34,16 +34,16 @@ function Navbar(up) {
     })
     return (
         <>
-            <nav className={`${scrollUp&&'animate-slide-in-top top-0'} ${!scrollUp&&'animate-slide-out-top delay-300 -top-20'} sticky md:text-lg lg:text-lg xl:text-xl font-regular`}>
-                <div id='hidnav' className={`${open ? "w-50 delay-0 animate-slide-in" : "animate-slide-out w-0 delay-200"} h-[120vh] fixed top-0 left-0 bg-white drop-shadow-xl`} onAnimationEnd={()=>{setAnimating(false)}}>
-                    <div className="w-full text-md md:text-lg lg:text-xl xl:text-xl 2xl:text-2xl z-20">
-                        <ul className={`m-auto mt-30 ${open ? "text-[100%]" : "text-[0%] delay-200" } flex flex-col w-fit h-[40vh] drop-shadow-xl z-20`}>
+            <nav className={`${scrollUp&&'animate-slide-in-top top-0'} ${!scrollUp&&'animate-slide-out-top delay-300 -top-60'} sticky text-lg xl:text-xl 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl 5xl:text-6xl font-regular z-50`}>
+                <div id='hidnav' className={`${open ? "portrait:w-[50vw] portrait:sm:w-[40vw] portrait:md:w-[30vw] landscape:w-[20vw] delay-0 animate-slide-in" : "animate-slide-out w-0 delay-150"} h-[120vh] fixed top-0 left-0 bg-white drop-shadow-xl`} onAnimationEnd={()=>{setAnimating(false)}}>
+                    <div className="w-full text-md lg:text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl 5xl:text-5xl z-20">
+                        <ul className={`m-auto mt-[12vh] ${open ? "text-[100%]" : "text-[0%] delay-200" } flex flex-col w-fit h-[40vh] drop-shadow-xl z-20`}>
                             <li className="m-auto my-6 z-20">
-                                <a href="https://cometfallpress.com/" className="m-auto !text-dark z-20" onClick={() => {console.log('working')}}>Home</a>
+                                <a href="https://cometfallpress.com/" className="m-auto !text-dark z-20">Home</a>
                             </li >
                                 <hr className='h-1 z-20'/>
                             <li className="m-auto my-6">
-                                <a href="https://cometfallpress.com/" className="m-auto !text-dark z-20">About</a>
+                                <a href="https://cometfallpress.com/team" className="m-auto !text-dark z-20">Meet the Team</a>
                             </li>
                                 <hr className='h-2'/>
                             <li className="m-auto my-6 z-20">
@@ -53,9 +53,9 @@ function Navbar(up) {
                     </div>
                 </div>
                 <div className="bg-dark drop-shadow-xl z-20 w-full flex flex-row items-center mx-auto p-1">
-                    <Bars3Icon className={`${open ? "" : ""} h-12 p-2 m-2 drop-shadow-xl text-white z-20`} onClick={invertOpen}/>
+                    <Bars3Icon className={`${open ? "" : ""} portrait:h-[4vh] landscape:h-[6vh] landscape:4xl:h-[5vh] p-2 m-2 drop-shadow-xl text-white z-20`} onClick={invertOpen}/>
                     <a href="https://cometfallpress.com/" className="flex items-center">
-                        <img src={logo} className="h-12 m-1 object-scale-down" alt="Cometfall Logo" />
+                        <img src={logo} className="portrait:h-[4vh] landscape:h-[6vh] landscape:4xl:h-[5vh] m-1 object-scale-down" alt="Cometfall Logo" />
                     </a>
                 </div>
             </nav>

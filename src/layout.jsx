@@ -22,11 +22,11 @@ function Layout() {
 
   return (
       <>
-          <div className="w-full h-full fixed left-0 top-0 overflow-y-scroll scroll-smooth" onScroll={handleScroll}>
+          <div className="w-full h-full fixed left-0 top-0 overflow-y-scroll overflow-x-clip scroll-smooth" onScroll={handleScroll}>
                 <Navbar up={sdir}/>
-                <div className="flex flex-col w-full h-full">
+                <div className="flex flex-col w-full h-full origin-[50%_0] scale-90">
                     <Outlet className='overflow-x-clip'/>
-                    <Footer/>
+                    <Footer />
                 </div>
           </div>
       </>

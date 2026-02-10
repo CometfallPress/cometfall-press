@@ -1,9 +1,8 @@
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, HashRouter, Routes, Route, Navigate} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import './index.css'
-import Home from './home.jsx'
 import Layout from './layout.jsx'
-import NoPage from './nopage.jsx'
+import Team from './team.jsx'
 import Project from './project.jsx'
 
 createRoot(document.getElementById('root')).render(
@@ -11,7 +10,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route element={<Layout />}>
           <Route path="" element={<Project/>} />
-          <Route path="about" element={<Navigate to="https://cometfallpress.com/"/>}/>
+          <Route path="team" element={<Team/>} />
           <Route path="home" element={<Navigate to="https://cometfallpress.com/"/>}/>
           <Route
               path="*"
