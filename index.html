@@ -1,8 +1,17 @@
 <!doctype html>
 <html class="scroll-smooth" lang="en" data-theme="light">
   <head>
+    <script>
+      (function(){
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Cometfall Press</title>
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
     <link rel="icon" href="/icons/favicon-32x32.png" type="image/png" sizes="32x32">

@@ -1,35 +1,27 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Navbar from './navbar.jsx'
-import { useState, useEffect, use} from 'react'
+import ScrollContext from "./ScrollContext.jsx";
 import Footer from './footer.jsx'
+import Scaler from "./scaler.jsx";
+
+
+
 
 function Layout() {
-    
-    const [scrollPosition, setScrollPosition] = useState(0);
-    const [sdir, setSdir] = useState(true)
 
-    const handleScroll = (e) => {
-		const { scrollTop, scrollHeight, clientHeight } = e.target;
-		setScrollPosition(scrollTop);
-        if(scrollPosition - scrollTop < -2)
-        {
-            setSdir(false)
-        }
-        else if (scrollPosition - scrollTop > 2) {
-            setSdir(true)
-        }
-	};
+    const { scrollPosition, sdir, handleScroll } = ScrollContext()
 
-  return (
-      <>
-          <div className="w-full h-full fixed left-0 top-0 overflow-y-scroll overflow-x-clip scroll-smooth" onScroll={handleScroll}>
+    return (
+        <>
+            <div className="w-full h-[100%] fixed scroll-smooth project" style={{ backgroundPosition: `0px ${(scrollPosition-200) * -0.75}px`}}/>
+            <div className="w-full h-full fixed overflow-y-scroll overflow-x-clip scroll-smooth" onScroll={handleScroll}>
                 <Navbar up={sdir}/>
-                <div className="flex flex-col w-full h-full origin-[50%_0] scale-90">
-                    <Outlet className='overflow-x-clip'/>
+                <Scaler scale={0.9}>
+                    <Outlet />
                     <Footer />
-                </div>
-          </div>
-      </>
+                </Scaler>
+            </div>
+        </>
   )
 }
 

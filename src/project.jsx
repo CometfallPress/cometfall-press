@@ -3,7 +3,9 @@
 import './index.css'
 import initbg from './assets/WebsiteBanner.webp'
 import world from './assets/WebsiteTheWorld.webp'
-import map from './assets/WebsiteWorldMap.webp'
+import map from './assets/KasaaqMapClean.webp'
+import overlay from './assets/WebsiteWorldMap_outer.webp'
+import mask from './assets/WebsiteWorldMapMask.webp'
 import houses from './assets/WebsiteHouseBanners.webp'
 import races from './assets/WebsiteRaces.webp'
 import worldtitle from './assets/WebsiteText1.png'
@@ -11,18 +13,25 @@ import racesitle from './assets/WebsiteText2.png'
 import subclasstitle from './assets/WebsiteText3.png'
 import subclasses from './assets/WebsiteSubclasses.webp'
 import book from './assets/WebsiteBook.webp'
+import {TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import {useState} from "react";
+// import ScrollContext from "./ScrollContext.jsx";
 
 
 function Project() {
 
+    // const { scrollPosition } = ScrollContext()
+
+    const [showOverlay, setShowOverlay] = useState(true);
+
     return (
         <>
-            <div className='scroll-smooth w-[100vw] -z-20 leading-relaxed place-items-center place-content-center text-base sm:text-md md:text-lg lg:text-xl xl:text-xl 2xl:text-xl 4xl:text-2xl 5xl:text-3xl 6xl:text-4xl font-regular'>
+            <div className='scroll-smooth w-[100vw] -z-20 leading-relaxed place-items-center place-content-center text-base portrait:text-[2vw] landscape:text-[2vh] font-regular'>
                 <div className='w-full h-auto md:mb-0 -top-20'>
-                    <img className='w-[100vw] landscape:origin-[50%_100%] landscape:scale-111 portrait:origin-[50%_50%] portrait:scale-160 portrait:md:scale-130 portrait:lg:scale-111 object-fill mb-10' src={initbg} alt='Sunless Dunes'/>
+                    <img className='w-[100vw] landscape:origin-[50%_100%] landscape:mb-10 landscape:scale-111 portrait:origin-[50%_60%] portrait:mb-20 portrait:scale-150 portrait:md:scale-130 portrait:lg:scale-111 object-fill ' src={initbg} alt='Sunless Dunes'/>
                 </div>
                 
-                <div className='w-[100%] m-auto mt-10 '>
+                <div className='w-[100%] m-auto mt-10'>
                     <div className='flex flex-col landscape:flex-row-reverse place-items-center place-content-center m-auto w-[90vw]'>
                         <p className='relative clear-both text-left text-pretty text-dark w-[100%] p-2 landscape:w-1/2'>
                             Sunless Dunes is a new Campaign Setting for D&D 5e inspired by 17th century South-Asia, taking your table to the nation of Kasaaq within the northern deserts of the continent of Eqos. The various cities, noble houses, races, and subclasses found within this setting are each influenced by one of the many diverse cultures found in and around India, set during a time period in which steam power is beginning to shake-up old feudal ways.
@@ -36,16 +45,16 @@ function Project() {
                         </div>
                     </div>
 
-                    <div className='relative flex flex-col mt-10 md:mt-10 w-[90vw] mx-auto'>
+                    <div className='relative flex flex-col mt-10 md:mt-10 w-[90vw] mx-auto mb-15'>
                         <div className='relative drop-shadow-[0_0_10px_rgba(50,0,0,0.33)] portrait:w-[90vw] landscape:w-[60vw] m-auto z-20 p-2 mt-5 flex justify-center items-center'>
                             <img src={worldtitle} alt='World Title' />
                         </div>
                         <div className='place-items-center relative h-auto flex flex-col-reverse m-auto landscape:flex-row'>
                             <p className='relative w-[100%] landscape:w-1/2 mx-auto h-auto p-2 clear-both mt-10 text-left text-pretty text-dark'>
-                                This book details the cultures and landscapes of the nation of the Kasaaqi Dynasty (कसाकी हुकूमत), which is only a small whole of a greater world known as Abmarah. Kasaaq is most well known for its large desert, but contains many diverse environments including dense jungles, floodplains, underground caves, volcanic mountains, tropical islands, and cool valleys.
+                                This book details the cultures and landscapes of the nation of the Kasaaqi Dynasty (कसाकी हुकूमत), which is only a small whole of a greater world known as Abmarah. Kasaaq is most well known for its large desert, but contains many diverse environments including dense jungles, floodplains, underground caves, volcanic mountains, tropical islands, and cool valleys.
                                 <br/>
                                 <br/>
-                                The Kav'orra Desert (कवोरा मरुस्थल) is a vast expanse of arid wasteland that covers almost the entirety of northern Eqos. It is a land of shifting sands and unrelenting heat, where the sun beats down mercilessly on all who dare to cross it. This desert is primordial, dating back to a time long before even the most powerful empires of the world existed. The sands of the Kav'orra Desert are said to be incomprehensibly old, unchanged and uncharted.
+                                The Kav&#39;orra Desert (कवोरा मरुस्थल) is a vast expanse of arid wasteland that covers almost the entirety of northern Eqos. It is a land of shifting sands and unrelenting heat, where the sun beats down mercilessly on all who dare to cross it. This desert is primordial, dating back to a time long before even the most powerful empires of the world existed. The sands of the Kav&#39;orra Desert are said to be incomprehensibly old, unchanged and uncharted.
                             </p>
                             <div className='portrait:w-[90%] landscape:w-3/5 z-20 p-2 m-2 mt-5'>
                                 <img className='min-w-[100%] drop-shadow-2xl' src={world} alt='World Map' />
@@ -54,20 +63,42 @@ function Project() {
                     </div>
                 </div>
                 <div className='place-items-center relative h-auto flex flex-col m-auto mt-5 w-[100vw]'>
-                    <div className='relative w-[100vw] mt-10 z-20 drop-shadow-[0_0_50px_rgba(50,5,5,0.33)]'>
-                        <img className='min-w-[100vw] drop-shadow-2xl scale-111 my-10' src={map} alt='Kasaaq Map'/>
+                    <div className="relative w-[100vw] mt-10 z-20 scale-111"
+                         style={{
+                             WebkitMaskImage: `url(${mask})`,
+                             maskImage: `url(${mask})`,
+                             WebkitMaskRepeat: 'no-repeat',
+                             maskRepeat: 'no-repeat',
+                             WebkitMaskSize: 'cover',
+                             maskSize: 'cover',
+                             WebkitMaskPosition: 'center',
+                             maskPosition: 'center',
+                         }}>
+                        <TransformWrapper initialScale={1.0} wheel={{activationKeys: ["Shift"] }} className="scroll-smooth">
+                            <TransformComponent className="scroll-smooth">
+                                <img className="min-w-[100vw] scroll-smooth" src={map} alt='Kasaaq Map'/>
+                            </TransformComponent>
+                        </TransformWrapper>
+
                     </div>
-                    <div className='flex flex-col mx-auto place-items-center'>
+                    <img src={overlay} alt="Overlay" className="pointer-events-none absolute inset-0 z-30 origin-center scale-105 min-w-[100vw]"/>
+                    {/*<div className={`pointer-events-none absolute inset-0 z-40 origin-center scale-105 min-w-[100vw] max-h-[50vw] my-[7%]`}>*/}
+                    {/*    <p className="flex size-fit m-auto px-5 py-2 text-[0.5em] text-black/75 font-bold rounded-2xl bg-white/50">*/}
+                    {/*        Drag to Pan | Shift+Scroll to Zoom*/}
+                    {/*    </p>*/}
+                    {/*</div>*/}
+
+                    <div className='flex flex-col mx-auto place-items-center mt-10'>
                         <div className='flex flex-col md:flex-row w-[90vw] my-10 '>
                             <p className='clear-both w-[100%] p-2 mr-0 md:w-1/2 md:mr-6 md:my-10 text-left text-pretty text-dark'>
-                                Each city was inspired by a different culture from the medieval Indian subcontinent, and they all hold unique adventure hooks within them. The nation is divided into six different kingdoms, each serving the <i>Mahataraja</i> of the city of Kasaaq. Many of the story hooks of the setting are political in nature, and there are many <i>Mahaan Houses</i> of powerful noble families to be found within the Kav'orra Desert and surrounding areas. They all have different ambitions within the constant power struggles of the desert...
+                                Each city was inspired by a different culture from the medieval Indian subcontinent, and they all hold unique adventure hooks within them. The nation is divided into six different kingdoms, each serving the <i>Mahataraja</i> of the city of Kasaaq. Many of the story hooks of the setting are political in nature, and there are many <i>Mahaan Houses</i> of powerful noble families to be found within the Kav&#39;orra Desert and surrounding areas. They all have different ambitions within the constant power struggles of the desert...
                             </p>
                             <p className='clear-both w-[100%] p-2 ml-0 md:w-1/2 md:ml-6 md:my-10 text-left text-pretty text-dark'>
                                 ...which your party can use to their advantage in furthering their own goals of adventure and notoriety. The setting features plot hooks relating to politics, war, mythology, ancient religions, and even tales of an apocalypse. The legend of the Sunless Dunes states that the ancient ruler of these sands, Sol Sultana, has ascended to become a goddess of the sun, and is soon returning to burn away the world.
                             </p>
                         </div>
                         <div className='relative z-20 w-[100vw] mx-0 drop-shadow-[0_0_25px_rgba(50,5,5,0.14)]'>
-                            <img className='min-w-[100%] drop-shadow-2xl origin-center scale-111 my-10' src={houses}/>
+                            <img className='min-w-[100%] drop-shadow-2xl origin-center scale-111 my-10' src={houses} alt="Houses of Kasaaq"/>
                         </div>
                     </div>
                 </div>
@@ -93,7 +124,7 @@ function Project() {
                         <p className='relative m-auto my-auto mt-10 lg:mt-10 clear-both text-left text-pretty font-regular w-[90vw] p-2 text-dark'>
                             This book will contain new lineages for 13 playable species, each culturally embedded within the history of Kasaaq and inspired from South-Asian mythologies. Most of these lineages also have unique species-feats to further customize their powers. These lineages include:
                         </p>
-                        <ul className='m-auto p-2 sm:columns-1 w-[90vw] md:columns-2'>
+                        <ul className='m-auto p-2 w-[90vw] portrait:md:columns-1 portrait:lg:columns-2 landscape:columns-2'>
                             <li className='p-1 break-inside-avoid-column'><b>The Sand Elves</b><br/> A new lineage of dark-skinned elves who are accustomed to the harsh desert.</li>
                             <li className='p-1 break-inside-avoid-column'><b>The Sunless Drow</b><br/> A new lineage of drow that have been forced to live on the arid surface under the moonlight.</li>
                             <li className='p-1 break-inside-avoid-column'><b>The Desert Dwarves</b><br/> A new lineage of dark-skinned dwarves who live in the arid mountains of the desert with a rajasthani-inspired culture.</li>
@@ -110,7 +141,7 @@ function Project() {
                             <li className='p-1 break-inside-avoid-column'><b>The Vicchu</b><br/> Half-Scorpion centaur-like monstrosities who wander across the deserts of Eqos, feared for their stature.</li>
                         </ul>
 
-                        <div className='relative drop-shadow-[0_0_10px_rgba(50,0,0,0.33)]portrait:w-[90vw] landscape:w-[60vw] m-auto z-20 p-2 mt-5 flex justify-center items-center'>
+                        <div className='relative drop-shadow-[0_0_10px_rgba(50,0,0,0.33)] portrait:w-[90vw] landscape:w-[60vw] m-auto z-20 p-2 mt-5 flex justify-center items-center'>
                             <img src={subclasstitle} alt='Subclass Title' />
                         </div>
                         <div className='place-items-center relative h-auto flex flex-col m-auto landscape:flex-row-reverse w-[90vw]'>
@@ -127,7 +158,7 @@ function Project() {
                         <p className='relative m-auto my-auto mt-10 lg:mt-10 clear-both text-left text-pretty font-regular w-[90vw] p-2 text-dark'>
                             This book will contain 12 new subclasses, one for each of the main classes found in 5e 2024:
                         </p>
-                        <ul className='m-auto p-2 sm:columns-1 w-[90vw] md:columns-2'>
+                        <ul className='m-auto p-2 w-[90vw] portrait:sm:columns-1 portrait:md:columns-2 landscape:columns-2'>
                             <li className='p-1 break-inside-avoid-column'><b>Barbarian:</b> <i>Path of the Pehlwan</i><br/> A subclass inspired by ancient Indian wrestling.</li>
                             <li className='p-1 break-inside-avoid-column'><b>Bard:</b> <i>The College of Hymns</i><br/> A subclass dedicated to the gods and their mantras.</li>
                             <li className='p-1 break-inside-avoid-column'><b>Cleric:</b> <i>The Star Domain</i><br/> A subclass that worships  gods of astrology and star signs.</li>

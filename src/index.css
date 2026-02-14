@@ -96,11 +96,6 @@ html { scroll-behavior: smooth; }
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  background-image: url(assets/WebsiteBG.webp);
-  background-repeat: repeat;
-  background-attachment: scroll;
-
   scroll-behavior: smooth;
 }
 
@@ -119,16 +114,13 @@ body {
   display: flex;
   place-items: center;
   min-width: 640px;
-  min-height: 100vh;
-  background-image: url(assets/WebsiteBG.webp);
-  background-repeat: repeat;
-  background-attachment: scroll;
 }
 
 .project {
   background-image: url(assets/WebsiteBG.webp);
   background-repeat: repeat;
   background-attachment: scroll;
+  scroll-behavior: smooth;
 }
 
 h1 {
