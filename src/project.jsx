@@ -26,7 +26,7 @@ function Project() {
 
     return (
         <>
-            <div className='scroll-smooth w-[100vw] -z-20 leading-relaxed place-items-center place-content-center text-base portrait:text-[2vw] landscape:text-[2vh] font-regular'>
+            <div className='scroll-smooth w-[100vw] -z-20 leading-relaxed place-items-center place-content-center text-base portrait:text-[2.4vw] landscape:text-[2.4vh] font-regular'>
                 <div className='w-full h-auto md:mb-0 -top-20'>
                     <img className='w-[100vw] landscape:origin-[50%_100%] landscape:mb-10 landscape:scale-111 portrait:origin-[50%_60%] portrait:mb-20 portrait:scale-150 portrait:md:scale-130 portrait:lg:scale-111 object-fill ' src={initbg} alt='Sunless Dunes'/>
                 </div>

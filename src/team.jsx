@@ -9,7 +9,7 @@ import jouwweria from './assets/portraits/jou.webp'
 function Team() {
     return (
         <>
-            <div className='scroll-smooth w-[100vw] -z-20 leading-relaxed place-items-center place-content-center text-base portrait:text-[2vw] landscape:text-[2vh] font-regular'>
+            <div className='scroll-smooth w-[100vw] -z-20 leading-relaxed place-items-center place-content-center text-base portrait:text-[2.4vw] landscape:text-[2.4vh] font-regular'>
                 <div className='w-full flex place-items-center justify-center h-auto landscape:mb-20 portrait:mb-5 md:mb-0'>
                     <p className='text-[2em] font-semibold m-auto mb-10 mt-20'>
                         Meet the Team
