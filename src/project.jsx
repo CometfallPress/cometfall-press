@@ -15,20 +15,41 @@ import subclasstitle from './assets/WebsiteText3.png'
 import subclasses from './assets/WebsiteSubclasses.webp'
 import book from './assets/WebsiteBook.webp'
 import sunlessdunesLogo from "./assets/SunlessDunesLogo.svg"
-import {TransformWrapper, TransformComponent, KeepScale} from "react-zoom-pan-pinch";
+import {TransformWrapper, TransformComponent, KeepScale, useControls} from "react-zoom-pan-pinch";
 import KickstarterCard from './kickstarter';
 import { useOutletContext } from "react-router-dom";
 import ParallaxImg from "./ParallaxImg.jsx";
 import MapPoints from "./MapPoints.js";
+import { MagnifyingGlassPlusIcon, MagnifyingGlassMinusIcon, ArrowPathIcon  } from "@heroicons/react/24/outline";
+
+
+const Controls = () => {
+    const { zoomIn, zoomOut, resetTransform } = useControls();
+
+    return (
+        <div className="grid p-2 place-items-center gap-4 z-50 -translate-y-[150%] bg-[#000000aa] rounded-xl">
+            <button className="row-1" type="button" onClick={() => zoomIn()}>
+                <MagnifyingGlassPlusIcon className="landscape:w-[4vw] portrait:w-[5vh] p-3 text-white bg-[#ffffff00] hover:bg-[#ffffffaa] rounded-[50%]"/>
+            </button>
+            <button className="row-1" type="button" onClick={() => zoomOut()}>
+                <MagnifyingGlassMinusIcon className="landscape:w-[4vw] portrait:w-[5vh] p-3 text-white bg-[#ffffff00] hover:bg-[#ffffffaa] rounded-[50%]"/>
+            </button>
+            <button className="row-1" type="button" onClick={() => resetTransform()}>
+                <ArrowPathIcon className="landscape:w-[4vw] portrait:w-[5vh] p-3 text-white bg-[#ffffff00] hover:bg-[#ffffffaa] rounded-[50%]"/>
+            </button>
+        </div>
+    );
+};
 
 function Project() {
 
-    const { scrollPosition, screenSize } = useOutletContext();
+    const {scrollPosition, screenSize} = useOutletContext();
     const points = MapPoints();
 
     return (
         <>
-            <div className='scroll-smooth w-screen -z-20 leading-relaxed place-items-center place-content-center text-base portrait:text-[4vw] landscape:text-[2.4vh]'>
+            <div
+                className='scroll-smooth w-screen -z-20 leading-relaxed place-items-center place-content-center text-base portrait:text-[4vw] landscape:text-[2.4vh]'>
                 <div
                     className='grid w-screen  h-auto md:mb-0 -top-20 landscape:origin-[50%_100%] landscape:mb-10 landscape:scale-111 portrait:origin-[50%_60%] portrait:mb-20 portrait:scale-150 portrait:md:scale-130 portrait:lg:scale-111 object-fill'
                     style={{
@@ -95,47 +116,51 @@ function Project() {
                     </div>
                 </div>
                 <div className='place-items-center relative h-auto flex flex-col m-auto mt-5 w-screen'>
-                    <div className="relative portrait:w-[150%] mt-10 z-20 scale-111"
-                         style={{
-                             WebkitMaskImage: `url(${mask})`,
-                             maskImage: `url(${mask})`,
-                             WebkitMaskRepeat: 'no-repeat',
-                             maskRepeat: 'no-repeat',
-                             WebkitMaskSize: `cover`,
-                             maskSize: `cover`,
-                             WebkitMaskPosition: 'center',
-                             maskPosition: 'center',
-                         }}>
-                        <TransformWrapper initialScale={1.0} wheel={{activationKeys: ["Shift"] }} className="scroll-smooth">
-                            <TransformComponent className="scroll-smooth">
-                                <div className="min-w-screen scroll-smooth">
-                                    <img className="min-w-screen" src={map} alt='Kasaaq Map'/>
-                                    {points.map((item, index) => {
-                                        return (
-                                            <div
-                                                key={index}
-                                                style={{
-                                                    position: "absolute",
-                                                    left: `${item.x}%`,
-                                                    top: `${item.y}%`,
-                                                    width: `${item.width}%`,
-                                                    height: `${item.height}%`,
-                                                }}
-                                            >
-                                                <KeepScale>
-                                                    <img
-                                                        src={item.src}
-                                                        alt=''/>
-                                                </KeepScale>
-                                            </div>
 
-                                        )
-                                    })}
-                                </div>
-                            </TransformComponent>
+                        <TransformWrapper initialScale={1.0} wheel={{activationKeys: ["Shift"] }} className="scroll-smooth">
+
+                            <div className="relative portrait:w-[150%] mt-10 z-20 scale-111"
+                                 style={{
+                                     WebkitMaskImage: `url(${mask})`,
+                                     maskImage: `url(${mask})`,
+                                     WebkitMaskRepeat: 'no-repeat',
+                                     maskRepeat: 'no-repeat',
+                                     WebkitMaskSize: `cover`,
+                                     maskSize: `cover`,
+                                     WebkitMaskPosition: 'center',
+                                     maskPosition: 'center',
+                                 }}>
+                                <TransformComponent className="scroll-smooth">
+                                    <div className="min-w-screen scroll-smooth">
+                                        <img className="min-w-screen" src={map} alt='Kasaaq Map'/>
+                                        {points.map((item, index) => {
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    style={{
+                                                        position: "absolute",
+                                                        left: `${item.x}%`,
+                                                        top: `${item.y}%`,
+                                                        width: `${item.width}%`,
+                                                        height: `${item.height}%`,
+                                                    }}
+                                                >
+                                                    <KeepScale>
+                                                        <img
+                                                            src={item.src}
+                                                            alt=''/>
+                                                    </KeepScale>
+                                                </div>
+
+                                            )
+                                        })}
+                                    </div>
+                                </TransformComponent>
+                            </div>
+                            <Controls />
                         </TransformWrapper>
 
-                    </div>
+
                     <img src={overlay} alt="Overlay" className="pointer-events-none absolute inset-0 z-30 origin-center scale-105 min-w-screen"/>
                     {/*<div className={`pointer-events-none absolute inset-0 z-40 origin-center scale-105 min-w-[100vw] max-h-[50vw] my-[7%]`}>*/}
                     {/*    <p className="flex size-fit m-auto px-5 py-2 text-[0.5em] text-black/75 font-bold rounded-2xl bg-white/50">*/}
