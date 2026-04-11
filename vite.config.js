@@ -9,5 +9,8 @@ export default defineConfig({
     react(),
     tailwindcss(),
     mkcert(),
-  ]
+  ],
+  build: {
+    assetsInlineLimit: 0
+  }
 })
