@@ -101,12 +101,20 @@ html { scroll-behavior: smooth; }
 
 a {
   font-weight: 500;
-  color: #7459a5;
+  color: #5f5475;
   text-decoration: inherit;
 }
 
 a:hover {
   color: #ed2486;
+}
+
+.unselectable {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }
 
 body {
@@ -121,6 +129,11 @@ body {
   background-repeat: repeat;
   background-attachment: scroll;
   scroll-behavior: smooth;
+}
+
+.ks_card {
+  background-image: url(assets/KS_Banner.png);
+  background-size: cover; 
 }
 
 h1 {

@@ -20,10 +20,12 @@
     "@react-spring/parallax": "^10.0.3",
     "@tailwindcss/postcss": "^4.0.5",
     "@tailwindcss/vite": "^4.1.18",
+    "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.11.0",
-    "react-zoom-pan-pinch": "^3.7.0"
+    "react-zoom-pan-pinch": "^3.7.0",
+    "vite-plugin-mkcert": "^1.17.10"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",

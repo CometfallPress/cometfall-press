@@ -7,10 +7,10 @@ function ScrollContext() {
     const handleScroll = (e) => {
         const { scrollTop } = e.target;
         setScrollPosition(scrollTop);
-        if(scrollPosition - scrollTop < -2) {
+        if(scrollPosition - scrollTop < -10) {
             setSdir(false)
         }
-        else if (scrollPosition - scrollTop > 2) {
+        else if (scrollPosition - scrollTop > 10) {
             setSdir(true)
         }
     };
