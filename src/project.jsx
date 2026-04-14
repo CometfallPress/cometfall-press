@@ -45,13 +45,15 @@ function Project() {
 
     const {scrollPosition, screenSize} = useOutletContext();
     const points = MapPoints();
+    const bp = 1.2
+    const bp2 = 1.4
 
     return (
         <>
             <div
-                className='scroll-smooth w-screen -z-20 leading-relaxed place-items-center place-content-center text-base portrait:text-[4vw] landscape:text-[2.4vh]'>
+                className={`scroll-smooth w-screen -z-20 leading-relaxed place-items-center place-content-center text-base ${screenSize.ratio>0.9?"portrait:text-[3vw]":"portrait:text-[3.5vw]"} landscape:text-[2.4vh]`}>
                 <div
-                    className='grid w-screen  h-auto md:mb-0 -top-20 landscape:origin-[50%_100%] landscape:mb-10 landscape:scale-111 portrait:origin-[50%_60%] portrait:mb-20 portrait:scale-150 portrait:md:scale-130 portrait:lg:scale-111 object-fill'
+                    className='grid w-screen h-auto md:mb-0 -top-20 landscape:origin-[50%_100%] landscape:mb-10 landscape:scale-111 portrait:origin-[50%_60%] portrait:mb-20 portrait:scale-150 portrait:md:scale-130 portrait:lg:scale-111 object-fill'
                     style={{
                         WebkitMaskImage: `url(${bannermask})`,
                         maskImage: `url(${bannermask})`,
@@ -59,8 +61,8 @@ function Project() {
                         maskRepeat: 'no-repeat',
                         WebkitMaskSize: '111%',
                         maskSize: '111%',
-                        WebkitMaskPosition: `50% ${50 + scrollPosition*0.25*(screenSize.height/screenSize.width)}%`,
-                        maskPosition: `50% ${50 + scrollPosition*0.25*(screenSize.height/screenSize.width)}%`,
+                        WebkitMaskPosition: `50% ${50 + scrollPosition*0.25*screenSize.ratio}%`,
+                        maskPosition: `50% ${50 + scrollPosition*0.25*screenSize.ratio}%`,
                     }}
                 >
                     <img
@@ -76,18 +78,19 @@ function Project() {
                 
                 <div className='w-full m-auto mt-10'>
                     <div className='flex flex-col landscape:flex-row-reverse place-items-center place-content-center m-auto w-[90vw]'>
-                        <p className='relative clear-both text-left text-pretty text-dark w-full p-2 landscape:w-1/2'>
+                        <p className={`relative clear-both text-left text-pretty text-dark p-2 ${screenSize.ratio>bp?"w-1/2":"w-full"}`}>
                             Sunless Dunes is a new Campaign Setting for D&D 5e inspired by 17th century South-Asia, taking your table to the nation of Kasaaq within the northern deserts of the continent of Eqos. The various cities, noble houses, races, and subclasses found within this setting are each influenced by one of the many diverse cultures found in and around India, set during a time period in which steam power is beginning to shake-up old feudal ways.
                             <br/>
-                                <img className='portrait:visible landscape:invisible relative portrait:m-auto portrait:w-2/3 landscape:w-0' src={book} alt='Book Sample' />
+                            {screenSize.ratio<=bp&&(<img className='relative m-auto w-2/3' src={book} alt='Book Sample' />)}
                             <br/>
                             Cometfall Press started off as a group of design students playing D&D many years ago in India. Our setting has been developed over many years, initially starting off as a homebrew world created for our table which continued to expand in scope. Now, our team is spread across the globe, and aims to bring our home-grown setting to players and DMs everywhere.
                         </p>
-                        <div className='portrait:invisible landscape:visible relative portrait:m-0 landscape:m-auto portrait:w-0 landscape:w-2/5 z-20'>
-                            <img src={book} className='m-auto drop-shadow-2xl' alt='Book Sample' />
-                        </div>
+                        {screenSize.ratio>bp&&(
+                            <div className='relative m-auto w-2/5 z-20'>
+                                <img src={book} className='m-auto drop-shadow-2xl' alt='Book Sample' />
+                            </div>)}
                     </div>
-
+                    <KickstarterCard/>
                     <div className='relative flex flex-col mt-10 md:mt-10 w-[90vw] mx-auto mb-15'>
                         <ParallaxImg
                             src={worldtitle}
@@ -97,8 +100,8 @@ function Project() {
                             scrollPosition={scrollPosition}
                         />
 
-                        <div className='place-items-center relative h-auto flex flex-col-reverse m-auto landscape:flex-row'>
-                            <p className='relative w-full landscape:w-1/2 mx-auto h-auto p-2 clear-both mt-10 text-left text-pretty text-dark'>
+                        <div className={`place-items-center relative h-auto flex ${screenSize.ratio>bp?"flex-row":"flex-col-reverse"} m-auto `}>
+                            <p className={`relative ${screenSize.ratio>bp?"w-1/2":"w-full"} mx-auto h-auto p-2 clear-both mt-10 text-left text-pretty text-dark`}>
                                 This book details the cultures and landscapes of the nation of the Kasaaqi Dynasty (कसाकी हुकूमत), which is only a small whole of a greater world known as Abmarah. Kasaaq is most well known for its large desert, but contains many diverse environments including dense jungles, floodplains, underground caves, volcanic mountains, tropical islands, and cool valleys.
                                 <br/>
                                 <br/>
@@ -147,6 +150,7 @@ function Project() {
                                                 >
                                                     <KeepScale>
                                                         <img
+                                                            className="scale-115"
                                                             src={item.src}
                                                             alt=''/>
                                                     </KeepScale>
@@ -168,12 +172,12 @@ function Project() {
                     {/*    </p>*/}
                     {/*</div>*/}
 
-                    <div className='flex flex-col mx-auto place-items-center mt-10'>
-                        <div className='flex flex-col md:flex-row w-[90vw] my-10 '>
-                            <p className='clear-both w-full p-2 mr-0 md:w-1/2 md:mr-6 md:my-10 text-left text-pretty text-dark'>
+                    <div className='flex flex-col mx-auto place-items-center'>
+                        <div className={`flex ${screenSize.ratio>bp2?"flex-row":"flex-col"} w-[90vw] my-10`}>
+                            <p className={`clear-both p-2 ${screenSize.ratio>bp2?"w-1/2 mr-6 my-10":"w-full  mr-0"} text-left text-pretty text-dark`}>
                                 Each city was inspired by a different culture from the medieval Indian subcontinent, and they all hold unique adventure hooks within them. The nation is divided into six different kingdoms, each serving the <i>Mahataraja</i> of the city of Kasaaq. Many of the story hooks of the setting are political in nature, and there are many <i>Mahaan Houses</i> of powerful noble families to be found within the Kav&#39;orra Desert and surrounding areas. They all have different ambitions within the constant power struggles of the desert...
                             </p>
-                            <p className='clear-both w-full p-2 ml-0 md:w-1/2 md:ml-6 md:my-10 text-left text-pretty text-dark'>
+                            <p className={`clear-both p-2 ${screenSize.ratio>bp2?"w-1/2 ml-6 my-10":"w-full ml-0"} text-left text-pretty text-dark`}>
                                 ...which your party can use to their advantage in furthering their own goals of adventure and notoriety. The setting features plot hooks relating to politics, war, mythology, ancient religions, and even tales of an apocalypse. The legend of the Sunless Dunes states that the ancient ruler of these sands, Sol Sultana, has ascended to become a goddess of the sun, and is soon returning to burn away the world.
                             </p>
                         </div>
@@ -200,7 +204,7 @@ function Project() {
                             intensity={0}
                             scrollPosition={scrollPosition}
                         />
-                        <div className='place-items-center relative h-auto flex flex-col m-auto landscape:flex-row w-[90vw]'>
+                        <div className={`place-items-center relative h-auto flex ${screenSize.ratio>bp2?"flex-row":"flex-col"} m-auto w-[90vw]`}>
                             <ParallaxImg
                                 src={races}
                                 alt='Races'
@@ -209,7 +213,7 @@ function Project() {
                                 intensity={0}
                                 scrollPosition={scrollPosition}
                             />
-                            <p className='relative portrait:w-[90vw] landscape:w-1/2 mx-auto h-auto p-2 clear-both mt-10 text-left text-pretty text-dark'>
+                            <p className={`relative ${screenSize.ratio>bp2?"w-1/2":"w-[90vw]"} mx-auto h-auto p-2 clear-both mt-10 text-left text-pretty text-dark`}>
                                 There are many species specifically created for the world of Abmarah, including ancient species long-thought extinct. Most peoples do not have an extensive species culture, instead their culture is based on the city or faction that they grew up in. 
                                 <br/>
                                 <br/>
@@ -280,15 +284,7 @@ function Project() {
                             <li className='p-1 break-inside-avoid-column'><b>Wizard:</b> <i>The Heretic</i><br/> A subclass that involves turning the divine into the arcane.</li>
                         </ul>
                     </div>
-                     <div className='text-pretty landscape:text-[3vh] portrait:text-[5vw]  font-semibold text-5xl m-auto mt-20 mb-10 text-center'>
-                        <a className='transition-all' href='https://www.kickstarter.com/projects/cometfallpress/sunless-dunes-5e-campaign-setting-inspired-by-south-asia'>
-                            <div className="mb-5">
-                                The Pre-Launch is now live on <img className="inline-block place-items-center place-content-center landscape:h-[2.5vh] portrait:h-[4.2vw]" src="https://i.kickstarter.com/tq0sfld-kickstarter-logo-green.png"/>!
-                            </div>
-                        </a>
-                        <KickstarterCard />
-                        <div className='mb-20'/>
-                    </div>
+                    <KickstarterCard prelaunch_text={true}/>
                 </div>
             </div>
         </>

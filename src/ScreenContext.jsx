@@ -4,6 +4,7 @@ function ScreenContext() {
     const [screenSize, setScreenSize] = useState({
         width: window.innerWidth,
         height: window.innerHeight,
+        ratio: window.innerWidth / window.innerHeight,
     })
 
     useEffect(() => {
@@ -11,6 +12,7 @@ function ScreenContext() {
             setScreenSize({
                 width: window.innerWidth,
                 height: window.innerHeight,
+                ratio: window.innerWidth / window.innerHeight,
             })
         }
 

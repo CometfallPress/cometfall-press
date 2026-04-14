@@ -31,19 +31,27 @@ function Navbar(scrollstate) {
             <nav className={`${(scrollUp||scrollPos<150||mousePosition.y<0.2)?'top-0':'-top-60'} transition-all sticky text-lg xl:text-xl 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl 5xl:text-6xl font-regular z-50`}>
                 <div id='hidnav' className={`${open? "portrait:w-[50vw] portrait:sm:w-[40vw] portrait:md:w-[30vw] landscape:w-[20vw]" : "w-0"} w-0 transition-all h-[120vh] fixed top-0 left-0 bg-white drop-shadow-xl`}>
                     <div className="w-full text-md lg:text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl 5xl:text-5xl z-20">
-                        <ul className={`m-auto mt-[12vh] ${open ? "text-[100%]" : "text-[0%]" } transition-all flex flex-col w-fit h-[40vh] drop-shadow-xl z-20`}>
+                        <ul className={`m-auto mt-[12vh] ${open ? "text-[100%]" : "text-[0%]" } transition-all flex flex-col w-fit h-[40vh] drop-shadow-xl z-20 space-y-6`}>
                             <li className="m-auto my-6 z-20">
-                                <a href="https://cometfallpress.com/" className="m-auto !text-dark z-20">Home</a>
+                                <a href="https://cometfallpress.com/" className="m-auto !text-dark hover:text-[#ed2386]! transition-all z-20">Home</a>
                             </li >
-                            <hr className='h-1 z-20'/>
+                            <hr className='h-2 my-2'/>
                             <li className="m-auto my-6">
-                                <a href="https://cometfallpress.com/team" className="m-auto !text-dark z-20">Meet the Team</a>
+                                <a href="https://cometfallpress.com/team" className="m-auto !text-dark hover:text-[#ed2386]! transition-all z-20">Meet the Team</a>
                             </li>
-                            <hr className='h-2'/>
+                            <hr className='h-2 my-2'/>
                             <li className="m-auto my-6 z-20">
-                                <a href="https://www.kickstarter.com/projects/cometfallpress/sunless-dunes-5e-campaign-setting-inspired-by-south-asia" className="m-auto !text-dark z-20">Kickstarter Page</a>
+                                <a href="https://cometfallpress.com/kickstarter" className="m-auto !text-dark hover:text-[#ed2386]! transition-all z-20">Kickstarter</a>
                             </li>
-                            <hr className='h-2'/>
+                            <hr className='h-2 my-2'/>
+                            <li className="m-auto my-6 z-20">
+                                <a href="https://cometfallpress.com/playtest" className="m-auto !text-dark hover:text-[#ed2386]! transition-all z-20">Playtests</a>
+                            </li>
+                            <hr className='h-2 my-2'/>
+                            <li className="m-auto my-6 z-20">
+                                <a href="https://cometfallpress.com/feedback" className="m-auto !text-dark hover:text-[#ed2386]! transition-all z-20">Feedback</a>
+                            </li>
+                            <hr className='h-2 my-2'/>
                             <li className="m-auto my-6 z-20">
                                 <a href="#contact" className="m-auto !text-dark z-20">Contact Us</a>
                             </li>
