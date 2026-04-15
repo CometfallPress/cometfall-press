@@ -6,12 +6,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build",
+    "build": "npm run sitemap && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "justbuild": "npm run build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "npm run build && python deploy.py",
+    "sitemap": "python sitemap.py"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
