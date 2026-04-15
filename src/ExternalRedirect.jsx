@@ -11,7 +11,7 @@ const ExternalRedirect = ({ to }) => {
 				<div className='flex flex-col h-full m-auto place-items-center place-content-center  scale-120'>
 					<p className="text-2xl font-bold mb-5">Redirecting...</p>
 					<div>
-						<svg className="animate-spin -ml-1 mr-3 h-10 w-10 text-dark" xmlns="http://www.w3.org/2000/svg"
+						<svg className="animate-spin -ml-1 mr-3 h-10 w-10 text-[#7459a5]" xmlns="http://www.w3.org/2000/svg"
 						     fill="none" viewBox="0 0 24 24">
 							<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"></circle>
 							<path className="opacity-75" fill="currentColor"

@@ -285,6 +285,7 @@ function Project() {
                         </ul>
                     </div>
                     <KickstarterCard prelaunch_text={true}/>
+                    <div className='mb-20'/>
                 </div>
             </div>
         </>
