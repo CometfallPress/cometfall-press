@@ -6,12 +6,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "npm run sitemap && vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "justbuild": "npm run build",
     "predeploy": "npm run build",
-    "deploy": "npm run build && python deploy.py",
+    "deploy": "python deploy.py",
     "sitemap": "python sitemap.py"
   },
   "dependencies": {
