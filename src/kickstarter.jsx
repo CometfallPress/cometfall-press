@@ -129,7 +129,7 @@ export default function KickstarterCard(props) {
 									</button>
 								</div>
 							</form>
-							<p className={`mx-auto mt-4 p-2 landscape:text-[1vw] portrait:text-[2vw] ${respSuccess?"text-lime-700":"text-rose-700"}`}>
+							<p className={`mx-auto mt-4 p-2 text-[1.2vw] portrait:text-[1.5vh] ${respSuccess?"text-lime-700":"text-rose-700"}`}>
 								{status}
 							</p>
 						</div>
