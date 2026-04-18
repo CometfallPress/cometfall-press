@@ -1,5 +1,7 @@
 import sunlessdunesLogo from "./assets/SunlessDunesLogo.svg"
+import noteheader from "./assets/NoteHeader.png"
 import {useState} from "react";
+import {useOutletContext} from "react-router-dom";
 
 
 
@@ -42,17 +44,19 @@ export default function KickstarterCard(props) {
 	};
 
 	return (
-		<div className='text-pretty landscape:text-[3vh] portrait:text-[5vw] font-semibold text-5xl m-auto mt-20 mb-5 text-center'>
+		<div className='text-pretty landscape:text-[3vh] portrait:text-[5vw] font-semibold text-5xl m-auto mt-20 mb-5 text-center scale-112'>
+			{/* eslint-disable-next-line react/prop-types */}
 			{props.prelaunch_text===true?(
 				<a className='transition-all text-zinc-900! hover:text-[#ed2396]!' href='https://www.cometfallpress.com/kickstarter/'>
-					<div className="mb-5">
+					<div className="portrait:mb-16 landscape:mb-12">
 						Our pre-Launch is now live on <img className="inline-block place-items-center place-content-center landscape:h-[2.5vh] portrait:h-[4.2vw]" src="https://i.kickstarter.com/tq0sfld-kickstarter-logo-green.png"/>!
 					</div>
 				</a>
 			):""}
-			<section className="ks_card border-2 mx-auto portrait:max-w-[100vw] landscape:max-w-[80vw] rounded-[3vw] border-zinc-200 shadow-sm">
-				<div className="grid backdrop-blur-xl backdrop-brightness-125 rounded-[3vw]">
-					<div className="landscape:col-1 portrait:row-1 w-[full] p-6 space-y-10 ">
+			<img className="-z-10 portrait:min-w-[200%] portrait:-translate-x-[25%]" alt='' src={noteheader}/>
+			<div className="ks_card mx-auto w-[100vw] origin-center">
+				<div className=" grid z-20">
+					<div className="landscape:col-1 portrait:row-1 w-full p-6 space-y-10 ">
 						<p className="landscape:text-[1vw] portrait:text-[1vh] font-medium uppercase tracking-wide text-zinc-200 text-shadow-md">
 							Kickstarter Pre-Launch
 						</p>
@@ -88,8 +92,8 @@ export default function KickstarterCard(props) {
 							</a>
 						</div>
 					</div>
-					<div className="landscape:col-2 portrait:row-2 w-[95%] h-fit p-2 space-y-5 m-auto place-items-center place-content-center">
-						<div className="flex flex-col my-auto text-zinc-900 bg-white p-4 py-10 mb-2 rounded-[2vw] place-items-center place-content-center">
+					<div className="landscape:col-2 portrait:row-2 w-full h-fit p-2 space-y-5 m-auto place-items-center scale-90 place-content-center">
+						<div className="flex flex-col my-auto text-zinc-900 bg-white p-4 pt-10 pb-4 mb-2 rounded-[2vw] place-items-center place-content-center">
 							<p className="landscape:text-[1.5vw] portrait:text-[2vh] font-medium p-1 text-shadow-md mb-2">
 								Join our newsletter to get updates and exclusive rewards
 							</p>
@@ -129,13 +133,14 @@ export default function KickstarterCard(props) {
 									</button>
 								</div>
 							</form>
-							<p className={`mx-auto mt-4 p-2 text-[1.2vw] portrait:text-[1.5vh] ${respSuccess?"text-lime-700":"text-rose-700"}`}>
+							<p className={`mx-auto p-2 text-[1.2vw] portrait:text-[1.5vh] ${status===""?"my-0 h-0":"mt-4 h-auto"} ${respSuccess?"text-lime-700":"text-rose-700"}`}>
 								{status}
 							</p>
 						</div>
 					</div>
 				</div>
-			</section>
+			</div>
+			<img className="-z-10 portrait:min-w-[200%] portrait:-translate-x-[25%] rotate-180" alt='' src={noteheader}/>
 		</div>
 	);
 }

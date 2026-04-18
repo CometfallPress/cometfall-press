@@ -117,6 +117,20 @@ a:hover {
     user-select: none;
 }
 
+.logo {
+  height: 30rem;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+  margin: auto;
+}
+
+.card {
+  font-size: 5rem;
+  font-optical-sizing: auto;
+  margin: 0 0 20% 20%;
+}
+
 body {
   margin: auto;
   display: flex;
@@ -132,8 +146,8 @@ body {
 }
 
 .ks_card {
-  background-image: url(assets/KS_Banner.png);
-  background-size: cover; 
+  background-image: url(assets/KS_Banner2.png);
+  background-size: cover;
 }
 
 h1 {

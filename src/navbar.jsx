@@ -44,14 +44,14 @@ function Navbar(scrollstate) {
                                 <a href="https://cometfallpress.com/kickstarter" className="m-auto !text-dark hover:text-[#ed2386]! transition-all z-20">Kickstarter</a>
                             </li>
                             <hr className='h-2 my-2'/>
-                            <li className="m-auto my-6 z-20">
-                                <a href="https://cometfallpress.com/playtest" className="m-auto !text-dark hover:text-[#ed2386]! transition-all z-20">Playtests</a>
-                            </li>
-                            <hr className='h-2 my-2'/>
-                            <li className="m-auto my-6 z-20">
-                                <a href="https://cometfallpress.com/feedback" className="m-auto !text-dark hover:text-[#ed2386]! transition-all z-20">Feedback</a>
-                            </li>
-                            <hr className='h-2 my-2'/>
+                            {/*<li className="m-auto my-6 z-20">*/}
+                            {/*    <a href="https://cometfallpress.com/playtest" className="m-auto !text-dark hover:text-[#ed2386]! transition-all z-20">Playtests</a>*/}
+                            {/*</li>*/}
+                            {/*<hr className='h-2 my-2'/>*/}
+                            {/*<li className="m-auto my-6 z-20">*/}
+                            {/*    <a href="https://cometfallpress.com/feedback" className="m-auto !text-dark hover:text-[#ed2386]! transition-all z-20">Feedback</a>*/}
+                            {/*</li>*/}
+                            {/*<hr className='h-2 my-2'/>*/}
                             <li className="m-auto my-6 z-20">
                                 <a href="#contact" className="m-auto !text-dark z-20">Contact Us</a>
                             </li>

@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build",
+    "build": "python sitemap.py && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "justbuild": "npm run build",
@@ -21,6 +21,8 @@
     "@react-spring/parallax": "^10.0.3",
     "@tailwindcss/postcss": "^4.0.5",
     "@tailwindcss/vite": "^4.1.18",
+    "@tiptap/react": "^3.22.4",
+    "@tiptap/starter-kit": "^3.22.4",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

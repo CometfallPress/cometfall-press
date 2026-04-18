@@ -1,4 +1,4 @@
-import React from 'react';
+import 'react';
 import './index.css'
 
 // Social Media Links JSON
@@ -8,12 +8,13 @@ const socialLinks = {
     linkedIn: "https://www.linkedin.com/company/cometfallpress/",
     twitter: "https://twitter.com/CometfallPress",
     facebook: "https://www.facebook.com/profile.php?id=61572637307560",
-    discord: "https://discord.gg/6ScD8ZK7fX"
+    discord: "https://discord.gg/afgrQbd7St",
+    kickstarter: "https://www.cometfallpress.com/kickstarter/",
 };
 
 function Footer() {
     return (
-        <footer id='contact' className="bg-dark text-light text-center p-4 mt-0 scroll-smooth origin-bottom scale-111">
+        <footer id='contact' className="bg-dark text-light text-center p-4 mt-0 scroll-smooth origin-center scale-112">
             <div className="container mx-auto">
                 <p className="text-sm md:text-base">
                     © {new Date().getFullYear()} Cometfall Press. All Rights Reserved.
@@ -38,6 +39,9 @@ function Footer() {
                     </a>
                     <a href={socialLinks.discord} target="_blank" rel="noopener noreferrer" className="social-icon">
                         <i className="fab fa-discord text-xl"></i>
+                    </a>
+                    <a href={socialLinks.kickstarter} target="_blank" rel="noopener noreferrer" className="social-icon">
+                        <i className="fab fa-kickstarter-k text-xl"></i>
                     </a>
                     <a href="mailto:aaron.kumar@cometfallpress.com" target="_blank" rel="noopener noreferrer" className="social-icon">
                         <i className="fas fa-envelope text-2xl"></i>

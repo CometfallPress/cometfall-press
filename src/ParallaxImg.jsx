@@ -1,6 +1,7 @@
 import ScrollContext from './ScrollContext'
 import ScreenContext from "./ScreenContext";
 import PropTypes from "prop-types"
+import {useEffect, useRef} from "react";
 
 function ParallaxImg(props) {
 

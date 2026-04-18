@@ -34,4 +34,5 @@ if __name__ == "__main__":
 	except (Exception,) as e:
 		print(f"An exception occurred while trying to generate the sitemap: {e}")
 		exit(-1)
+	print("Sitemap generated.")
 	exit(0)
