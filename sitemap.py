@@ -17,14 +17,15 @@ if __name__ == "__main__":
 
 		curr_datetime = datetime.today().strftime('%Y-%m-%d')
 		paths_count = len(paths)
+		exclude = ["login", "newsletter", "admin", "publish", "users", "list", "*"]
 		with open(str(dst), "w") as f:
 			f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
 			f.write('\n\t<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
 			for i, path in enumerate(paths):
-				if path == "*" or ":" in path:
+				if path in exclude or ":" in path:
 					continue
 				f.write('\n\t\t<url>\n')
-				f.write(f'\t\t\t<loc>https://cometfallpress.com/{path}/</loc>\n')
+				f.write(f'\t\t\t<loc>https://www.cometfallpress.com/{path}</loc>\n')
 				f.write(f'\t\t\t<lastmod>{curr_datetime}</lastmod>\n')
 				f.write('\t\t\t<changefreq>weekly</changefreq>\n')
 				f.write(f'\t\t\t<priority>{max(0.5, 1-(i*0.1)):.1f}</priority>\n')

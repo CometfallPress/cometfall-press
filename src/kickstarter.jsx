@@ -1,7 +1,7 @@
 import sunlessdunesLogo from "./assets/SunlessDunesLogo.svg"
 import noteheader from "./assets/NoteHeader.png"
 import {useState} from "react";
-import {useOutletContext} from "react-router-dom";
+import { api } from "./csrf.jsx"
 
 
 
@@ -17,11 +17,8 @@ export default function KickstarterCard(props) {
 		e.preventDefault();
 		setProcessing(true);
 		try {
-			const res = await fetch("https://api.cometfallpress.com/newsletter/subscribe", {
+			const res = await api("/newsletter/subscribe", {
 				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
 				body: JSON.stringify({ name, email }),
 			});
 			const data = await res.json();
@@ -69,7 +66,7 @@ export default function KickstarterCard(props) {
 
 						<div className="w-full place-items-center place-content-center gap-3 pt-2">
 							<a
-								href="https://www.cometfallpress.com/kickstarter/"
+								href={`${import.meta.env.VITE_REDIRECT_URL}/kickstarter`}
 								target="_blank"
 								rel="noreferrer"
 								className="block w-[66%] text-[1.2vw] text-center portrait:text-[1.5vh] items-center rounded-2xl bg-[#05ce78] px-5 py-4 m-auto text-white! hover:text-[#7459a5]! hover:scale-102 duration-100 transition-all"
@@ -80,7 +77,7 @@ export default function KickstarterCard(props) {
 							</a>
 							<br/>
 							<a
-								href="https://www.cometfallpress.com/kickstarter/"
+								href={`${import.meta.env.VITE_REDIRECT_URL}/kickstarter/`}
 								target="_blank"
 								rel="noreferrer"
 								className="block w-[66%] text-[1.2vw] text-center portrait:text-[1.5vh] items-center rounded-2xl border bg-zinc-100 m-auto border-zinc-300 px-5 py-4 text-black! hover:text-[#ed2396]! hover:scale-102 duration-100 transition-all"
@@ -93,8 +90,8 @@ export default function KickstarterCard(props) {
 						</div>
 					</div>
 					<div className="landscape:col-2 portrait:row-2 w-full h-fit p-2 space-y-5 m-auto place-items-center scale-90 place-content-center">
-						<div className="flex flex-col my-auto text-zinc-900 bg-white p-4 pt-10 pb-4 mb-2 rounded-[2vw] place-items-center place-content-center">
-							<p className="landscape:text-[1.5vw] portrait:text-[2vh] font-medium p-1 text-shadow-md mb-2">
+						<div className="flex flex-col my-auto text-zinc-900 bg-white p-4 pt-10 pb-4 mb-2 landscape:rounded-[2vw] portrait:rounded-[2vh] place-items-center place-content-center">
+							<p className="landscape:text-[1.5vw] portrait:text-[2vh] font-medium p-1 text-shadow-md mb-4">
 								Join our newsletter to get updates and exclusive rewards
 							</p>
 							<form className='w-full' onSubmit={handleSubmit}>

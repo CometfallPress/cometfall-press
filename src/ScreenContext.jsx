@@ -22,7 +22,7 @@ function ScreenContext() {
         return () => window.removeEventListener('resize', handleResize)
     }, [])
 
-    return { screenSize }
+    return screenSize
 }
 
 export default ScreenContext

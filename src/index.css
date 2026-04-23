@@ -135,7 +135,6 @@ body {
   margin: auto;
   display: flex;
   place-items: center;
-  min-width: 640px;
 }
 
 .project {

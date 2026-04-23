@@ -9,7 +9,7 @@ const socialLinks = {
     twitter: "https://twitter.com/CometfallPress",
     facebook: "https://www.facebook.com/profile.php?id=61572637307560",
     discord: "https://discord.gg/afgrQbd7St",
-    kickstarter: "https://www.cometfallpress.com/kickstarter/",
+    kickstarter: `${import.meta.env.VITE_REDIRECT_URL}/kickstarter/`,
 };
 
 function Footer() {

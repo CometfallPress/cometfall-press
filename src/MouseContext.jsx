@@ -1,6 +1,6 @@
 import React from 'react';
 
-const useMousePosition = () => {
+const MouseContext = () => {
   const [
     mousePosition,
     setMousePosition
@@ -21,4 +21,4 @@ const useMousePosition = () => {
   return mousePosition;
 };
 
-export default useMousePosition;
+export default MouseContext;

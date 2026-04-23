@@ -1,12 +1,13 @@
 import ScreenContext from "./ScreenContext.jsx";
-
+import constants from "./constants.jsx"
 function Notification() {
     const { screenSize } = ScreenContext()
+    const { bp, bp2, bp3 } = constants();
     return (
         <>
-            <a href="https://www.cometfallpress.com/kickstarter/">
+            <a href={`${import.meta.env.VITE_REDIRECT_URL}/kickstarter/`}>
                 <div className="w-screen bg-[#ed2386] z-60 absolute sticky">
-                    <p className={`p-2 text-white font-semibold text-center text-base ${screenSize.ratio>0.7?"portrait:text-[2vw]":"portrait:text-[2.4vw]"} landscape:text-[2vh]`}>
+                    <p className={`p-2 text-white font-semibold text-center text-base ${screenSize.ratio>bp?"portrait:text-[1.5vw]":"portrait:text-[1.3vh]"} landscape:text-[1.8vh]`}>
                         Our Kickstarter Pre-Launch is now live! Check it out <u>here</u>!
                     </p>
                 </div>

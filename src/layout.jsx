@@ -5,22 +5,23 @@ import ScreenContext from "./ScreenContext.jsx";
 import Footer from './footer.jsx'
 import Scaler from "./scaler.jsx";
 import Notification from "./notification.jsx"
+import { useAppContext } from "./AppContext";
+import PropTypes from "prop-types";
 
 
 
 function Layout() {
 
-    const { scrollPosition, sdir, handleScroll } = ScrollContext()
-    const { screenSize } = ScreenContext()
+    const { scrollState } = useAppContext();
 
     return (
         <>
-            <div className="w-full h-full fixed scroll-smooth project" style={{ backgroundPosition: `0px ${(scrollPosition-200) * -0.75}px`}}/>
-            <div className="w-full h-full fixed overflow-y-scroll overflow-x-clip scroll-smooth" onScroll={handleScroll}>
+            <div className="w-full h-full fixed scroll-smooth project" style={{ backgroundPosition: `0px ${(scrollState.scrollPosition-200) * -0.75}px`}}/>
+            <div className="w-full h-full fixed overflow-y-scroll overflow-x-clip scroll-smooth" onScroll={scrollState.handleScroll}>
                 <Notification />
-                <Navbar scrollstate={{scrollPosition, sdir}}/>
+                <Navbar />
                 <Scaler scale={0.9}>
-                    <Outlet context={{scrollPosition, sdir, screenSize}}/>
+                    <Outlet context={{scrollState.scrollPosition, sdir, screenSize, user}}/>
                     <Footer />
                 </Scaler>
             </div>
