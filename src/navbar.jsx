@@ -3,33 +3,33 @@ import logo from './assets/WebsiteLogo.webp'
 import { Bars3Icon } from '@heroicons/react/24/solid'
 import { useEffect, useState } from 'react'
 import { useAppContext } from "./AppContext";
+import UserDropdown from "./userDropdown.jsx";
 
 function Navbar(props) {
 
-    const { mouseState, scrollState, } = useAppContext()
+    const { mouseState, scrollState, user } = useAppContext()
     const [open, setOpen] = useState(false)
-    const [openUserDropdown, setOpenUserDropdown] = useState(false)
 
     const invertOpen = () => {
         if(open){setOpen(false)}
         else{setOpen(true)}
     }
-    const [scrollUp, setUp] = useState(props.sdir)
-    const [scrollPos, setScrollPos] = useState(props.scrollstate.scrollPosition)
+    const [scrollUp, setUp] = useState(scrollState.sdir)
+    const [scrollPos, setScrollPos] = useState(scrollState.scrollPosition)
 
     useEffect(() => {
-        const still = scrollPos === props.scrollstate.scrollPosition
-        setUp(props.scrollstate.sdir)
-        setScrollPos(props.scrollstate.scrollPosition)
+        const still = scrollPos === scrollState.scrollPosition
+        setUp(scrollState.sdir)
+        setScrollPos(scrollState.scrollPosition)
         if(!scrollUp&&!still) {
             if(open){setOpen(false)}
         }
-    }, [scrollPos, props.scrollstate.scrollPosition, props.scrollstate.sdir, scrollUp, open])
+    }, [scrollState, scrollUp, open, scrollPos])
 
     return (
         <>
             <div className={`${open?'opacity-100':'opacity-0'} opacity-0 fixed w-full h-full z-40 pointer-events-none backdrop-blur-md backdrop-brightness-90 transition-opacity`}/>
-            <nav className={`${(scrollUp||scrollPos<150||mousePosition.y<0.2)?'top-0':'-top-60'} transition-all sticky text-lg xl:text-xl 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl 5xl:text-6xl font-regular z-50`}>
+            <nav className={`${(scrollUp||scrollPos<150||mouseState.y<0.2)?'top-0':'-top-60'} transition-all sticky text-lg xl:text-xl 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl 5xl:text-6xl font-regular z-50`}>
                 <div id='hidnav' className={`${open? "portrait:w-[50vw] portrait:sm:w-[40vw] portrait:md:w-[30vw] landscape:w-[20vw]" : "w-0"} w-0 transition-all h-[120vh] fixed top-0 left-0 bg-white drop-shadow-xl`}>
                     <div className="w-full text-md lg:text-lg xl:text-xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl 5xl:text-5xl z-20">
                         <ul className={`m-auto landscape:mt-[15vh] portrait:mt-[12vh] ${open ? "text-[100%]" : "text-[0%]" } transition-all flex flex-col w-fit h-[40vh] drop-shadow-xl z-20 space-y-6`}>
@@ -64,7 +64,7 @@ function Navbar(props) {
                     <a href={`${import.meta.env.VITE_REDIRECT_URL}`} className="flex items-center unselectable">
                         <img src={logo} className="unselectable portrait:h-[4vh] landscape:h-[6vh] landscape:4xl:h-[5vh] m-1 object-scale-down" alt="Cometfall Logo" />
                     </a>
-                    {user!==null&&(<UserDropdown/>)}
+                    {user!==null&&(<UserDropdown user={user}/>)}
                 </div>
             </nav>
         </>

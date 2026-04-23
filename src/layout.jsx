@@ -6,13 +6,12 @@ import Footer from './footer.jsx'
 import Scaler from "./scaler.jsx";
 import Notification from "./notification.jsx"
 import { useAppContext } from "./AppContext";
-import PropTypes from "prop-types";
 
 
 
 function Layout() {
 
-    const { scrollState } = useAppContext();
+    const { scrollState, screenState, user } = useAppContext();
 
     return (
         <>
@@ -21,7 +20,7 @@ function Layout() {
                 <Notification />
                 <Navbar />
                 <Scaler scale={0.9}>
-                    <Outlet context={{scrollState.scrollPosition, sdir, screenSize, user}}/>
+                    <Outlet context={{scrollState, screenState, user}}/>
                     <Footer />
                 </Scaler>
             </div>

@@ -55,30 +55,31 @@ function App() {
 
 	return (
 		<AppContext.Provider value={{ user, scrollState, screenState, mouseState, breakpoints }}>
-		<BrowserRouter>
-			<Routes>
-				<Route element={<Layout />}>
-					<Route path="" element={<Project />} />
-					<Route path="home" element={<Navigate to="/" />} />
-					<Route path="team" element={<Team />} />
-					<Route path="login" element={<Login />} />
-					<Route path="admin" element={<Admin />} />
+			<BrowserRouter>
+				<Routes>
+					<Route element={<Layout />}>
+						<Route path="" element={<Project />} />
+						<Route path="home" element={<Navigate to="/" />} />
+						<Route path="team" element={<Team />} />
+						<Route path="login" element={<Login />} />
+						<Route path="admin" element={<Admin />} />
 
-					<Route
-						path="kickstarter"
-						element={
-							<ExternalRedirect to="https://www.kickstarter.com/projects/cometfallpress/sunless-dunes-5e-campaign-setting-inspired-by-south-asia?ref=ac9ed8"
-							/>
-						}
-					/>
+						<Route
+							path="kickstarter"
+							element={
+								<ExternalRedirect to="https://www.kickstarter.com/projects/cometfallpress/sunless-dunes-5e-campaign-setting-inspired-by-south-asia?ref=ac9ed8"
+								/>
+							}
+						/>
 
-					<Route path="playtest" element={<ExternalRedirect to="https://www.kickstarter.com/projects/cometfallpress/sunless-dunes-5e-campaign-setting-inspired-by-south-asia?ref=cratyi" />} />
-					<Route path="feedback" element={<ExternalRedirect to="https://forms.gle/gZJvmk8BAEDLZ1TX8" />} />
+						<Route path="playtest" element={<ExternalRedirect to="https://www.kickstarter.com/projects/cometfallpress/sunless-dunes-5e-campaign-setting-inspired-by-south-asia?ref=cratyi" />} />
+						<Route path="feedback" element={<ExternalRedirect to="https://forms.gle/gZJvmk8BAEDLZ1TX8" />} />
 
-					<Route path="*" element={<Navigate to="/" />} />
-				</Route>
-			</Routes>
-		</BrowserRouter>
+						<Route path="*" element={<Navigate to="/" />} />
+					</Route>
+				</Routes>
+			</BrowserRouter>
+		</AppContext.Provider>
 	);
 }
 

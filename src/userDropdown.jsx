@@ -1,6 +1,10 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
+import {useState} from "react";
 
-function UserDropdown() {
+function UserDropdown(user) {
+
+	const [openUserDropdown, setOpenUserDropdown] = useState(false)
+
 	return (
 		<>
 			<div className={`ml-auto mr-10 flex items-center gap-1 text-white ${openUserDropdown?"drop-shadow-[#ed2396] drop-shadow-lg":""} hover:drop-shadow-[#ed2396] hover:drop-shadow-lg transition-all`}
@@ -15,3 +19,5 @@ function UserDropdown() {
 		</>
 	)
 }
+
+export default UserDropdown;

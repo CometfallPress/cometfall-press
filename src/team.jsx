@@ -7,16 +7,14 @@ import vijay from './assets/portraits/vij.webp'
 import jouwweria from './assets/portraits/jou.webp'
 import ourTeamTitle from "./assets/OurTeamTitle.png";
 import ParallaxImg from "./ParallaxImg.jsx";
-import {useOutletContext} from "react-router-dom";
+import { useAppContext } from "./AppContext.jsx";
 import Hero from "./hero.jsx";
 import noteheader from "./assets/NoteHeader.png";
-import constants from "./constants.jsx";
 
 
 function Team() {
 
-    const { scrollPosition, screenSize } = useOutletContext();
-    const { bp} = constants();
+    const { scrollState, screenState, breakpoints } = useAppContext();
 
     const team = [
         {
@@ -55,13 +53,13 @@ function Team() {
                 <ParallaxImg
                     src={ourTeamTitle}
                     alt='Our Team'
-                    classes={`relative drop-shadow-[0_0_10px_rgba(50,0,0,0.33)] ${screenSize.ratio<=bp?"w-[90vw]":"w-[60vw]"} scale-120 m-auto z-20 p-2 mt-10 mb-5 flex justify-center items-center`}
+                    classes={`relative drop-shadow-[0_0_10px_rgba(50,0,0,0.33)] ${screenState.ratio<=breakpoints.bp1?"w-[90vw]":"w-[60vw]"} scale-120 m-auto z-20 p-2 mt-10 mb-5 flex justify-center items-center`}
                     intensity={0}
-                    scrollPosition={scrollPosition}
+                    scrollPosition={scrollState.scrollPosition}
                 />
                 <div className='origin-top scale-x-112'>
                     <img className="-z-10 portrait:min-w-[200%] portrait:-translate-x-[25%] scale-y-112" alt='' src={noteheader}/>
-                    <div className={`ks_card mx-auto grid ${screenSize.ratio<=bp?"grid-rows-4 grid-cols-1":"grid-cols-2 grid-rows-1"} p-10 landscape:px-15 place-items-center place-content-center gap-4`}>
+                    <div className={`ks_card mx-auto grid ${screenState.ratio<=breakpoints.bp1?"grid-rows-4 grid-cols-1":"grid-cols-2 grid-rows-1"} p-10 landscape:px-15 place-items-center place-content-center gap-4`}>
                         {team.map((member, index) => (
                             <Hero key={index} id={member.id} name={member.name} title={member.title} description={member.description} src={member.src}/>
                         ))}
