@@ -1,5 +1,5 @@
-import ScrollContext from './ScrollContext'
-import ScreenContext from "./ScreenContext";
+import ScrollContext from '../contexts/ScrollContext.jsx'
+import ScreenContext from "../contexts/ScreenContext.jsx";
 import PropTypes from "prop-types"
 import {useEffect, useRef} from "react";
 

@@ -1,27 +1,27 @@
 "use client";
 
-import './index.css'
-import initbg from './assets/WebsiteBanner.webp'
-import world from './assets/WebsiteTheWorld.webp'
-import map from './assets/KasaaqMapClean.webp'
-import overlay from './assets/WebsiteWorldMap_outer.webp'
-import mapmask from './assets/WebsiteWorldMapMask.webp'
-import bannermask from './assets/WebsiteBannerMask.webp'
-import houses from './assets/WebsiteHouseBanners.webp'
-import housesmask from './assets/WebsiteHouseBannersMask.webp'
-import races from './assets/WebsiteRaces.webp'
-import worldtitle from './assets/WebsiteText1.png'
-import racesitle from './assets/WebsiteText2.png'
-import subclasstitle from './assets/WebsiteText3.png'
-import subclasses from './assets/WebsiteSubclasses.webp'
-import book from './assets/WebsiteBook.webp'
-import sunlessdunesLogo from "./assets/SunlessDunesLogo.svg"
-import booksarragned from './assets/BooksArranged.webp'
+import '../index.css'
+import initbg from '../assets/WebsiteBanner.webp'
+import world from '../assets/WebsiteTheWorld.webp'
+import map from '../assets/KasaaqMapClean.webp'
+import overlay from '../assets/WebsiteWorldMap_outer.webp'
+import mapmask from '../assets/WebsiteWorldMapMask.webp'
+import bannermask from '../assets/WebsiteBannerMask.webp'
+import houses from '../assets/WebsiteHouseBanners.webp'
+import housesmask from '../assets/WebsiteHouseBannersMask.webp'
+import races from '../assets/WebsiteRaces.webp'
+import worldtitle from '../assets/WebsiteText1.png'
+import racesitle from '../assets/WebsiteText2.png'
+import subclasstitle from '../assets/WebsiteText3.png'
+import subclasses from '../assets/WebsiteSubclasses.webp'
+import book from '../assets/WebsiteBook.webp'
+import sunlessdunesLogo from "../assets/SunlessDunesLogo.svg"
+import booksarragned from '../assets/BooksArranged.webp'
 import {TransformWrapper, TransformComponent, KeepScale, useControls} from "react-zoom-pan-pinch";
-import KickstarterCard from './kickstarter';
-import { useAppContext } from "./AppContext.jsx";
-import ParallaxImg from "./ParallaxImg.jsx";
-import MapPoints from "./MapPoints.js";
+import KickstarterCard from '../elements/kickstarter.jsx';
+import { useAppContext } from "../contexts/AppContext.jsx";
+import ParallaxImg from "../elements/ParallaxImg.jsx";
+import MapPoints from "../elements/MapPoints.tsx";
 import { MagnifyingGlassPlusIcon, MagnifyingGlassMinusIcon, ArrowPathIcon  } from "@heroicons/react/24/outline";
 
 

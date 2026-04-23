@@ -1,15 +1,15 @@
 "use client";
 
-import './index.css'
-import sam from './assets/portraits/sam.webp'
-import aaron from './assets/portraits/aar.webp'
-import vijay from './assets/portraits/vij.webp'
-import jouwweria from './assets/portraits/jou.webp'
-import ourTeamTitle from "./assets/OurTeamTitle.png";
-import ParallaxImg from "./ParallaxImg.jsx";
-import { useAppContext } from "./AppContext.jsx";
-import Hero from "./hero.jsx";
-import noteheader from "./assets/NoteHeader.png";
+import '../index.css'
+import sam from '../assets/portraits/sam.webp'
+import aaron from '../assets/portraits/aar.webp'
+import vijay from '../assets/portraits/vij.webp'
+import jouwweria from '../assets/portraits/jou.webp'
+import ourTeamTitle from "../assets/OurTeamTitle.png";
+import ParallaxImg from "../elements/ParallaxImg.jsx";
+import { useAppContext } from "../contexts/AppContext.jsx";
+import Hero from "../elements/hero.jsx";
+import noteheader from "../assets/NoteHeader.png";
 
 
 function Team() {

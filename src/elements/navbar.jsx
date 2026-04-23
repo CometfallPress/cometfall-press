@@ -1,8 +1,8 @@
-import './index.css'
-import logo from './assets/WebsiteLogo.webp'
+import '../index.css'
+import logo from '../assets/WebsiteLogo.webp'
 import { Bars3Icon } from '@heroicons/react/24/solid'
 import { useEffect, useState } from 'react'
-import { useAppContext } from "./AppContext";
+import { useAppContext } from "../contexts/AppContext.jsx";
 import UserDropdown from "./userDropdown.jsx";
 
 function Navbar(props) {

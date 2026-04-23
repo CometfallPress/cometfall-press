@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
-import Navbar from './navbar.jsx'
-import ScrollContext from "./ScrollContext.jsx";
-import ScreenContext from "./ScreenContext.jsx";
-import Footer from './footer.jsx'
-import Scaler from "./scaler.jsx";
-import Notification from "./notification.jsx"
-import { useAppContext } from "./AppContext";
+import Navbar from './elements/navbar.jsx'
+import ScrollContext from "./contexts/ScrollContext.jsx";
+import ScreenContext from "./contexts/ScreenContext.jsx";
+import Footer from './elements/footer.jsx'
+import Scaler from "./elements/scaler.jsx";
+import Notification from "./elements/notification.jsx"
+import { useAppContext } from "./contexts/AppContext.jsx";
 
 
 

@@ -1,7 +1,7 @@
-import sunlessdunesLogo from "./assets/SunlessDunesLogo.svg"
-import noteheader from "./assets/NoteHeader.png"
+import sunlessdunesLogo from "../assets/SunlessDunesLogo.svg"
+import noteheader from "../assets/NoteHeader.png"
 import {useState} from "react";
-import { api } from "./csrf.jsx"
+import { api } from "../contexts/csrf.jsx"
 
 
 

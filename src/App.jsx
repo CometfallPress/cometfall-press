@@ -1,20 +1,20 @@
 import {useEffect, useState} from "react";
-import {api, initCSRF} from "./csrf.jsx";
+import {api, initCSRF} from "./contexts/csrf.jsx";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Layout from "./layout.jsx";
-import Team from "./team.jsx";
-import Project from "./project.jsx";
-import Login from "./login.jsx";
-import Admin from "./admin.jsx";
+import Team from "./routes/team.jsx";
+import Project from "./routes/project.jsx";
+import Login from "./routes/login.jsx";
+import Admin from "./routes/admin.jsx";
 
-import ExternalRedirect from "./ExternalRedirect.jsx";
-import ScrollContext from "./ScrollContext.jsx";
-import ScreenContext from "./ScreenContext.jsx";
-import MouseContext from "./MouseContext.jsx";
-import constants from "./constants.jsx";
+import ExternalRedirect from "./routes/ExternalRedirect.jsx";
+import ScrollContext from "./contexts/ScrollContext.jsx";
+import ScreenContext from "./contexts/ScreenContext.jsx";
+import MouseContext from "./contexts/MouseContext.jsx";
+import constants from "./contexts/constants.jsx";
 
-import { AppContext } from "./AppContext";
+import { AppContext } from "./contexts/AppContext.jsx";
 
 
 function App() {

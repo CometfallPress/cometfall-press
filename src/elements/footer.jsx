@@ -1,5 +1,5 @@
 import 'react';
-import './index.css'
+import '../index.css'
 
 // Social Media Links JSON
 const socialLinks = {

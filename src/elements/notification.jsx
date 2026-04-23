@@ -1,6 +1,6 @@
-import ScreenContext from "./ScreenContext.jsx";
-import constants from "./constants.jsx"
-import { useAppContext } from "./AppContext.jsx";
+import ScreenContext from "../contexts/ScreenContext.jsx";
+import constants from "../contexts/constants.jsx"
+import { useAppContext } from "../contexts/AppContext.jsx";
 
 function Notification() {
     const { screenState, breakpoints } = useAppContext()
