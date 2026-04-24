@@ -1,5 +1,5 @@
 import ScreenContext from "../contexts/ScreenContext.jsx";
-import constants from "../contexts/constants.jsx"
+import constants from "../contexts/Constants.jsx"
 import { useAppContext } from "../contexts/AppContext.jsx";
 
 function Notification() {

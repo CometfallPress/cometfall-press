@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { useAppContext } from "../contexts/AppContext.jsx";
 import UserDropdown from "./userDropdown.jsx";
 
-function Navbar(props) {
+function Navbar() {
 
     const { mouseState, scrollState, user } = useAppContext()
     const [open, setOpen] = useState(false)
@@ -64,7 +64,7 @@ function Navbar(props) {
                     <a href={`${import.meta.env.VITE_REDIRECT_URL}`} className="flex items-center unselectable">
                         <img src={logo} className="unselectable portrait:h-[4vh] landscape:h-[6vh] landscape:4xl:h-[5vh] m-1 object-scale-down" alt="Cometfall Logo" />
                     </a>
-                    {user!==null&&(<UserDropdown user={user}/>)}
+                    {user!==null&&(<UserDropdown />)}
                 </div>
             </nav>
         </>

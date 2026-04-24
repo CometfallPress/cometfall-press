@@ -1,7 +1,7 @@
 import sunlessdunesLogo from "../assets/SunlessDunesLogo.svg"
 import noteheader from "../assets/NoteHeader.png"
 import {useState} from "react";
-import { api } from "../contexts/csrf.jsx"
+import { api } from "../contexts/CSRF.jsx"
 
 
 
@@ -17,11 +17,10 @@ export default function KickstarterCard(props) {
 		e.preventDefault();
 		setProcessing(true);
 		try {
-			const res = await api("/newsletter/subscribe", {
+			const { res, data } = await api("/newsletter/subscribe", {
 				method: "POST",
 				body: JSON.stringify({ name, email }),
 			});
-			const data = await res.json();
 			setProcessing(false);
 			if (res.status === 200) {
 				setRespSuccess(true);

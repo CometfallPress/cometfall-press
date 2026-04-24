@@ -10,7 +10,7 @@ export async function initCSRF() {
 }
 
 export async function api(path, options = {}) {
-	return fetch(`${import.meta.env.VITE_API_URL}` + path, {
+	const res = await fetch(`${import.meta.env.VITE_API_URL}` + path, {
 		method: options.method || "GET",
 		headers: {
 			"Content-Type": "application/json",
@@ -19,4 +19,10 @@ export async function api(path, options = {}) {
 		credentials: "include",
 		body: options.body,
 	});
+
+	const data = await res.json();
+	if (data.redirect_to) {
+		window.location.replace(`${import.meta.env.VITE_REDIRECT_URL}${data.redirect_to}`);
+	}
+	return { res, data }
 }

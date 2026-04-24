@@ -20,8 +20,8 @@ import booksarragned from '../assets/BooksArranged.webp'
 import {TransformWrapper, TransformComponent, KeepScale, useControls} from "react-zoom-pan-pinch";
 import KickstarterCard from '../elements/kickstarter.jsx';
 import { useAppContext } from "../contexts/AppContext.jsx";
-import ParallaxImg from "../elements/ParallaxImg.jsx";
-import MapPoints from "../elements/MapPoints.tsx";
+import ParallaxImg from "../elements/parallaxImg.jsx";
+import MapPoints from "../elements/mapPoints.tsx";
 import { MagnifyingGlassPlusIcon, MagnifyingGlassMinusIcon, ArrowPathIcon  } from "@heroicons/react/24/outline";
 
 
