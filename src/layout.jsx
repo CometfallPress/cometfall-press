@@ -1,7 +1,5 @@
 import { Outlet } from "react-router-dom";
 import Navbar from './elements/navbar.jsx'
-import ScrollContext from "./contexts/ScrollContext.jsx";
-import ScreenContext from "./contexts/ScreenContext.jsx";
 import Footer from './elements/footer.jsx'
 import Scaler from "./elements/scaler.jsx";
 import Notification from "./elements/notification.jsx"

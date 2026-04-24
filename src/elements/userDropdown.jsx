@@ -21,22 +21,22 @@ function UserDropdown() {
 						</p>
 						<ChevronDownIcon className={`w-5 h-5 shrink-0 mt-auto mx-1 transition-all ${openUserDropdown&&"-scale-y-100"}`}/>
 					</div>
-					<div className={`absolute flex flex-col gap-y-1 p-4 py-6 right-0 top-5 mt-2 w-fit ${openUserDropdown&&"scale-y-100"} scale-y-0 transition-all origin-top bg-white text-black rounded-lg shadow-lg overflow-hidden z-50 place-items-center`}
+					<div className={`absolute flex flex-col gap-y-1 p-4 py-6 right-0 top-5 mt-2 w-56 ${openUserDropdown&&"scale-y-100"} font-semibold text-[1.5cqh] scale-y-0 transition-all origin-top bg-white text-black rounded-lg shadow-lg overflow-hidden z-50 place-items-center`}
 						onMouseLeave={()=> setOpenUserDropdown(false)}
 					>
-						<button className="font-semibold text-[2cqh] m-auto p-2 px-4 hover:bg-fuchsia-100 rounded-lg">
+						<a href={`${import.meta.env.VITE_REDIRECT_URL}/admin/newsletter`} className="m-auto p-2 px-4 hover:bg-fuchsia-100 rounded-lg">
 							Newsletter List
-						</button>
+						</a>
 						<hr className='h-2 my-2 w-full'/>
-						<button className="font-semibold text-[2cqh] m-auto p-2 px-4 hover:bg-fuchsia-100 rounded-lg">
+						<a href={`${import.meta.env.VITE_REDIRECT_URL}/admin/newsletter/editor`} className="m-auto p-2 px-4 hover:bg-fuchsia-100 rounded-lg">
 							Newsletter Editor
-						</button>
+						</a>
 						<hr className='h-2 my-2 w-full'/>
-						<button className="font-semibold text-[2cqh] m-auto p-2 px-4 hover:bg-fuchsia-100 rounded-lg"
+						<a className="m-auto p-2 px-4 hover:bg-fuchsia-100 rounded-lg"
 							onClick={async () => await api("/logout")}
 						>
 							Log Out
-						</button>
+						</a>
 					</div>
 				</div>
 			</div>

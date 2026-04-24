@@ -43,7 +43,7 @@ export default function KickstarterCard(props) {
 		<div className='text-pretty landscape:text-[3vh] portrait:text-[5vw] font-semibold text-5xl m-auto mt-20 mb-5 text-center scale-112'>
 			{/* eslint-disable-next-line react/prop-types */}
 			{props.prelaunch_text===true?(
-				<a className='transition-all text-zinc-900! hover:text-[#ed2396]!' href='https://www.cometfallpress.com/kickstarter/'>
+				<a className='transition-all text-zinc-900! hover:text-[#ed2396]!' href={`${import.meta.env.VITE_REDIRECT_URL}/kickstarter/`}>
 					<div className="portrait:mb-16 landscape:mb-12">
 						Our pre-Launch is now live on <img className="inline-block place-items-center place-content-center landscape:h-[2.5vh] portrait:h-[4.2vw]" src="https://i.kickstarter.com/tq0sfld-kickstarter-logo-green.png"/>!
 					</div>

@@ -1,23 +1,12 @@
-import {KeepScale} from "react-zoom-pan-pinch";
-
-type Point = {
-    id: string;
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-    src: string;
-}
-
 function MapPoints() {
-    const mapPointsGlob = import.meta.glob("./assets/map_points/*.webp", {
+    const mapPointsGlob = import.meta.glob("../assets/map_points/*.webp", {
         eager: true,
         import: "default",
     }) as Record<string, string>;
 
     const mapPointImages = Object.values(mapPointsGlob);
 
-    const points = mapPointImages.map((item, index) => {
+    return mapPointImages.map((item, index) => {
 
         const split_str = item.split("/")
         const filename = split_str[split_str.length - 1]
@@ -36,8 +25,6 @@ function MapPoints() {
             height: height,
         }
     })
-
-    return points
 }
 
 export default MapPoints;

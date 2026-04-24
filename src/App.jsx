@@ -15,6 +15,9 @@ import MouseContext from "./contexts/MouseContext.jsx";
 import constants from "./contexts/Constants.jsx";
 
 import { AppContext } from "./contexts/AppContext.jsx";
+import NewsletterEditor from "./routes/newsletterEditor.jsx";
+import NewsletterList from "./routes/newsletterList.jsx";
+import AdminLayout from "./adminLayout.jsx";
 
 
 function App() {
@@ -24,6 +27,12 @@ function App() {
 	const screenState = ScreenContext()
 	const breakpoints = constants();
 	const mouseState = MouseContext();
+
+	const tabs = [
+		{title: "Admin Panel", path: "/admin/"},
+		{title: "Newsletter List", path: "/admin/newsletter/"},
+		{title: "Newsletter Editor", path: "/admin/newsletter/editor"}
+	];
 
 	const fetchUser = async () => {
 		const { res, data } = await api("/me", {
@@ -63,7 +72,11 @@ function App() {
 						<Route path="home" element={<Navigate to="/" />} />
 						<Route path="team" element={<Team />} />
 						<Route path="login" element={<Login />} />
-						<Route path="admin" element={<Admin />} />
+						<Route path="admin" element={<AdminLayout tabs={tabs}/>}>
+							<Route index element={<Admin />}/>
+							<Route path="newsletter" element={<NewsletterList />} />
+							<Route path="newsletter/editor" element={<NewsletterEditor />} />
+						</Route>
 
 						<Route
 							path="kickstarter"
@@ -75,7 +88,6 @@ function App() {
 
 						<Route path="playtest" element={<ExternalRedirect to="https://www.kickstarter.com/projects/cometfallpress/sunless-dunes-5e-campaign-setting-inspired-by-south-asia?ref=cratyi" />} />
 						<Route path="feedback" element={<ExternalRedirect to="https://forms.gle/gZJvmk8BAEDLZ1TX8" />} />
-
 						<Route path="*" element={<Navigate to="/" />} />
 					</Route>
 				</Routes>
