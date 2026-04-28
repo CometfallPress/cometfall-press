@@ -1,36 +1,41 @@
-import {useEffect, useState} from "react";
-import {api, initCSRF} from "./contexts/CSRF.jsx";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Layout from "./layout.jsx";
+import AdminLayout from "./adminLayout.jsx";
+
 import Team from "./routes/team.jsx";
 import Project from "./routes/project.jsx";
 import Login from "./routes/login.jsx";
 import Admin from "./routes/admin.jsx";
-
 import ExternalRedirect from "./routes/externalRedirect.jsx";
+import NewsletterSubscribers from "./routes/newsletterSubscribers.jsx";
+import NewsletterEditor from "./routes/newsletterEditor.jsx";
+import NewsletterList from "./routes/newsletterList.jsx";
+
+import { AppContext } from "./contexts/AppContext.jsx";
 import ScrollContext from "./contexts/ScrollContext.jsx";
 import ScreenContext from "./contexts/ScreenContext.jsx";
 import MouseContext from "./contexts/MouseContext.jsx";
+import ToastContext from "./contexts/ToastContext.jsx";
 import constants from "./contexts/Constants.jsx";
+import { api } from "./contexts/CSRF.jsx";
 
-import { AppContext } from "./contexts/AppContext.jsx";
-import NewsletterEditor from "./routes/newsletterEditor.jsx";
-import NewsletterList from "./routes/newsletterList.jsx";
-import AdminLayout from "./adminLayout.jsx";
-
+import ToastStack from "./elements/toastStack.jsx";
 
 function App() {
 
 	const [user, setUser] = useState(null)
 	const scrollState = ScrollContext()
 	const screenState = ScreenContext()
-	const breakpoints = constants();
-	const mouseState = MouseContext();
+	const breakpoints = constants()
+	const mouseState = MouseContext()
+	const toastState = ToastContext()
+
 
 	const tabs = [
-		{title: "Admin Panel", path: "/admin/"},
-		{title: "Newsletter List", path: "/admin/newsletter/"},
+		{title: "Newsletter Subscribers", path: "/admin/newsletter/subscribers"},
+		{title: "Newsletter List", path: "/admin/newsletter/list"},
 		{title: "Newsletter Editor", path: "/admin/newsletter/editor"}
 	];
 
@@ -60,7 +65,16 @@ function App() {
 	}, []);
 
 	return (
-		<AppContext.Provider value={{ user, scrollState, screenState, mouseState, breakpoints }}>
+		<AppContext.Provider value={
+			{
+				user,
+				scrollState,
+				screenState,
+				mouseState,
+				toastState,
+				breakpoints,
+			}
+		}>
 			<BrowserRouter>
 				<Routes>
 					<Route element={<Layout />}>
@@ -70,8 +84,10 @@ function App() {
 						<Route path="login" element={<Login />} />
 						<Route path="admin" element={<AdminLayout tabs={tabs}/>}>
 							<Route index element={<Admin />}/>
-							<Route path="newsletter" element={<NewsletterList />} />
-							<Route path="newsletter/editor" element={<NewsletterEditor />} />
+							<Route path="newsletter/subscribers" element={<NewsletterSubscribers />} />
+							<Route path="newsletter/list" element={<NewsletterList />} />
+							<Route path="newsletter/editor/" element={<NewsletterEditor />} />
+							<Route path="newsletter/editor/:documentId" element={<NewsletterEditor />} />
 						</Route>
 
 						<Route
@@ -87,6 +103,7 @@ function App() {
 						<Route path="*" element={<Navigate to="/" />} />
 					</Route>
 				</Routes>
+				<ToastStack/>
 			</BrowserRouter>
 		</AppContext.Provider>
 	);

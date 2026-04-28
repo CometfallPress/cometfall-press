@@ -9,14 +9,7 @@
   --color-violet: #7459a5;
   --color-magenta: #ed2486;
 
-  --animate-slide-in: slide-in 0.2s ease-in-out;
-  --animate-slide-out: slide-out 0.2s ease-in-out;
-
-  --animate-slide-in-top: slide-in-top 0.3s ease-in-out;
-  --animate-slide-out-top: slide-out-top 0.3s ease-in-out;
-
-  --animate-rotate-in: rotate-in 0.2s ease-in-out;
-  --animate-rotate-out: rotate-out 0.2s ease-in-out;
+  --animate-slide-and-fade-in-out-top: slide-and-fade-in-out-top 4.0s ;
 
   --breakpoint-2xl: 93.75rem;   /* 1500px */
   --breakpoint-3xl: 106.25rem;  /* 1700px */
@@ -24,58 +17,27 @@
   --breakpoint-5xl: 131.25rem;  /* 2100px */
   --breakpoint-6xl: 143.75rem;
 
-  @keyframes slide-out {    
+  @keyframes slide-and-fade-in-out-top {
     0% {
-      transform: translate(0);
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+    5% {
+      transform: translate(0, 21rem);
+      opacity: 0.8;
+    }
+    7% {
+      transform: translate(0, 20rem);
+      opacity: 1;
+    }
+    90% {
+      transform: translate(0, 20rem);
+      opacity: 1;
     }
     100% {
-      transform: translate(-20rem, 0);
-    }    
-  }
-
-  @keyframes slide-in {    
-    0% {
-      transform: translate(-20rem, 0)
+      transform: translate(0, 0);
+      opacity: 0;
     }
-    100% {
-      transform: translate(0);
-    }    
-  }
-
-  @keyframes slide-out-top {    
-    0% {
-      transform: translate(0);
-    }
-    100% {
-      transform: translate(0, -20rem);
-    }    
-  }
-
-  @keyframes slide-in-top {    
-    0% {
-      transform: translate(0, -20rem)
-    }
-    100% {
-      transform: translate(0);
-    }    
-  }
-
-  @keyframes rotate-out {    
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(-90deg);
-    }    
-  }
-
-  @keyframes rotate-in {    
-    0% {
-      transform: rotate(-90deg);
-    }
-    100% {
-      transform: rotate(0deg);
-    }    
   }
 }
 
@@ -210,4 +172,24 @@ h3 {
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="lora"]::before {
   content: "Lora";
   font-family: "Lora", sans-serif;
+}
+
+.ql-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: white;
+}
+
+.ql-toolbar.ql-snow {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border: none!important;
+  border-bottom: 1px solid #e2e8f0!important;
+}
+
+.ql-container.ql-snow {
+  border: none!important;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }

@@ -15,7 +15,7 @@ function Layout() {
         <>
             <div className="w-full h-full fixed scroll-smooth project" style={{ backgroundPosition: `0px ${(scrollState.scrollPosition-200) * -0.75}px`}}/>
             <div className="w-full h-full fixed overflow-y-scroll overflow-x-clip scroll-smooth" onScroll={scrollState.handleScroll}>
-                <Notification />
+                {!user&&<Notification />}
                 <Navbar />
                 <Scaler scale={0.9}>
                     <Outlet context={{scrollState, screenState, user}}/>

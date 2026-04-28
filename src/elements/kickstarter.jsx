@@ -68,7 +68,7 @@ export default function KickstarterCard(props) {
 								href={`${import.meta.env.VITE_REDIRECT_URL}/kickstarter`}
 								target="_blank"
 								rel="noreferrer"
-								className="block w-[66%] text-[1.2vw] text-center portrait:text-[1.5vh] items-center rounded-2xl bg-[#05ce78] px-5 py-4 m-auto text-white! hover:text-[#7459a5]! hover:scale-102 duration-100 transition-all"
+								className="block w-[66%] text-[1.2vw] text-center portrait:text-[1.5vh] items-center rounded-2xl bg-emerald-500 active:bg-emerald-700 px-5 py-4 m-auto text-white! hover:text-[#7459a5]! hover:scale-102 duration-100 transition-all"
 							>
 								<p className="m-auto">
 									View on Kickstarter
@@ -79,7 +79,7 @@ export default function KickstarterCard(props) {
 								href={`${import.meta.env.VITE_REDIRECT_URL}/kickstarter/`}
 								target="_blank"
 								rel="noreferrer"
-								className="block w-[66%] text-[1.2vw] text-center portrait:text-[1.5vh] items-center rounded-2xl border bg-zinc-100 m-auto border-zinc-300 px-5 py-4 text-black! hover:text-[#ed2396]! hover:scale-102 duration-100 transition-all"
+								className="block w-[66%] text-[1.2vw] text-center portrait:text-[1.5vh] items-center rounded-2xl border bg-zinc-100 active:bg-zinc-300 m-auto border-zinc-300 px-5 py-4 text-black! hover:text-[#ed2396]! hover:scale-102 duration-100 transition-all"
 							>
 								<p className="m-auto">
 									Notify me on launch
@@ -115,7 +115,7 @@ export default function KickstarterCard(props) {
 									       className="bg-white text-heading text-sm text-black rounded-xl outline-1 focus-within:outline-2 focus-within:outline-[#7459a5] outline-[#7459a5] block w-full px-3 py-2.5 placeholder:text-body"
 									       placeholder="email@example.com" required
 									/>
-									<button type="submit" className="block text-[1.2vw] text-center portrait:text-[1.5vh] items-center rounded-2xl border bg-zinc-100 m-auto border-zinc-300 px-5 py-4 text-black! hover:text-pink-700! hover:scale-102 duration-100 transition-all" >
+									<button type="submit" className="block text-[1.2vw] text-center portrait:text-[1.5vh] items-center rounded-2xl border bg-zinc-100 active:bg-zinc-300 m-auto border-zinc-300 px-5 py-4 text-black! hover:text-pink-700! hover:scale-102 duration-100 transition-all" >
 										{processing ? (
 											<div className="place-items-center items-center place-content-center content-center text-center">
 												<svg className="animate-spin h-5 w-5 text-[#7459a5]" xmlns="http://www.w3.org/2000/svg"
