@@ -52,7 +52,8 @@ function NewsletterEditor() {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				content: delta,
+				html: value,
+				delta: delta,
 			}),
 		});
 	};

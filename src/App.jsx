@@ -42,25 +42,21 @@ function App() {
 	}
 
 	useEffect(() => {
-		try {
-			fetchUser().then(r => {
-				if(r.res&&r.data){
-					if (r.res.status === 200) {
-						setUser(r.data.username)
-					}
-					else {
-						setUser(null)
-					}
-				}
-			})
-		} catch (err) {
-			console.log(err)
-			setUser(null)
-		}
-	}, [])
+		const boot = async () => {
+			try {
+				const { res, data } = await fetchUser();
 
-	useEffect(() => {
-		initCSRF();
+				if (res?.status === 200) {
+					setUser(data.username);
+				} else {
+					setUser(null);
+				}
+			} catch (err) {
+				console.log(err);
+				setUser(null);
+			}
+		};
+		boot();
 	}, []);
 
 	return (
