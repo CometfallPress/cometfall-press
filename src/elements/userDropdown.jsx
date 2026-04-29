@@ -41,7 +41,7 @@ function UserDropdown() {
 						</a>
 						<hr className='h-2 my-2 w-full'/>
 						<a className="m-auto p-2 px-4 hover:bg-fuchsia-100 rounded-lg flex flex-row place-items-center place-content-center"
-						   onClick={async () => await api("/logout")}
+						   onClick={async () => await api("/logout", { method: "POST" })}
 						>
 							<ArrowRightStartOnRectangleIcon className="w-5 h-5 mr-1" />
 							Log Out
