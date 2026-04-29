@@ -12,7 +12,7 @@ function AdminLayout(props) {
 
 	useEffect(() => {
 		for (let i=0; i < tabs.length; i++) {
-			if (tabs[i].path===location.pathname) {
+			if (location.pathname.includes(tabs[i].path)) {
 				setSelected(i)
 			}
 		}

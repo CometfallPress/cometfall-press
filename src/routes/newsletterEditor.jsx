@@ -1,10 +1,10 @@
-import {useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import Quill from "quill";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import { api } from "../contexts/CSRF.jsx";
-import { CloudArrowUpIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
-import { useParams } from "react-router-dom";
+import { CloudArrowUpIcon, EnvelopeIcon, ExclamationCircleIcon, DocumentArrowUpIcon,  XCircleIcon } from "@heroicons/react/24/outline";
+import {useNavigate, useParams} from "react-router-dom";
 import {useAppContext} from "../contexts/AppContext.jsx";
 
 const FontAttributor = Quill.import("attributors/class/font");
@@ -24,12 +24,14 @@ Quill.register(FontAttributor, true);
 
 
 function NewsletterEditor() {
-	const [value, setValue] = useState("");
-	const [prevVal, setPrevVal] = useState("");
+	const [value, setValue] = useState({delta: null, html: ""});
+	const prevVal = useRef(JSON.stringify({delta: "", html: ""}));
 	const quillRef = useRef(null);
-	const [status, setStatus] = useState("");
+	const [error, setError] = useState(false);
 	const { documentId } = useParams();
-	const { toastState } = useAppContext();
+	const [ docId, setDocumentId ] = useState(documentId);
+	const { toastState, setModal } = useAppContext();
+	const navigate = useNavigate();
 
 	const modules = {
 		toolbar: [
@@ -38,7 +40,7 @@ function NewsletterEditor() {
 			["bold", "italic", "underline", "strike"],
 			[{ color: [] }, { background: [] }],
 			[{ script: "sub" }, { script: "super" }],
-			[{ header: 1 }, { header: 2 }, { header: 3 }, { header: 4 }, { header: 5 }, { header: 6 }, false],
+			[{ header: [1, 2, 3, 4, 5, 6, false] }],
 			[{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
 			[{ indent: "-1" }, { indent: "+1" }],
 			[{ align: [] }],
@@ -48,59 +50,156 @@ function NewsletterEditor() {
 		]
 	};
 
-	const handleSave = async () => {
-		if(documentId !== undefined) {
-			const editor = quillRef.current.getEditor();
-			const delta = editor.getContents();
-
-			const { res, data } = await api(`/newsletter/save/${documentId}`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					nid: documentId,
-					html: value,
-					delta: delta,
-				}),
-			});
-			setStatus(data.status)
-			if (res.status===200) {
-				toastState.addToast("Your changes have been saved!", "success");
-			}
-			else{
-				toastState.addToast(`An error occured while saving your changes!: ${status}`, "error");
-			}
-
+	const checkDocIdAndSave = useCallback(async (serializedValue) => {
+		const doc = docId?docId:documentId;
+		if (!doc) {
+			setModal(
+				{
+					title: "Warning: Blank Document!",
+					icon: <ExclamationCircleIcon className="w-10 h-10 text-amber-400 my-auto mx-1 shrink-0"/>,
+					message: "You're currently editing a blank document that hasn't yet been saved on the server. Do you want to create a new document and save?",
+					buttons: [
+						{
+							text: "Save as New Document",
+							icon: <DocumentArrowUpIcon className="w-7 h-7 my-auto mx-1 shrink-0" />,
+							onClick: async () => {
+								try {
+									await api("/newsletter/new", {method: "POST", body: JSON.stringify({})}).then(
+										async (dict) => {
+											if (dict.res.status === 200) {
+												setDocumentId(dict.data.id)
+											}
+											else {
+												toastState.addToast(`An error occurred while creating a new newsletter, please try again later!: ${dict.data.status}`, "error");
+											}
+											return dict
+										}
+									).then(async (dict) => {
+										await handleSave(serializedValue, dict.data.id)
+										return dict
+									}).then((dict) => {
+										navigate(`/admin/newsletter/editor/${dict.data.id}`)
+									})
+									setModal(null)
+								}
+								catch (e) {
+									console.error(e);
+									toastState.addToast(`An error occurred while creating a new newsletter, please try again later!`, "error");
+								}
+							}
+						},
+						{
+							text: "Continue without Saving",
+							icon: < XCircleIcon className="w-7 h-7 my-auto mx-1 shrink-0"/>,
+							onClick: () => { setModal(null) }
+						},
+					]
+				}
+			)
 		}
-	};
+		else {
+			await handleSave(serializedValue, doc)
+		}
+	}, [docId, documentId])
+
+	const handleSave = async (serializedValue, docId) => {
+		const doc = docId?docId:documentId;
+		const { res, data } = await api(`/newsletter/save/${doc}`, {
+			method: "POST",
+			body: JSON.stringify({
+				nid: doc,
+				delta: serializedValue,
+			}),
+		});
+		if (res.status===200) {
+			toastState.addToast("Your changes have been saved!", "success");
+			prevVal.current = serializedValue;
+		}
+		else{
+			toastState.addToast(`An error occured while saving your changes!: ${data.status}`, "error");
+		}
+		return { res, data }
+	}
 
 	useEffect(() => {
-		const interval = setInterval(() => {
-			if (prevVal !== value) { handleSave(); setPrevVal(value); }
-		}, 10000);
+		const doc = docId?docId:documentId
+		if (error || !doc) return;
 
-		return () => clearInterval(interval);
-	}, [prevVal, value]);
+		const timer = setTimeout(async () => {
+			const serialized = JSON.stringify(value);
+
+			if (serialized === prevVal.current) return;
+
+			await checkDocIdAndSave(serialized);
+		}, 30000);
+
+		return () => clearTimeout(timer);
+	}, [value, error, docId, documentId, checkDocIdAndSave, toastState]);
+
+	useEffect(() => {
+		const handleLoad = async () => {
+			const doc = docId?docId:documentId
+			if(doc !== undefined) {
+				const { res, data } = await api(`/newsletter/load/${doc.toString()}`, {
+					method: "POST",
+					body: JSON.stringify({
+						nid: doc,
+					}),
+				});
+				if (res.status===200) {
+					const parsedDelta = JSON.parse(data.delta_content);
+					setValue(parsedDelta);
+				}
+				else{
+					setError(true)
+					toastState.addToast(`An error occured while loading the saved document; auto-save has been turned off to avoid overwriting.`, "error");
+				}
+			}
+		}
+
+		try {
+			handleLoad().then(r => r)
+		}
+		catch(err) {
+			setError(true)
+			console.error(err);
+		}
+	}, [docId, documentId]);
 
 	return (
 		<>
 			<div className="relative w-full h-full rounded-2xl border border-slate-200 bg-white shadow-sm overflow-x-scroll">
 				<ReactQuill
-					ref={quillRef}
 					theme="snow"
-					value={value}
-					onChange={setValue}
+					ref={quillRef}
+					value={value.delta}
+					onChange={async (content, delta, source, editor) => {
+						const fullDelta = editor.getContents();
+						setValue({ delta: fullDelta, html: content });
+					}}
 					className="w-full h-full overflow-y-hidden overscroll-contain scroll-smooth!"
 					modules={modules}
 				/>
 				<div className="absolute right-0 bottom-0 z-50 w-auto flex flex-row m-3">
-					<button className="w-fit bg-emerald-500 active:bg-emerald-700 text-white flex flex-row p-2 m-2 rounded-xl font-medium text-md place-items-center place-content-center text-center" onClick={async () => {await handleSave()}}>
-						<CloudArrowUpIcon class="h-6 w-6 mx-2 my-auto" />
+					<button
+						className="w-fit bg-emerald-500 active:bg-emerald-700 text-white flex flex-row p-2 m-2 rounded-xl font-medium text-md place-items-center place-content-center text-center"
+						onClick={ async () => {
+								const editor = quillRef.current?.getEditor();
+								if (!editor) return;
+								const fullDelta = editor.getContents();
+								const html = editor.root.innerHTML
+								const serialized = JSON.stringify({delta: fullDelta, html: html});
+								prevVal.current = serialized;
+								await checkDocIdAndSave(serialized);
+							}
+						}
+					>
+						<CloudArrowUpIcon className="h-6 w-6 mx-2 my-auto" />
 						<p className="mr-2 my-auto">Save Changes</p>
+
 					</button>
-					<button className="w-fit bg-emerald-500 active:bg-emerald-700 text-white flex flex-row p-2 m-2 rounded-xl font-medium text-md place-items-center place-content-center text-center" onClick={async () => {await toastState.addToast("Done!")}}>
-						<EnvelopeIcon class="h-6 w-6 mx-2 my-auto" />
+					<button className="w-fit bg-emerald-500 active:bg-emerald-700 text-white flex flex-row p-2 m-2 rounded-xl font-medium text-md place-items-center place-content-center text-center" onClick={async () => {await toastState.addToast("Not implemented yet!", "error")}}>
+						<EnvelopeIcon className="h-6 w-6 mx-2 my-auto" />
 						<p className="mr-2 my-auto">Publish</p>
 					</button>
 				</div>

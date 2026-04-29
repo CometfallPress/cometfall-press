@@ -11,7 +11,7 @@ function Toast({ id, message, type= "info" }) {
             animate={{ opacity: 1, y: 20, type: "spring" }}
             exit={{ opacity: 0, y: -10, type: "spring" }}
             className={`
-              pointer-events-auto rounded-xl px-4 py-3 text-black font-semibold shadow-lg landscape:w-[25vw] portrait:w-[50vw] text-center 
+              pointer-events-auto rounded-xl px-4 py-3 text-black shadow-lg landscape:w-[25vw] portrait:w-[50vw] text-center 
               ${type === "success" ? "bg-emerald-200" : ""}
               ${type === "error" ? "bg-red-200" : ""}
               ${type === "info" ? "bg-slate-100" : ""}

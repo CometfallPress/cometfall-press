@@ -1,15 +1,29 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { api } from "../contexts/CSRF.jsx"
-import { DocumentPlusIcon } from "@heroicons/react/24/outline";
+import { DocumentPlusIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import {useAppContext} from "../contexts/AppContext.jsx";
 
 
 function NewsletterList() {
+	const { toastState } = useAppContext();
 	const [newsletters, setNewsletters] = useState([]);
+	const navigate = useNavigate();
 
 	const getNewsletters = async () => {
 		const { res, data } = await api("/newsletter/list", {method: "POST", body: JSON.stringify({})})
 		if (res.status === 200) {
 			setNewsletters(data);
+		}
+	}
+
+	const createNewsletter = async () => {
+		const { res, data } = await api("/newsletter/new", {method: "POST", body: JSON.stringify({})})
+		if (res.status === 200) {
+			navigate(`/admin/newsletter/editor/${data.id.toString()}`);
+		}
+		else {
+			toastState.addToast(`An error occurred while creating a new newsletter, please try again later!: ${data.status}`, "error");
 		}
 	}
 
@@ -49,7 +63,7 @@ function NewsletterList() {
 						</tr>
 					</thead>
 					<tbody className="w-full place-content-center place-items-center text-center overflow-scroll">
-					{newsletters.map((ns) => (
+					{newsletters.sort((a,b) => b.datetime_added_raw - a.datetime_added_raw).map((ns) => (
 						<tr key={ns.id} className="">
 							<th scope="row" className="px-6 py-4 font-medium text-heading whitespace-nowrap">
 								{ns.created_by}
@@ -59,17 +73,17 @@ function NewsletterList() {
 							<td className="px-6 py-4 drop-shadow-sm">{ns.datetime_updated}</td>
 							<td className="px-6 py-4 drop-shadow-sm">{ns.sent_to_users}</td>
 							<td className="px-6 py-4 drop-shadow-sm">{ns.datetime_sent}</td>
-							<td className="px-6 py-4 drop-shadow-sm"></td>
+							<td className="px-6 py-4 drop-shadow-sm" onClick={() => {navigate(`/admin/newsletter/editor/${ns.id}`)}}><PencilSquareIcon className="h-6 w-6 m-2 hover:text-[#ed2396]"/></td>
 						</tr>
 					))}
 					</tbody>
-					<div className="absolute right-0 bottom-0 z-50 m-3">
-						<button className="bg-emerald-500 active:bg-emerald-700 text-white flex flex-row p-2 m-2 ml-auto rounded-xl font-medium text-md place-items-center place-content-center text-center" onClick={() => {return null}}>
-							<DocumentPlusIcon class="h-6 w-6 mx-2 my-auto" />
-							<p className="mr-2 my-auto">New Newsletter</p>
-						</button>
-					</div>
 				</table>
+				<div className="absolute right-0 bottom-0 z-50 m-3">
+					<button className="bg-emerald-500 active:bg-emerald-700 text-white flex flex-row p-2 m-2 ml-auto rounded-xl font-medium text-md place-items-center place-content-center text-center" onClick={async () => {await createNewsletter()}}>
+						<DocumentPlusIcon className="h-6 w-6 mx-2 my-auto" />
+						<p className="mr-2 my-auto">New Newsletter</p>
+					</button>
+				</div>
 			</div>
 
 		</>

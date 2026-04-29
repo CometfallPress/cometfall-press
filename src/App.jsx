@@ -22,10 +22,12 @@ import constants from "./contexts/Constants.jsx";
 import { api } from "./contexts/CSRF.jsx";
 
 import ToastStack from "./elements/toastStack.jsx";
+import Modal from "./elements/modal.jsx";
 
 function App() {
 
 	const [user, setUser] = useState(null)
+	const [modal, setModal] = useState(null)
 	const scrollState = ScrollContext()
 	const screenState = ScreenContext()
 	const breakpoints = constants()
@@ -73,6 +75,8 @@ function App() {
 				mouseState,
 				toastState,
 				breakpoints,
+				modal,
+				setModal,
 			}
 		}>
 			<BrowserRouter>
@@ -104,6 +108,7 @@ function App() {
 					</Route>
 				</Routes>
 				<ToastStack/>
+				<Modal modal={modal}/>
 			</BrowserRouter>
 		</AppContext.Provider>
 	);
