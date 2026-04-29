@@ -21,11 +21,11 @@ function AdminLayout(props) {
 	return (
 		<>
 			<div className="w-screen h-screen">
-				<div className={`grid grid-cols-3 gap-2 w-fit ml-10 font-semibold`}>
+				<div className={`grid grid-cols-3 gap-2 w-fit ml-10 font-semibold landscape:whitespace-nowrap`}>
 					{tabs.map((tab, index) => {
 						return (
 							<div key={index}
-							     className={`col-${index} w-full mx-auto mt-2 px-2 pt-2 pb-1 ${index===selected?"bg-white text-[#5f5475]":"bg-[#ffffff767]"} hover:text-[#ed2396] rounded-t-lg text-center`}
+							     className={`col-${index} w-full mx-auto mt-2 px-2 pt-2 pb-1 ${index===selected?"bg-white text-[#5f5475]":"bg-[#ffffff767]"} hover:text-[#ed2396] rounded-t-lg text-center place-content-end`}
 							     onClick={() => {if (index!==selected){setSelected(index); navigate(tab.path)}}}
 							>
 								{tab.title}

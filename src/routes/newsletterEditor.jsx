@@ -25,6 +25,7 @@ Quill.register(FontAttributor, true);
 
 function NewsletterEditor() {
 	const [value, setValue] = useState({delta: null, html: ""});
+	const [title, setTitle] = useState("CometfallPress Newsletter Update");
 	const prevVal = useRef(JSON.stringify({delta: "", html: ""}));
 	const quillRef = useRef(null);
 	const [error, setError] = useState(false);
@@ -109,6 +110,7 @@ function NewsletterEditor() {
 			body: JSON.stringify({
 				nid: doc,
 				delta: serializedValue,
+				title: title,
 			}),
 		});
 		if (res.status===200) {
@@ -134,7 +136,7 @@ function NewsletterEditor() {
 		}, 30000);
 
 		return () => clearTimeout(timer);
-	}, [value, error, docId, documentId, checkDocIdAndSave, toastState]);
+	}, [value, title, error, docId, documentId, checkDocIdAndSave, toastState]);
 
 	useEffect(() => {
 		const handleLoad = async () => {
@@ -149,6 +151,7 @@ function NewsletterEditor() {
 				if (res.status===200) {
 					const parsedDelta = JSON.parse(data.delta_content);
 					setValue(parsedDelta);
+					setTitle(data.title)
 				}
 				else{
 					setError(true)
@@ -169,6 +172,10 @@ function NewsletterEditor() {
 	return (
 		<>
 			<div className="relative w-full h-full rounded-2xl border border-slate-200 bg-white shadow-sm overflow-x-scroll">
+				<div className="flex flex-row m-2 p-1">
+					<p className="font-bold m-2">Title: </p>
+					<input className="rounded-md outline-1 outline-slate-200 p-2 landscape:w-1/2 portrait:w-3/4" value={title} onChange={(e) => {setTitle(e.target.value)}}/>
+				</div>
 				<ReactQuill
 					theme="snow"
 					ref={quillRef}

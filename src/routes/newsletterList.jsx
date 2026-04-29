@@ -40,6 +40,9 @@ function NewsletterList() {
 					<thead className="uppercase text-md font-bold text-white bg-neutral-secondary-soft border-b border-slate-200 rounded-2xl bg-emerald-500">
 						<tr>
 							<th scope="col" className="px-6 py-4 drop-shadow-sm">
+								Title
+							</th>
+							<th scope="col" className="px-6 py-4 drop-shadow-sm">
 								Created By
 							</th>
 							<th scope="col" className="px-6 py-4 drop-shadow-sm">
@@ -62,12 +65,13 @@ function NewsletterList() {
 							</th>
 						</tr>
 					</thead>
-					<tbody className="w-full place-content-center place-items-center text-center overflow-scroll">
+					<tbody className="w-full place-content-center place-items-center text-left overflow-scroll">
 					{newsletters.sort((a,b) => b.datetime_added_raw - a.datetime_added_raw).map((ns) => (
-						<tr key={ns.id} className="">
+						<tr key={ns.id} className="border-t border-slate-200 even:bg-gray-100 last:border-b">
 							<th scope="row" className="px-6 py-4 font-medium text-heading whitespace-nowrap">
-								{ns.created_by}
+								{ns.title}
 							</th>
+							<td className="px-6 py-4 drop-shadow-sm">{ns.created_by}</td>
 							<td className="px-6 py-4 drop-shadow-sm">{ns.datetime_added}</td>
 							<td className="px-6 py-4 drop-shadow-sm">{ns.last_update_by}</td>
 							<td className="px-6 py-4 drop-shadow-sm">{ns.datetime_updated}</td>
