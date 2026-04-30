@@ -25,7 +25,7 @@ function AdminLayout(props) {
 					{tabs.map((tab, index) => {
 						return (
 							<div key={index}
-							     className={`col-${index} w-full mx-auto mt-2 px-2 pt-2 pb-1 ${index===selected?"bg-white text-[#5f5475]":"bg-[#ffffff767]"} hover:text-[#ed2396] rounded-t-lg text-center place-content-end`}
+							     className={`col-${index} w-full mx-auto mt-2 px-2 pt-2 pb-1 ${index===selected?"bg-white text-[#5f5475]":"bg-[#ffffff767]"} hover:text-[#ed2396] rounded-t-lg text-center place-content-endn`}
 							     onClick={() => {if (index!==selected){setSelected(index); navigate(tab.path)}}}
 							>
 								{tab.title}
