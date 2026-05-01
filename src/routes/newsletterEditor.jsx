@@ -6,8 +6,10 @@ import { api } from "../contexts/CSRF.jsx";
 import { CloudArrowUpIcon, EnvelopeIcon, ExclamationCircleIcon, DocumentArrowUpIcon,  XCircleIcon } from "@heroicons/react/24/outline";
 import {useNavigate, useParams} from "react-router-dom";
 import {useAppContext} from "../contexts/AppContext.jsx";
+import EditorCommandsMenu from "../elements/editorCommandsMenu.jsx";
 
 const FontAttributor = Quill.import("attributors/class/font");
+
 
 FontAttributor.whitelist = [
 	"inter",
@@ -47,8 +49,8 @@ function NewsletterEditor() {
 			[{ align: [] }],
 			["blockquote", "code-block"],
 			["link", "image", "video"],
-			["clean"]
-		]
+			["clean"],
+		],
 	};
 
 	const checkDocIdAndSave = useCallback(async (serializedValue) => {
@@ -186,7 +188,9 @@ function NewsletterEditor() {
 					}}
 					className="w-full h-full overflow-y-hidden overscroll-contain scroll-smooth!"
 					modules={modules}
+					placeholder={"Type / for custom variables and commands"}
 				/>
+				<EditorCommandsMenu quillRef={quillRef} />
 				<div className="absolute right-0 bottom-0 z-50 w-auto flex flex-row m-3">
 					<button
 						className="w-fit bg-emerald-500 active:bg-emerald-700 text-white flex flex-row p-2 m-2 rounded-xl font-medium text-md place-items-center place-content-center text-center"

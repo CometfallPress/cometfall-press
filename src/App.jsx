@@ -12,6 +12,7 @@ import ExternalRedirect from "./routes/externalRedirect.jsx";
 import NewsletterSubscribers from "./routes/newsletterSubscribers.jsx";
 import NewsletterEditor from "./routes/newsletterEditor.jsx";
 import NewsletterList from "./routes/newsletterList.jsx";
+import ProtectedRoute from "./routes/protectedRoute.jsx";
 
 import { AppContext } from "./contexts/AppContext.jsx";
 import ScrollContext from "./contexts/ScrollContext.jsx";
@@ -86,14 +87,15 @@ function App() {
 						<Route path="home" element={<Navigate to="/" />} />
 						<Route path="team" element={<Team />} />
 						<Route path="login" element={<Login />} />
-						<Route path="admin" element={<AdminLayout tabs={tabs}/>}>
-							<Route index element={<Admin />}/>
-							<Route path="newsletter/subscribers" element={<NewsletterSubscribers />} />
-							<Route path="newsletter/list" element={<NewsletterList />} />
-							<Route path="newsletter/editor/" element={<NewsletterEditor />} />
-							<Route path="newsletter/editor/:documentId" element={<NewsletterEditor />} />
+						<Route element={<ProtectedRoute/>}>
+							<Route path="admin" element={<AdminLayout tabs={tabs}/>}>
+								<Route index element={<Admin />}/>
+								<Route path="newsletter/subscribers" element={<NewsletterSubscribers />} />
+								<Route path="newsletter/list" element={<NewsletterList />} />
+								<Route path="newsletter/editor/" element={<NewsletterEditor />} />
+								<Route path="newsletter/editor/:documentId" element={<NewsletterEditor />} />
+							</Route>
 						</Route>
-
 						<Route
 							path="kickstarter"
 							element={
