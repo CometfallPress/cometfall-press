@@ -27,19 +27,11 @@ function EditorCommandsMenu(props) {
                 let s = slashAtRef.current
                 let text = ed.getText();
                 let index = text.indexOf(s);
-                console.log(s,text,index);
                 if (index !== -1) {
                     ed.deleteText(index,s.length);
                     ed.insertText(index, username);
                     ed.setSelection(index + username.length);
                 }
-            },
-        },
-        {
-            label: "Replace with Template",
-            match: "/template",
-            action: (ed, range) => {
-                ed.setContent(template);
             },
         },
         {
@@ -55,6 +47,13 @@ function EditorCommandsMenu(props) {
                     ed.insertText(index, divider);
                     ed.setSelection(index + divider.length);
                 }
+            },
+        },
+        {
+            label: "Replace with Template",
+            match: "/template",
+            action: (ed, range) => {
+                ed.setContent(template);
             },
         },
     ];

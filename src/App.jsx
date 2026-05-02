@@ -12,7 +12,6 @@ import ExternalRedirect from "./routes/externalRedirect.jsx";
 import NewsletterSubscribers from "./routes/newsletterSubscribers.jsx";
 import NewsletterEditor from "./routes/newsletterEditor.jsx";
 import NewsletterList from "./routes/newsletterList.jsx";
-import ProtectedRoute from "./routes/protectedRoute.jsx";
 
 import { AppContext } from "./contexts/AppContext.jsx";
 import ScrollContext from "./contexts/ScrollContext.jsx";
@@ -36,11 +35,11 @@ function App() {
 	const toastState = ToastContext()
 
 
-	const tabs = [
-		{title: "Newsletter Subscribers", path: "/admin/newsletter/subscribers"},
-		{title: "Newsletter List", path: "/admin/newsletter/list"},
-		{title: "Newsletter Editor", path: "/admin/newsletter/editor"}
-	];
+	const tabs = {
+		"/admin/newsletter/subscribers": {title: "Newsletter Subscribers", path: "/admin/newsletter/subscribers"},
+		"/admin/newsletter/list": {title: "Newsletter List", path: "/admin/newsletter/list"},
+		"/admin/newsletter/editor": {title: "Newsletter Editor", path: "/admin/newsletter/editor"}
+	}
 
 	const fetchUser = async () => {
 		const { res, data } = await api("/me", {
@@ -87,14 +86,12 @@ function App() {
 						<Route path="home" element={<Navigate to="/" />} />
 						<Route path="team" element={<Team />} />
 						<Route path="login" element={<Login />} />
-						<Route element={<ProtectedRoute/>}>
-							<Route path="admin" element={<AdminLayout tabs={tabs}/>}>
-								<Route index element={<Admin />}/>
-								<Route path="newsletter/subscribers" element={<NewsletterSubscribers />} />
-								<Route path="newsletter/list" element={<NewsletterList />} />
-								<Route path="newsletter/editor/" element={<NewsletterEditor />} />
-								<Route path="newsletter/editor/:documentId" element={<NewsletterEditor />} />
-							</Route>
+						<Route path="admin" element={<AdminLayout tabs={tabs}/>}>
+							<Route index element={<Admin />}/>
+							<Route path="newsletter/subscribers" element={<NewsletterSubscribers />} />
+							<Route path="newsletter/list" element={<NewsletterList />} />
+							<Route path="newsletter/editor/" element={<NewsletterEditor />} />
+							<Route path="newsletter/editor/:documentId" element={<NewsletterEditor />} />
 						</Route>
 						<Route
 							path="kickstarter"

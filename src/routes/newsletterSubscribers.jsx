@@ -37,8 +37,8 @@ function NewsletterSubscribers() {
                     </thead>
                     <tbody className="w-full place-content-center place-items-center text-center overflow-scroll">
                     {subs.map((sub, index) => (
-                        <tr key={index} className="border-t border-slate-200 even:bg-gray-100">
-                            <th scope="row" className="px-6 py-4 font-medium text-heading whitespace-nowrap">{sub.email}</th>
+                        <tr key={index} className="border-t border-slate-200 even:bg-gray-100 text-left">
+                            <th scope="row" className="px-6 py-4 font-medium text-body whitespace-nowrap">{sub.email}</th>
                             <td className="px-6 py-4 drop-shadow-sm">{sub.name}</td>
                             <td className="px-6 py-4 drop-shadow-sm">{sub.date_joined}</td>
                         </tr>

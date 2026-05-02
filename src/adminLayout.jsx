@@ -1,32 +1,26 @@
 import { Outlet } from "react-router-dom";
-import {useEffect, useState} from "react";
-
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { useNavigate, useLocation } from "react-router-dom";
+import {useAppContext} from "./contexts/AppContext.jsx";
 
 function AdminLayout(props) {
-	const [selected, setSelected] = useState(0)
+
+    const { user } = useAppContext()
 	const tabs = props.tabs
 	const navigate = useNavigate();
 	const location = useLocation();
-
-	useEffect(() => {
-		for (let i=0; i < tabs.length; i++) {
-			if (location.pathname.includes(tabs[i].path)) {
-				setSelected(i)
-			}
-		}
-	}, [location.pathname, tabs])
+    const [selected, setSelected] = useState(location.pathname)
 
 	return (
 		<>
 			<div className="w-screen h-screen">
 				<div className={`grid grid-cols-3 gap-2 w-fit ml-10 font-semibold landscape:whitespace-nowrap`}>
-					{tabs.map((tab, index) => {
+					{Object.entries(tabs).map(([key, tab], index) => {
 						return (
-							<div key={index}
-							     className={`col-${index} w-full mx-auto mt-2 px-2 pt-2 pb-1 ${index===selected?"bg-white text-[#5f5475]":"bg-[#ffffff767]"} hover:text-[#ed2396] rounded-t-lg text-center place-content-endn`}
-							     onClick={() => {if (index!==selected){setSelected(index); navigate(tab.path)}}}
+							<div key={key}
+							     className={`col-${index} w-full mx-auto mt-2 px-2 pt-2 pb-1 ${tab.path===selected?"bg-white text-[#5f5475]":"bg-[#ffffff767]"} hover:text-[#ed2396] rounded-t-lg text-center place-content-end`}
+							     onClick={() => {if (tab.path!==selected){setSelected(tab.path); navigate(tab.path)}}}
 							>
 								{tab.title}
 							</div>
@@ -35,7 +29,7 @@ function AdminLayout(props) {
 				</div>
 				<div className="w-full h-[90vh] m-auto bg-white rounded-xl">
 					<div className="p-2 h-full">
-						<Outlet />
+                        {user&&(<Outlet />)}
 					</div>
 				</div>
 			</div>
@@ -44,7 +38,7 @@ function AdminLayout(props) {
 }
 
 AdminLayout.propTypes = {
-	tabs: PropTypes.array.isRequired,
+	tabs: PropTypes.object.isRequired,
 };
 
 export default AdminLayout;
