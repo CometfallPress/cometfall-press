@@ -18,10 +18,16 @@ export function initCSRF() {
 export async function api(path, options = {}) {
 	await initCSRF();
 
+
+	const isFormData = options.body instanceof FormData;
 	const method = options.method || "GET";
 	const headers = {
-		...(method !== "GET" ? { "Content-Type": "application/json" } : {}),
-		...(csrfToken && method !== "GET" ? { "X-CSRFToken": csrfToken, "X-CSRF-Token": csrfToken } : {}),
+		...(method !== "GET" && !isFormData
+			? { "Content-Type": options.contentType || "application/json" }
+			: {}),
+		...(csrfToken && method !== "GET"
+			? { "X-CSRFToken": csrfToken, "X-CSRF-Token": csrfToken }
+			: {}),
 	};
 
 	const res = await fetch(`${import.meta.env.VITE_API_URL}${path}`, {

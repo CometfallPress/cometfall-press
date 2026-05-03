@@ -64,7 +64,7 @@ function Navbar() {
                     <a href={`${import.meta.env.VITE_REDIRECT_URL}`} className="flex items-center unselectable">
                         <img src={logo} className="unselectable portrait:h-[4vh] landscape:h-[6vh] landscape:4xl:h-[5vh] m-1 object-scale-down" alt="Cometfall Logo" />
                     </a>
-                    {user!==null&&(<UserDropdown />)}
+                    {(user!==null&&user!=="loading")&&(<UserDropdown />)}
                 </div>
             </nav>
         </>

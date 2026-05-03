@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto&family=Lora&family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Eczar:wght@400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=BioRhyme:wght@200..800&display=swap');
+
+.ql-font-serif { font-family: serif; }
+.ql-font-sans-serif { font-family: sans-serif; }
+.ql-font-monospace { font-family: monospace; }
+.ql-font-inter { font-family: "Inter", sans-serif; }
+.ql-font-roboto { font-family: "Roboto", sans-serif; }
+.ql-font-lora { font-family: "Lora", serif; }
+.ql-font-dm-sans { font-family: "DM Sans", sans-serif; }
+.ql-font-fira-sans { font-family: "Fira Sans", sans-serif; }
+.ql-font-montserrat { font-family: "Montserrat", sans-serif; }
+.ql-font-eczar { font-family: "Eczar", serif; }
+.ql-font-raleway { font-family: "Raleway", sans-serif; }
+.ql-font-fraunces { font-family: "Fraunces", serif; }
+.ql-font-biorhyme { font-family: "BioRhyme", serif; }
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="serif"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="serif"]::before {
+    content: "Serif";
+    font-family: serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="sans-serif"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="sans-serif"]::before {
+    content: "Sans Serif";
+    font-family: sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="monospace"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="monospace"]::before {
+    content: "Monospace";
+    font-family: monospace;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="inter"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="inter"]::before {
+    content: "Inter";
+    font-family: "Inter", sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="roboto"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="roboto"]::before {
+    content: "Roboto";
+    font-family: "Roboto", sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="lora"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="lora"]::before {
+    content: "Lora";
+    font-family: "Lora", serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="dm-sans"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="dm-sans"]::before {
+    content: "DM Sans";
+    font-family: "DM Sans", sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="fira-sans"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="fira-sans"]::before {
+    content: "Fira Sans";
+    font-family: "Fira Sans", sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="montserrat"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="montserrat"]::before {
+    content: "Montserrat";
+    font-family: "Montserrat", sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="eczar"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="eczar"]::before {
+    content: "Eczar";
+    font-family: "Eczar", serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="raleway"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="raleway"]::before {
+    content: "Raleway";
+    font-family: "Raleway", sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="fraunces"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="fraunces"]::before {
+    content: "Fraunces";
+    font-family: "Fraunces", serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="biorhyme"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="biorhyme"]::before {
+    content: "BioRhyme";
+    font-family: "BioRhyme", serif;
+}

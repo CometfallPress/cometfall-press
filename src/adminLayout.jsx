@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import { useNavigate, useLocation } from "react-router-dom";
 import {useAppContext} from "./contexts/AppContext.jsx";
@@ -10,7 +10,11 @@ function AdminLayout(props) {
 	const tabs = props.tabs
 	const navigate = useNavigate();
 	const location = useLocation();
-    const [selected, setSelected] = useState(location.pathname)
+    const [selected, setSelected] = useState(location.pathname.split("/").slice(0, 4).join("/"))
+
+	useEffect(() => {
+		setSelected(location.pathname.split("/").slice(0, 4).join("/"))
+	}, [location.pathname])
 
 	return (
 		<>

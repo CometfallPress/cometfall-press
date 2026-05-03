@@ -7,11 +7,20 @@ import { CloudArrowUpIcon, EnvelopeIcon, ExclamationCircleIcon, DocumentArrowUpI
 import {useNavigate, useParams} from "react-router-dom";
 import {useAppContext} from "../contexts/AppContext.jsx";
 import EditorCommandsMenu from "../elements/editorCommandsMenu.jsx";
+import BlotFormatter, {createResponsiveVideoBlotClass} from '@enzedonline/quill-blot-formatter2';
+import QuillImageDropAndPaste from 'quill-image-drop-and-paste'
 
 const FontAttributor = Quill.import("attributors/class/font");
 
 
 FontAttributor.whitelist = [
+	"dm-sans",
+	"fira-sans",
+	"montserrat",
+	"eczar",
+	"raleway",
+	"fraunces",
+	"biorhyme",
 	"inter",
 	"roboto",
 	"lora",
@@ -19,11 +28,13 @@ FontAttributor.whitelist = [
 	"sans-serif",
 	"serif",
 	"monospace",
-];
+].sort((a, b) => { return b[0] <= a[0] ? 1 : -1; });
 
 Quill.register(FontAttributor, true);
-
-
+Quill.register('modules/blotFormatter2', BlotFormatter);
+const VideoResponsive = createResponsiveVideoBlotClass(Quill);
+Quill.register({ 'formats/video': VideoResponsive }, true);
+Quill.register('modules/imageDropAndPaste', QuillImageDropAndPaste);
 
 function NewsletterEditor() {
 	const [value, setValue] = useState({delta: null, html: ""});
@@ -33,24 +44,112 @@ function NewsletterEditor() {
 	const [error, setError] = useState(false);
 	const { documentId } = useParams();
 	const [ docId, setDocumentId ] = useState(documentId);
+	const [ doc, setDoc ] = useState(null);
 	const { toastState, setModal } = useAppContext();
 	const navigate = useNavigate();
 
+	const uploadImage = useCallback(async (file) => {
+		if (!file) return;
+
+		const formData = new FormData();
+		formData.append("image", file);
+
+		const { res, data } = await api("/newsletter/upload", {
+			method: "POST",
+			body: formData,
+		});
+
+		if (res.status === 200) {
+			const editor = quillRef.current?.getEditor();
+			if (!editor) return;
+
+			const range = editor.getSelection(true);
+			const index = range ? range.index : editor.getLength();
+
+			editor.insertEmbed(index, "image", data.image_url, "user");
+		}
+		else {
+			toastState.addToast(
+				"An error occured while adding your image to the database, please try again later!",
+				"error"
+			)
+		}
+	}, []);
+
+	const toolbarImageHandler = useCallback(() => {
+		const input = document.createElement("input");
+		input.type = "file";
+		input.accept = "image/*";
+
+		input.onchange = async () => {
+			const file = input.files?.[0];
+			if (!file) return;
+			await uploadImage(file);
+		};
+
+		input.click();
+	}, [uploadImage]);
+
+	const imageDropHandler = useCallback(async (imageDataUrl, type, imageData) => {
+		if (!imageData || !type || !imageDataUrl) return;
+		const file = imageData.toFile();
+		await uploadImage(file);
+	}, [uploadImage]);
+
 	const modules = {
-		toolbar: [
-			[{ font: FontAttributor.whitelist }],
-			[{ size: ["small", false, "large", "huge"] }],
-			["bold", "italic", "underline", "strike"],
-			[{ color: [] }, { background: [] }],
-			[{ script: "sub" }, { script: "super" }],
-			[{ header: [1, 2, 3, 4, 5, 6, false] }],
-			[{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
-			[{ indent: "-1" }, { indent: "+1" }],
-			[{ align: [] }],
-			["blockquote", "code-block"],
-			["link", "image", "video"],
-			["clean"],
-		],
+		toolbar: {
+			container: [
+				[{ font: FontAttributor.whitelist }],
+				[{ size: ["small", false, "large", "huge"] }],
+				["bold", "italic", "underline", "strike"],
+				[{ color: [] }, { background: [] }],
+				[{ script: "sub" }, { script: "super" }],
+				[{ header: [1, 2, 3, 4, 5, 6, false] }],
+				[{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
+				[{ indent: "-1" }, { indent: "+1" }],
+				[{ align: [] }],
+				["blockquote", "code-block"],
+				["link", "image", "video"],
+				["clean"],
+			],
+			handlers: {
+				image: toolbarImageHandler,
+			},
+		},
+		blotFormatter2: {
+			align: {
+				allowAligning: true,
+				alignments: ['left', 'center', 'right']
+			},
+			resize: {
+				allowResizing: true, // default true
+				allowResizeModeChange: true,
+				useRelativeSize: false,
+				imageOversizeProtection: false,
+				minimumWidthPx: 25,
+			},
+			delete: {
+				allowKeyboardDelete: true, // default true
+			},
+			image: {
+				registerImageTitleBlot: true,
+				allowAltTitleEdit: true, // default true
+				allowCompressor: false,
+				linkOptions: {
+					allowLinkEdit: true //default true
+				},
+				registerArrowRightFix: true
+			},
+			video: {
+				selector: 'iframe.ql-video',
+				registerCustomVideoBlot: true,
+				registerBackspaceFix: true,
+				defaultAspectRatio: '16/9 auto',
+			},
+		},
+		imageDropAndPaste: {
+			handler: imageDropHandler,
+		},
 	};
 
 	const checkDocIdAndSave = useCallback(async (serializedValue) => {
@@ -101,7 +200,7 @@ function NewsletterEditor() {
 			)
 		}
 		else {
-			await handleSave(serializedValue, doc)
+			return await handleSave(serializedValue, doc)
 		}
 	}, [docId, documentId])
 
@@ -121,6 +220,19 @@ function NewsletterEditor() {
 		}
 		else{
 			toastState.addToast(`An error occured while saving your changes!: ${data.status}`, "error");
+		}
+		return { res, data }
+	}
+
+	const handlePublish = async (serializedValue) => {
+		await handleSave(serializedValue)
+		const {res, data} = await api(`/newsletter/publish/${documentId}`, {method: "POST", body: JSON.stringify({ "nid": documentId })})
+		if (res.status===200) {
+			toastState.addToast("The newsletter has been published!", "success");
+			prevVal.current = serializedValue;
+		}
+		else{
+			toastState.addToast(`An error occurred while publishing your changes!: ${data.status}`, "error");
 		}
 		return { res, data }
 	}
@@ -152,6 +264,7 @@ function NewsletterEditor() {
 				});
 				if (res.status===200) {
 					const parsedDelta = JSON.parse(data.delta_content);
+					setDoc(data)
 					setValue(parsedDelta);
 					setTitle(data.title)
 				}
@@ -209,10 +322,21 @@ function NewsletterEditor() {
 						<p className="mr-2 my-auto">Save Changes</p>
 
 					</button>
-					<button className="w-fit bg-emerald-500 active:bg-emerald-700 text-white flex flex-row p-2 m-2 rounded-xl font-medium text-md place-items-center place-content-center text-center" onClick={async () => {await toastState.addToast("Not implemented yet!", "error")}}>
-						<EnvelopeIcon className="h-6 w-6 mx-2 my-auto" />
-						<p className="mr-2 my-auto">Publish</p>
-					</button>
+					{ doc? (
+						doc.datetime_sent?(<></>):(
+							<button className="w-fit bg-emerald-500 active:bg-emerald-700 text-white flex flex-row p-2 m-2 rounded-xl font-medium text-md place-items-center place-content-center text-center" onClick={async () => {
+								const editor = quillRef.current?.getEditor();
+								if (!editor) return;
+								const fullDelta = editor.getContents();
+								const html = editor.root.innerHTML
+								const serialized = JSON.stringify({delta: fullDelta, html: html});
+								prevVal.current = serialized;
+								await handlePublish(serialized);}
+							}>
+								<EnvelopeIcon className="h-6 w-6 mx-2 my-auto" />
+								<p className="mr-2 my-auto">Publish</p>
+							</button>
+						)): (<></>)}
 				</div>
 			</div>
 		</>

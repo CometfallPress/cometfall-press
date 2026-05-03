@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Inter&family=Roboto&family=Lora&family=Poppins&display=swap);
+@import url(qlfonts.css);
 @import "tailwindcss";
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -134,44 +134,6 @@ h3 {
 
 .social-icon:hover {
     color: white;
-}
-
-/* default labels */
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="serif"]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="serif"]::before {
-  content: "Serif";
-  font-family: "Serif", serif;
-}
-
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="sans-serif"]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="sans-serif"]::before {
-  content: "Sans Serif";
-  font-family: "Sans Serif", sans-serif;
-}
-
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="monospace"]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="monospace"]::before {
-  content: "Monospace";
-  font-family: "Monospace", monospace;
-}
-
-/* your custom fonts */
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="inter"]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="inter"]::before {
-  content: "Inter";
-  font-family: "Inter", sans-serif;
-}
-
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="roboto"]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="roboto"]::before {
-  content: "Roboto";
-  font-family: "Roboto", sans-serif;
-}
-
-.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="lora"]::before,
-.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="lora"]::before {
-  content: "Lora";
-  font-family: "Lora", sans-serif;
 }
 
 .ql-toolbar {
