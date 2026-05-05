@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import {XCircleIcon} from "@heroicons/react/24/outline";
 
 function Modal(props) {
 
@@ -10,6 +11,10 @@ function Modal(props) {
                        <div className="flex flex-row whitespace-nowrap">
                            {props.modal.icon}
                            <p className="text-lg m-3 p-1 font-bold whitespace-nowrap">{props.modal.title}</p>
+                           <XCircleIcon
+                               className="w-6 h-6 mb-auto mt-1 ml-auto mr-2 shrink-0"
+                               onClick={props.modal.close}
+                           />
                        </div>
                         <p className="text-md m-3 p-1">{props.modal.message}</p>
                         <div className="flex flex-row w-auto gap-x-2 m-3 mx-auto">

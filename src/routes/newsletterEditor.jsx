@@ -1,14 +1,14 @@
-import {useCallback, useEffect, useRef, useState} from "react";
 import Quill from "quill";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import { api } from "../contexts/CSRF.jsx";
-import { CloudArrowUpIcon, EnvelopeIcon, ExclamationCircleIcon, DocumentArrowUpIcon,  XCircleIcon } from "@heroicons/react/24/outline";
 import {useNavigate, useParams} from "react-router-dom";
 import {useAppContext} from "../contexts/AppContext.jsx";
+import {useCallback, useEffect, useRef, useState} from "react";
+import QuillImageDropAndPaste from 'quill-image-drop-and-paste';
 import EditorCommandsMenu from "../elements/editorCommandsMenu.jsx";
 import BlotFormatter, {createResponsiveVideoBlotClass} from '@enzedonline/quill-blot-formatter2';
-import QuillImageDropAndPaste from 'quill-image-drop-and-paste'
+import { CloudArrowUpIcon, EnvelopeIcon, ExclamationCircleIcon, DocumentArrowUpIcon,  XCircleIcon, PrinterIcon } from "@heroicons/react/24/outline";
 
 const FontAttributor = Quill.import("attributors/class/font");
 
@@ -47,6 +47,10 @@ function NewsletterEditor() {
 	const [ doc, setDoc ] = useState(null);
 	const { toastState, setModal } = useAppContext();
 	const navigate = useNavigate();
+
+	const juiceHtml = (html) => {
+		return html;
+	}
 
 	const uploadImage = useCallback(async (file) => {
 		if (!file) return;
@@ -160,6 +164,7 @@ function NewsletterEditor() {
 					title: "Warning: Blank Document!",
 					icon: <ExclamationCircleIcon className="w-10 h-10 text-amber-400 my-auto mx-1 shrink-0"/>,
 					message: "You're currently editing a blank document that hasn't yet been saved on the server. Do you want to create a new document and save?",
+					close: () => {setModal(null)},
 					buttons: [
 						{
 							text: "Save as New Document",
@@ -226,13 +231,51 @@ function NewsletterEditor() {
 
 	const handlePublish = async (serializedValue) => {
 		await handleSave(serializedValue)
-		const {res, data} = await api(`/newsletter/publish/${documentId}`, {method: "POST", body: JSON.stringify({ "nid": documentId })})
+		prevVal.current = serializedValue;
+		setModal({
+			title: "Publish Document",
+			icon: <ExclamationCircleIcon className="w-10 h-10 text-blue-900 my-auto mx-1 shrink-0"/>,
+			message: "Publishing the document will send it out to all the newsletter subscribers. Are you sure you want to contine?",
+			close: () => {setModal(null)},
+			buttons: [
+				{
+					text: "Save as Draft Instead",
+					icon: <DocumentArrowUpIcon className="w-7 h-7 my-auto mx-1 shrink-0" />,
+					onClick: async () => {
+						try {
+							await publish("draft")
+							setModal(null)
+						}
+						catch (e) {
+							console.error(e);
+							toastState.addToast(`An error occurred while publishing the newsletter!`, "error");
+							setModal(null)
+						}
+					}
+				},
+				{
+					text: "Publish to All Subscribers",
+					icon: <PrinterIcon className="w-7 h-7 my-auto mx-1 shrink-0" />,
+					onClick: async () => {
+						try {
+							await publish("publish")
+							setModal(null)
+						}
+						catch (e) {
+							console.error(e);
+							toastState.addToast(`An error occurred while publishing the newsletter!`, "error");
+							setModal(null)
+						}
+					}
+				},
+			]}
+		)
+	}
+
+	const publish = async (type) => {
+		const {res, data} = await api(`/newsletter/publish/${documentId}?type=${type}`, {method: "POST", body: JSON.stringify({ "nid": documentId })})
 		if (res.status===200) {
 			toastState.addToast("The newsletter has been published!", "success");
-			prevVal.current = serializedValue;
-		}
-		else{
-			toastState.addToast(`An error occurred while publishing your changes!: ${data.status}`, "error");
 		}
 		return { res, data }
 	}
@@ -297,7 +340,8 @@ function NewsletterEditor() {
 					value={value.delta}
 					onChange={async (content, delta, source, editor) => {
 						const fullDelta = editor.getContents();
-						setValue({ delta: fullDelta, html: content });
+						const html = juiceHtml(content)
+						setValue({ delta: fullDelta, html: html });
 					}}
 					className="w-full h-full overflow-y-hidden overscroll-contain scroll-smooth!"
 					modules={modules}
@@ -311,7 +355,7 @@ function NewsletterEditor() {
 								const editor = quillRef.current?.getEditor();
 								if (!editor) return;
 								const fullDelta = editor.getContents();
-								const html = editor.root.innerHTML
+								const html = juiceHtml(editor.root.innerHTML)
 								const serialized = JSON.stringify({delta: fullDelta, html: html});
 								prevVal.current = serialized;
 								await checkDocIdAndSave(serialized);
@@ -328,7 +372,7 @@ function NewsletterEditor() {
 								const editor = quillRef.current?.getEditor();
 								if (!editor) return;
 								const fullDelta = editor.getContents();
-								const html = editor.root.innerHTML
+								const html = juiceHtml(editor.root.innerHTML)
 								const serialized = JSON.stringify({delta: fullDelta, html: html});
 								prevVal.current = serialized;
 								await handlePublish(serialized);}
