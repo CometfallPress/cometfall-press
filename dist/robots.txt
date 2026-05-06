@@ -1,4 +1,4 @@
 User-agent: *
 Allow:/
 Disallow: /admin
-Sitemap: https://www.cometfallpress.com/smap.xml
+Sitemap: https://cometfallpress.com/sitemap.xml

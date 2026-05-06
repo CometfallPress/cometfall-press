@@ -10,31 +10,13 @@ import EditorCommandsMenu from "../elements/editorCommandsMenu.jsx";
 import BlotFormatter, {createResponsiveVideoBlotClass} from '@enzedonline/quill-blot-formatter2';
 import { CloudArrowUpIcon, EnvelopeIcon, ExclamationCircleIcon, DocumentArrowUpIcon,  XCircleIcon, PrinterIcon } from "@heroicons/react/24/outline";
 
-const FontAttributor = Quill.import("attributors/class/font");
-
-
-FontAttributor.whitelist = [
-	"dm-sans",
-	"fira-sans",
-	"montserrat",
-	"eczar",
-	"raleway",
-	"fraunces",
-	"biorhyme",
-	"inter",
-	"roboto",
-	"lora",
-	"poppins",
-	"sans-serif",
-	"serif",
-	"monospace",
-].sort((a, b) => { return b[0] <= a[0] ? 1 : -1; });
-
-Quill.register(FontAttributor, true);
-Quill.register('modules/blotFormatter2', BlotFormatter);
+const FontStyle = Quill.import("attributors/class/font");
 const VideoResponsive = createResponsiveVideoBlotClass(Quill);
+FontStyle.whitelist = ["arial", "arial-black", "arial-narrow", "comic-sans-ms", "garamond", "georgia", "monospace", "sans-serif", "serif", "tahoma", "trebuchet-ms", "verdana",];
+Quill.register(FontStyle, true)
 Quill.register({ 'formats/video': VideoResponsive }, true);
 Quill.register('modules/imageDropAndPaste', QuillImageDropAndPaste);
+Quill.register("modules/blotFormatter2", BlotFormatter)
 
 function NewsletterEditor() {
 	const [value, setValue] = useState({delta: null, html: ""});
@@ -103,12 +85,12 @@ function NewsletterEditor() {
 	const modules = {
 		toolbar: {
 			container: [
-				[{ font: FontAttributor.whitelist }],
+				[{ font: FontStyle.whitelist }],
 				[{ size: ["small", false, "large", "huge"] }],
 				["bold", "italic", "underline", "strike"],
 				[{ color: [] }, { background: [] }],
 				[{ script: "sub" }, { script: "super" }],
-				[{ header: [1, 2, 3, 4, 5, 6, false] }],
+				[{ header: [false, 4, 3, 2, 1] }],
 				[{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
 				[{ indent: "-1" }, { indent: "+1" }],
 				[{ align: [] }],
@@ -343,7 +325,7 @@ function NewsletterEditor() {
 						const html = juiceHtml(content)
 						setValue({ delta: fullDelta, html: html });
 					}}
-					className="w-full h-full overflow-y-hidden overscroll-contain scroll-smooth!"
+					className="w-full h-full overflow-y-scroll overscroll-auto scroll-smooth!"
 					modules={modules}
 					placeholder={"Type / for custom variables and commands"}
 				/>
@@ -355,7 +337,7 @@ function NewsletterEditor() {
 								const editor = quillRef.current?.getEditor();
 								if (!editor) return;
 								const fullDelta = editor.getContents();
-								const html = juiceHtml(editor.root.innerHTML)
+								const html = juiceHtml(editor.getSemanticHTML())
 								const serialized = JSON.stringify({delta: fullDelta, html: html});
 								prevVal.current = serialized;
 								await checkDocIdAndSave(serialized);
@@ -372,7 +354,7 @@ function NewsletterEditor() {
 								const editor = quillRef.current?.getEditor();
 								if (!editor) return;
 								const fullDelta = editor.getContents();
-								const html = juiceHtml(editor.root.innerHTML)
+								const html = juiceHtml(editor.getSemanticHTML())
 								const serialized = JSON.stringify({delta: fullDelta, html: html});
 								prevVal.current = serialized;
 								await handlePublish(serialized);}

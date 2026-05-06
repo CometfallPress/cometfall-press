@@ -18,7 +18,7 @@ function AdminLayout(props) {
 
 	return (
 		<>
-			<div className="w-screen h-screen">
+			<div className="w-[90vw] h-screen scale-111 origin-top-left">
 				<div className={`grid grid-cols-3 gap-2 w-fit ml-10 font-semibold landscape:whitespace-nowrap`}>
 					{Object.entries(tabs).map(([key, tab], index) => {
 						return (
@@ -31,7 +31,7 @@ function AdminLayout(props) {
 						)})
 					}
 				</div>
-				<div className="w-full h-[90vh] m-auto bg-white rounded-xl">
+				<div className="w-full h-[80vh] m-auto bg-white rounded-xl">
 					<div className="p-2 h-full">
                         {user&&(<Outlet />)}
 					</div>
