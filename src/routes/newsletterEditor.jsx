@@ -12,7 +12,34 @@ import { CloudArrowUpIcon, EnvelopeIcon, ExclamationCircleIcon, DocumentArrowUpI
 
 const FontStyle = Quill.import("attributors/class/font");
 const VideoResponsive = createResponsiveVideoBlotClass(Quill);
+const BlockEmbed = Quill.import("blots/block/embed");
+class HorizontalRuleBlot extends BlockEmbed {
+	static blotName = "horizontalRule";
+	static tagName = "hr";
+	static create() {
+		const node = super.create();
+		node.setAttribute("contenteditable", "false");
+		return node;
+	}
+	static value() {
+		return true;
+	}
+}
+const icons = Quill.import("ui/icons");
+
 FontStyle.whitelist = ["arial", "arial-black", "arial-narrow", "comic-sans-ms", "garamond", "georgia", "monospace", "sans-serif", "serif", "tahoma", "trebuchet-ms", "verdana",];
+icons.horizontalRule = `
+  <svg viewBox="0 0 18 18">
+    <line
+      class="ql-stroke"
+      x1="3"
+      x2="15"
+      y1="9"
+      y2="9"
+    ></line>
+  </svg>`;
+
+Quill.register(HorizontalRuleBlot, true);
 Quill.register(FontStyle, true)
 Quill.register({ 'formats/video': VideoResponsive }, true);
 Quill.register('modules/imageDropAndPaste', QuillImageDropAndPaste);
@@ -82,6 +109,16 @@ function NewsletterEditor() {
 		await uploadImage(file);
 	}, [uploadImage]);
 
+	const toolbarHorizontalRuleHandler = useCallback(async () => {
+		const editor = quillRef.current?.getEditor();
+		const range = editor.getSelection();
+		if (range.length) {
+			editor.deleteText(range);
+		}
+		editor.insertEmbed(range.index, "horizontalRule", true);
+		editor.setSelection(range.index + 2);
+	}, [])
+
 	const modules = {
 		toolbar: {
 			container: [
@@ -94,12 +131,12 @@ function NewsletterEditor() {
 				[{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
 				[{ indent: "-1" }, { indent: "+1" }],
 				[{ align: [] }],
-				["blockquote", "code-block"],
-				["link", "image", "video"],
-				["clean"],
+				["blockquote", "code-block", "clean"],
+				["horizontalRule", "link", "image", "video"],
 			],
 			handlers: {
 				image: toolbarImageHandler,
+				horizontalRule: toolbarHorizontalRuleHandler,
 			},
 		},
 		blotFormatter2: {

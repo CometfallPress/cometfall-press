@@ -38,14 +38,13 @@ function EditorCommandsMenu(props) {
             label: "Divider",
             match: "/divider",
             action: (ed, range) => {
-                let divider = "\n<hr>\n"
                 let s = slashAtRef.current
                 let text = ed.getText()
                 let index = text.indexOf(s);
                 if (index !== -1) {
                     ed.deleteText(index,s.length);
-                    ed.insertText(index, divider);
-                    ed.setSelection(index + divider.length);
+                    ed.insertEmbed(index, "horizontalRule", true);
+                    ed.setSelection(index + 2);
                 }
             },
         },
