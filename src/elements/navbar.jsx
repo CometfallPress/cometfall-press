@@ -4,7 +4,15 @@ import { Bars3Icon } from '@heroicons/react/24/solid'
 import { useEffect, useState } from 'react'
 import { useAppContext } from "../contexts/AppContext.jsx";
 import UserDropdown from "./userDropdown.jsx";
+import SocialIcons from "./media-icons.jsx";
 
+
+const socialLinks = {
+    discord: "https://discord.gg/afgrQbd7St",
+    kickstarter: `${import.meta.env.VITE_REDIRECT_URL}/kickstarter/`,
+    instagram: "https://www.instagram.com/cometfallpress/",
+    twitter: "https://twitter.com/CometfallPress",
+};
 function Navbar() {
 
     const { mouseState, scrollState, user } = useAppContext()
@@ -64,6 +72,9 @@ function Navbar() {
                     <a href={`${import.meta.env.VITE_REDIRECT_URL}`} className="flex items-center unselectable">
                         <img src={logo} className="unselectable portrait:h-[4vh] landscape:h-[6vh] landscape:4xl:h-[5vh] m-1 object-scale-down" alt="Cometfall Logo" />
                     </a>
+                    <div className="ml-auto mr-10">
+                        <SocialIcons socialLinks={socialLinks} />
+                    </div>
                     {(user!==null&&user!=="loading")&&(<UserDropdown />)}
                 </div>
             </nav>

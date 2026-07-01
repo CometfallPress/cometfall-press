@@ -1,7 +1,9 @@
 import sunlessdunesLogo from "../assets/SunlessDunesLogo.svg"
-import noteheader from "../assets/NoteHeader.png"
+import noteheader from "../assets/NoteHeader2.png"
+import cardmask from "../assets/CardMask.webp"
 import {useState} from "react";
 import { api } from "../contexts/CSRF.jsx"
+import { useAppContext } from "../contexts/AppContext.jsx";
 
 
 
@@ -12,6 +14,7 @@ export default function KickstarterCard(props) {
 	const [processing, setProcessing] = useState(false);
 	const [status, setStatus] = useState("");
 	const [respSuccess, setRespSuccess] = useState(true);
+	const { screenState, breakpoints } = useAppContext();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -49,94 +52,111 @@ export default function KickstarterCard(props) {
 					</div>
 				</a>
 			):""}
-			<img className="-z-10 portrait:min-w-[200%] portrait:-translate-x-[25%]" alt='' src={noteheader}/>
-			<div className="ks_card mx-auto w-[100vw] origin-center">
-				<div className=" grid z-20">
-					<div className="landscape:col-1 portrait:row-1 w-full p-6 space-y-10 ">
-						<p className="landscape:text-[1vw] portrait:text-[1vh] font-medium uppercase tracking-wide text-zinc-200 text-shadow-md">
-							Kickstarter Pre-Launch
-						</p>
+			<img className="-z-10 scale-x-98 scale-y-101" alt='' src={noteheader}/>
+			<div style={{
+				WebkitMaskImage: `url(${cardmask})`,
+				maskImage: `url(${cardmask})`,
+				WebkitMaskRepeat: 'no-repeat',
+				maskRepeat: 'no-repeat',
+				WebkitMaskSize: `${screenState.ratio>breakpoints.bp1?'100% 250%':'100% 100%'}`,
+				maskSize: `${screenState.ratio>breakpoints.bp1?'100% 250%':'100% 100%'}`,
+				WebkitMaskPosition: 'center',
+				maskPosition: 'center',
+			}}>
 
-						<img src={sunlessdunesLogo} className="landscape:w-[20vw] portrait:w-[40vw] m-auto my-4 fill-black" alt='Kickstarter Banner'/>
-
-						<p className="landscape:text-[1.5vw] portrait:text-[1.5vh] font-semibold text-zinc-100 text-shadow-md mx-2">
-							Follow the project on Kickstarter and get notified when it launches.
-						</p>
-
-						<div className="w-full place-items-center place-content-center gap-3 pt-2">
-							<a
-								href={`${import.meta.env.VITE_REDIRECT_URL}/kickstarter`}
-								target="_blank"
-								rel="noreferrer"
-								className="block w-[66%] text-[1.2vw] text-center portrait:text-[1.5vh] items-center rounded-2xl bg-emerald-500 active:bg-emerald-700 px-5 py-4 m-auto text-white! hover:text-[#7459a5]! hover:scale-102 duration-100 transition-all"
-							>
-								<p className="m-auto">
-									View on Kickstarter
-								</p>
-							</a>
-							<br/>
-							<a
-								href={`${import.meta.env.VITE_REDIRECT_URL}/kickstarter/`}
-								target="_blank"
-								rel="noreferrer"
-								className="block w-[66%] text-[1.2vw] text-center portrait:text-[1.5vh] items-center rounded-2xl border bg-zinc-100 active:bg-zinc-300 m-auto border-zinc-300 px-5 py-4 text-black! hover:text-[#ed2396]! hover:scale-102 duration-100 transition-all"
-							>
-								<p className="m-auto">
-									Notify me on launch
+				<div className="ks_card mx-auto w-screen origin-center">
+					<div className=" grid z-20 landscape:px-25 portrait:px-14 py-10">
+						{props.include_ks&&(
+							<div className={`${screenState.ratio<breakpoints.bp1?'row-1':'col-1'} w-full p-6 space-y-10`}>
+								<p className={`${screenState.ratio<breakpoints.bp1?'text-[1vh]':'text-[1vw]'} font-medium uppercase tracking-wide text-zinc-200 text-shadow-md`}>
+									Kickstarter Pre-Launch
 								</p>
 
-							</a>
-						</div>
-					</div>
-					<div className="landscape:col-2 portrait:row-2 w-full h-fit p-2 space-y-5 m-auto place-items-center scale-90 place-content-center">
-						<div className="flex flex-col my-auto text-zinc-900 bg-white p-4 pt-10 pb-4 mb-2 landscape:rounded-[2vw] portrait:rounded-[2vh] place-items-center place-content-center">
-							<p className="landscape:text-[1.5vw] portrait:text-[2vh] font-medium p-1 text-shadow-md mb-4">
-								Join our newsletter to get updates and exclusive rewards
-							</p>
-							<form className='w-full' onSubmit={handleSubmit}>
-								<div className="text-left space-y-6">
-									<label htmlFor="name" className="block mb-2.5 ml-2 text-sm font-medium text-shadow-md">
-										Name
-									</label>
-									<input type="text"
-									       id="name"
-									       value={name}
-									       onChange={(e) => setName(e.target.value)}
-									       className="bg-white text-heading text-sm text-black rounded-xl outline-1 focus-within:outline-2 focus-within:outline-[#7459a5] outline-[#7459a5] block w-full px-3 py-2.5 placeholder:text-body"
-									       placeholder="Your name (optional)"
-									/>
-									<label htmlFor="email" className="block mb-2.5 ml-2 text-sm font-medium text-shadow-md">
-										Email address
-									</label>
-									<input type="email"
-									       id="email"
-									       value={email}
-									       onChange={(e) => setEmail(e.target.value)}
-									       className="bg-white text-heading text-sm text-black rounded-xl outline-1 focus-within:outline-2 focus-within:outline-[#7459a5] outline-[#7459a5] block w-full px-3 py-2.5 placeholder:text-body"
-									       placeholder="email@example.com" required
-									/>
-									<button type="submit" className="block text-[1.2vw] text-center portrait:text-[1.5vh] items-center rounded-2xl border bg-zinc-100 active:bg-zinc-300 m-auto border-zinc-300 px-5 py-4 text-black! hover:text-pink-700! hover:scale-102 duration-100 transition-all" >
-										{processing ? (
-											<div className="place-items-center items-center place-content-center content-center text-center">
-												<svg className="animate-spin h-5 w-5 text-[#7459a5]" xmlns="http://www.w3.org/2000/svg"
-												     fill="none" viewBox="0 0 24 24">
-													<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"></circle>
-													<path className="opacity-75" fill="currentColor"
-													      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-												</svg>
-											</div>):"Join"
-										}
-									</button>
+								<img src={sunlessdunesLogo} className={`${screenState.ratio<breakpoints.bp1?'w-[40vw]':'w-[20vw]'} m-auto my-4 fill-black`} alt='Kickstarter Banner'/>
+
+								<p className="landscape:text-[1.5vw] portrait:text-[1.5vh] font-semibold text-zinc-100 text-shadow-md mx-2">
+									Follow the project on Kickstarter and get notified when it launches.
+								</p>
+
+								<div className="w-full place-items-center place-content-center gap-3 pt-2">
+									<a
+										href={`${import.meta.env.VITE_REDIRECT_URL}/kickstarter`}
+										target="_blank"
+										rel="noreferrer"
+										className="block w-[66%] text-[1.2vw] text-center portrait:text-[1.5vh] items-center rounded-2xl bg-emerald-500 active:bg-emerald-700 px-5 py-4 m-auto text-white! hover:text-[#7459a5]! hover:scale-102 duration-100 transition-all"
+									>
+										<p className="m-auto">
+											Follow on Kickstarter
+										</p>
+									</a>
+									{/*<br/>*/}
+									{/*<a*/}
+									{/*	href={`${import.meta.env.VITE_REDIRECT_URL}/kickstarter/`}*/}
+									{/*	target="_blank"*/}
+									{/*	rel="noreferrer"*/}
+									{/*	className="block w-[66%] text-[1.2vw] text-center portrait:text-[1.5vh] items-center rounded-2xl border bg-zinc-100 active:bg-zinc-300 m-auto border-zinc-300 px-5 py-4 text-black! hover:text-[#ed2396]! hover:scale-102 duration-100 transition-all"*/}
+									{/*>*/}
+									{/*	<p className="m-auto">*/}
+									{/*		Notify me on launch*/}
+									{/*	</p>*/}
+
+									{/*</a>*/}
 								</div>
-							</form>
-							<p className={`mx-auto p-2 text-[1.2vw] portrait:text-[1.5vh] ${status===""?"my-0 h-0":"mt-4 h-auto"} ${respSuccess?"text-lime-700":"text-rose-700"}`}>
-								{status}
-							</p>
-						</div>
+							</div>
+						)}
+						{props.include_ns&&(
+							<div className={`${screenState.ratio<breakpoints.bp1?'row-2':'col-2'} w-full h-fit p-2 space-y-5 m-auto place-items-center scale-90 place-content-center`}>
+								<div className={`flex flex-col my-auto text-zinc-900 bg-white p-4 pt-10 pb-4 mb-2 ${screenState.ratio<breakpoints.bp1?'rounded-[2vh]':'rounded-[2vw]'} place-items-center place-content-center`}>
+									<p className={`${screenState.ratio<breakpoints.bp1?'text-[2vh]':'text-[1.5vw]'} font-medium p-1 text-shadow-md mb-4`}>
+										Join our newsletter to get updates and exclusive rewards
+									</p>
+									<form className='w-full' onSubmit={handleSubmit}>
+										<div className="text-left space-y-6">
+											<label htmlFor="name" className="block mb-2.5 ml-2 text-sm font-medium text-shadow-md">
+												Name
+											</label>
+											<input type="text"
+												id="name"
+												value={name}
+												onChange={(e) => setName(e.target.value)}
+												className="bg-white text-heading text-sm text-black rounded-xl outline-1 focus-within:outline-2 focus-within:outline-[#7459a5] outline-[#7459a5] block w-full px-3 py-2.5 placeholder:text-body"
+												placeholder="Your name (optional)"
+											/>
+											<label htmlFor="email" className="block mb-2.5 ml-2 text-sm font-medium text-shadow-md">
+												Email address
+											</label>
+											<input type="email"
+												id="email"
+												value={email}
+												onChange={(e) => setEmail(e.target.value)}
+												className="bg-white text-heading text-sm text-black rounded-xl outline-1 focus-within:outline-2 focus-within:outline-[#7459a5] outline-[#7459a5] block w-full px-3 py-2.5 placeholder:text-body"
+												placeholder="email@example.com" required
+											/>
+											<button type="submit" className="block text-[1.2vw] text-center portrait:text-[1.5vh] items-center rounded-2xl border bg-zinc-100 active:bg-zinc-300 m-auto border-zinc-300 px-5 py-4 text-black! hover:text-pink-700! hover:scale-102 duration-100 transition-all" >
+												{processing ? (
+													<div className="place-items-center items-center place-content-center content-center text-center">
+														<svg className="animate-spin h-5 w-5 text-[#7459a5]" xmlns="http://www.w3.org/2000/svg"
+															fill="none" viewBox="0 0 24 24">
+															<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"></circle>
+															<path className="opacity-75" fill="currentColor"
+																d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+														</svg>
+													</div>):"Join"
+												}
+											</button>
+										</div>
+									</form>
+									<p className={`mx-auto p-2 text-[1.2vw] portrait:text-[1.5vh] ${status===""?"my-0 h-0":"mt-4 h-auto"} ${respSuccess?"text-lime-700":"text-rose-700"}`}>
+										{status}
+									</p>
+								</div>
+							</div>
+						)}
+
 					</div>
 				</div>
 			</div>
-			<img className="-z-10 portrait:min-w-[200%] portrait:-translate-x-[25%] rotate-180" alt='' src={noteheader}/>
+			<img className="-z-10 scale-x-98 scale-y-101 rotate-180" alt='' src={noteheader}/>
 		</div>
 	);
 }

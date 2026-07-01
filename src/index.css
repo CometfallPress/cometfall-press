@@ -110,6 +110,8 @@ body {
 .ks_card {
   background-image: url(assets/KS_Banner2.png);
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 0px;
 }
 
 h1 {
@@ -128,7 +130,7 @@ h3 {
 }
 
 .social-icon {
-    color: #a64993;
+    color: #ffffff;
     transition: color 0.3s ease;
 }
 

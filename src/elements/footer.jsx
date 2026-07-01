@@ -1,5 +1,6 @@
 import 'react';
 import '../index.css'
+import SocialIcons from "./media-icons.jsx";
 
 // Social Media Links JSON
 const socialLinks = {
@@ -14,38 +15,15 @@ const socialLinks = {
 
 function Footer() {
     return (
-        <footer id='contact' className="bg-dark text-light text-center p-4 mt-0 scroll-smooth origin-center scale-112">
+        <footer id='contact' className="bg-dark text-light text-center p-4 mt-0 scroll-smooth origin-center scale-125">
             <div className="container mx-auto">
                 <p className="text-sm md:text-base">
                     © {new Date().getFullYear()} Cometfall Press. All Rights Reserved.
                 </p>
 
                 {/* Social Media Icons */}
-                <div className="mt-4 flex justify-center space-x-6">
-                    <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="social-icon">
-                        <i className="fab fa-instagram text-xl"></i>
-                    </a>
-                    <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="social-icon">
-                        <i className="fab fa-twitter text-xl"></i>
-                    </a>
-                    <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="social-icon">
-                        <i className="fab fa-facebook text-xl"></i>
-                    </a>
-                    <a href={socialLinks.bluesky} target="_blank" rel="noopener noreferrer" className="social-icon">
-                        <i className="fab fa-bluesky text-xl"></i> 
-                    </a>
-                    <a href={socialLinks.linkedIn} target="_blank" rel="noopener noreferrer" className="social-icon">
-                        <i className="fab fa-linkedin text-xl"></i>
-                    </a>
-                    <a href={socialLinks.discord} target="_blank" rel="noopener noreferrer" className="social-icon">
-                        <i className="fab fa-discord text-xl"></i>
-                    </a>
-                    <a href={socialLinks.kickstarter} target="_blank" rel="noopener noreferrer" className="social-icon">
-                        <i className="fab fa-kickstarter-k text-xl"></i>
-                    </a>
-                    <a href="mailto:aaron.kumar@cometfallpress.com" target="_blank" rel="noopener noreferrer" className="social-icon">
-                        <i className="fas fa-envelope text-2xl"></i>
-                    </a>
+                <div className="mt-4">
+                    <SocialIcons socialLinks={socialLinks} />
                 </div>
             </div>
         </footer>

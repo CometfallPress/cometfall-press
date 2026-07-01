@@ -11,7 +11,7 @@ function UserDropdown() {
 
 	return (
 		<>
-			<div className={`ml-auto mr-10 flex items-center gap-1 text-white ${openUserDropdown?"drop-shadow-[#ed2396] drop-shadow-lg":""} hover:drop-shadow-[#ed2396] hover:drop-shadow-lg transition-all`}
+			<div className={`mr-10 flex items-center gap-1 text-white ${openUserDropdown?"drop-shadow-[#ed2396] drop-shadow-lg":""} hover:drop-shadow-[#ed2396] hover:drop-shadow-lg transition-all`}
 			     onClick={()=> setOpenUserDropdown(!openUserDropdown)}
 
 			>

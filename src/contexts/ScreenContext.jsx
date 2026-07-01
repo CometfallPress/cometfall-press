@@ -5,6 +5,7 @@ function ScreenContext() {
         width: window.innerWidth,
         height: window.innerHeight,
         ratio: window.innerWidth / window.innerHeight,
+        dpr: window.devicePixelRatio,
     })
 
     useEffect(() => {
@@ -13,6 +14,7 @@ function ScreenContext() {
                 width: window.innerWidth,
                 height: window.innerHeight,
                 ratio: window.innerWidth / window.innerHeight,
+                dpr: window.devicePixelRatio,
             })
         }
 

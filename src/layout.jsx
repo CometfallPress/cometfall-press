@@ -13,6 +13,8 @@ function Layout() {
     const { scrollState, screenState, user } = useAppContext();
     const location = useLocation();
     const navigate = useNavigate();
+    const scale = 0.7 + ( 0.2 * screenState.dpr / 5 )
+    console.log(scale)
 
     useEffect(() => {
         if (user==="loading") return
@@ -27,7 +29,7 @@ function Layout() {
             <div className="w-full h-full fixed overflow-y-scroll overflow-x-clip scroll-smooth" onScroll={scrollState.handleScroll}>
                 {(!user)&&<Notification />}
                 <Navbar />
-                <Scaler scale={0.9}>
+                <Scaler scale={scale}>
                     <Outlet context={{scrollState, screenState, user}}/>
                     <Footer />
                 </Scaler>

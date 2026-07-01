@@ -6,7 +6,7 @@ import world from '../assets/WebsiteTheWorld.webp'
 import map from '../assets/KasaaqMapClean.webp'
 import overlay from '../assets/WebsiteWorldMap_outer.webp'
 import mapmask from '../assets/WebsiteWorldMapMask.webp'
-import bannermask from '../assets/WebsiteBannerMask.webp'
+import bannermask from '../assets/WebsiteBannerMask2.webp'
 import houses from '../assets/WebsiteHouseBanners.webp'
 import housesmask from '../assets/WebsiteHouseBannersMask.webp'
 import races from '../assets/WebsiteRaces.webp'
@@ -53,7 +53,7 @@ function Project() {
             <div
                 className={`scroll-smooth w-screen -z-20 leading-relaxed place-items-center place-content-center text-base ${screenState.ratio>breakpoints.bp1?"text-[3vw]":"portrait:text-[3vw]"} landscape:text-[2.4vh]`}>
                 <div
-                    className='grid w-screen h-auto -top-20 landscape:origin-[50%_100%] overflow-y-clip landscape:scale-111 portrait:origin-[50%_60%] portrait:scale-150 portrait:md:scale-130 portrait:lg:scale-111 object-fill'
+                    className='grid w-screen h-auto -top-20 overflow-y-clip landscape:origin-[50%_100%] landscape:scale-120  origin-[50%_60%] scale-150 object-fill'
                     style={{
                         WebkitMaskImage: `url(${bannermask})`,
                         maskImage: `url(${bannermask})`,
@@ -87,14 +87,24 @@ function Project() {
                                 <br/>
                                 {screenState.ratio<=breakpoints.bp1&&(<img className='relative m-auto w-2/3' src={book} alt='Book Sample' />)}
                                 <br/>
-                                Cometfall Press started off as a group of design students playing D&D many years ago in India. Our setting has been developed over many years, initially starting off as a homebrew world created for our table which continued to expand in scope. Now, our team is spread across the globe, and aims to bring our home-grown setting to players and DMs everywhere.
+                                <KickstarterCard include_ns={true} include_ks={true} />
                             </p>
                             {screenState.ratio>breakpoints.bp1&&(
                                 <div className='relative m-auto w-2/5 z-20'>
                                     <img src={book} className='m-auto drop-shadow-2xl' alt='Book Sample' />
                                 </div>)}
                         </div>
-                        <KickstarterCard />
+                        {/* <a
+                            href={`${import.meta.env.VITE_REDIRECT_URL}/kickstarter`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className={`block ${screenState.ratio>breakpoints.bp1?'w-[20%] text-[1.5vw]':'w-[40%] text-[2.2vw] '} text-center items-center rounded-2xl bg-emerald-500 active:bg-emerald-700 px-5 py-4 m-auto text-white! hover:text-[#7459a5]! hover:scale-102 duration-100 transition-all`}
+                        >
+                            <p className="m-auto">
+                                Follow on Kickstarter
+                            </p>
+                        </a> */}
+                        
                         <div className='relative flex flex-col mt-10 md:mt-15 w-[90vw] mx-auto mb-15'>
                             <ParallaxImg
                                 src={worldtitle}
@@ -302,7 +312,7 @@ function Project() {
                             intensity={0}
                             scrollPosition={scrollState.scrollPosition}
                         />
-                        <KickstarterCard prelaunch_text={true} />
+                        <KickstarterCard prelaunch_text={true} include_ns={true} include_ks={true}/>
                         <div className='mb-20'/>
                     </div>
                 </div>
