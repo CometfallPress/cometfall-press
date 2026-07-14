@@ -13,8 +13,7 @@ function Layout() {
     const { scrollState, screenState, user } = useAppContext();
     const location = useLocation();
     const navigate = useNavigate();
-    const scale = 0.7 + ( 0.2 * screenState.dpr / 5 )
-    console.log(scale)
+    const scale = 0.75 + ( 0.2 * screenState.dpr / 5 )
 
     useEffect(() => {
         if (user==="loading") return

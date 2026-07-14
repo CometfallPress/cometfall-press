@@ -1,12 +1,12 @@
 "use client";
 
 import '../index.css'
-import initbg from '../assets/WebsiteBanner.webp'
+import initbg from '../assets/WebsiteBanner2.webp'
 import world from '../assets/WebsiteTheWorld.webp'
 import map from '../assets/KasaaqMapClean.webp'
 import overlay from '../assets/WebsiteWorldMap_outer.webp'
 import mapmask from '../assets/WebsiteWorldMapMask.webp'
-import bannermask from '../assets/WebsiteBannerMask2.webp'
+import bannermask from '../assets/WebsiteBannerMask3.webp'
 import houses from '../assets/WebsiteHouseBanners.webp'
 import housesmask from '../assets/WebsiteHouseBannersMask.webp'
 import races from '../assets/WebsiteRaces.webp'
@@ -53,7 +53,7 @@ function Project() {
             <div
                 className={`scroll-smooth w-screen -z-20 leading-relaxed place-items-center place-content-center text-base ${screenState.ratio>breakpoints.bp1?"text-[3vw]":"portrait:text-[3vw]"} landscape:text-[2.4vh]`}>
                 <div
-                    className='grid w-screen h-auto -top-20 overflow-y-clip landscape:origin-[50%_100%] landscape:scale-120  origin-[50%_60%] scale-150 object-fill'
+                    className='grid w-screen h-auto -top-10 overflow-y-clip landscape:origin-[50%_20%] landscape:scale-135  origin-[50%_15%] scale-170 object-fill'
                     style={{
                         WebkitMaskImage: `url(${bannermask})`,
                         maskImage: `url(${bannermask})`,
@@ -63,7 +63,7 @@ function Project() {
                         maskSize: '111%',
                         WebkitMaskPosition: `50% ${10 + scrollState.scrollPosition*0.1*screenState.ratio}%`,
                         maskPosition: `50% ${10 + scrollState.scrollPosition*0.1*screenState.ratio}%`,
-                        marginBottom: `${Math.max(-0.02*scrollState.scrollPosition*screenState.ratio, -20)}%`,
+                        marginBottom: `${Math.max(-0.02*scrollState.scrollPosition*screenState.ratio, 10)}%`,
                     }}
                 >
                     <img
@@ -72,14 +72,14 @@ function Project() {
                         src={initbg}
                         alt='Godess Sol Shrine Background'
                     />
-                    <div style={{ transform: `translateY(${25 + scrollState.scrollPosition*0.03*screenState.ratio}%) scale(${Math.max(1-(scrollState.scrollPosition*0.0001*screenState.ratio), 0.97)})` }} className='col-start-1 row-start-1 w-[25vw] mx-auto'>
+                    <div style={{ transform: `translateY(${15 + scrollState.scrollPosition*0.03*screenState.ratio}%) scale(${Math.max(1-(scrollState.scrollPosition*0.0001*screenState.ratio), 0.97)})` }} className='col-start-1 row-start-1 w-[25vw] mx-auto'>
                         <img src={sunlessdunesLogo} alt='Sunless Dunes'/>
                     </div>
                 </div>
                 
-                <div style={{ transform: `translateY(-0.5%)`}}>
+                <div style={{ transform: `translateY(${screenState.ratio>breakpoints.bp1?'-1':'1'}%)`}}>
                     <div className='w-full m-auto mt-10'>
-                        <div className={`flex ${screenState.ratio<=breakpoints.bp1?"flex-col":"flex-row-reverse"} place-items-center place-content-center m-auto w-[90vw]`}
+                        <div className={`flex ${screenState.ratio<=breakpoints.bp1?"flex-col":"flex-row-reverse"} relative mt-10 md:mt-15 w-[90vw] mx-auto mb-15`}
                              style = {{ transform: `translateY(${Math.max(scrollState.scrollPosition*-0.01*screenState.ratio, -10)}%)`}}
                         >
                             <p className={`relative clear-both text-left text-pretty text-dark p-2 ${screenState.ratio>breakpoints.bp1?"w-1/2":"w-full"}`}>
@@ -87,14 +87,14 @@ function Project() {
                                 <br/>
                                 {screenState.ratio<=breakpoints.bp1&&(<img className='relative m-auto w-2/3' src={book} alt='Book Sample' />)}
                                 <br/>
-                                <KickstarterCard include_ns={true} include_ks={true} />
+                                Cometfall Press started off as a group of design students playing D&D many years ago in India. Our setting has been developed over many years, initially starting off as a homebrew world created for our table which continued to expand in scope. Now, our team is spread across the globe, and aims to bring our home-grown setting to players and DMs everywhere.
                             </p>
                             {screenState.ratio>breakpoints.bp1&&(
                                 <div className='relative m-auto w-2/5 z-20'>
                                     <img src={book} className='m-auto drop-shadow-2xl' alt='Book Sample' />
                                 </div>)}
                         </div>
-                        {/* <a
+                        <a
                             href={`${import.meta.env.VITE_REDIRECT_URL}/kickstarter`}
                             target="_blank"
                             rel="noreferrer"
@@ -103,8 +103,8 @@ function Project() {
                             <p className="m-auto">
                                 Follow on Kickstarter
                             </p>
-                        </a> */}
-                        
+                        </a>
+                        {/*<KickstarterCard include_ns={true} include_ks={true} />*/}
                         <div className='relative flex flex-col mt-10 md:mt-15 w-[90vw] mx-auto mb-15'>
                             <ParallaxImg
                                 src={worldtitle}
