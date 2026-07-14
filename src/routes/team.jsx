@@ -58,13 +58,15 @@ function Team() {
                     scrollPosition={scrollState.scrollPosition}
                 />
                 <div className='origin-top scale-x-112'>
-                    <img className="-z-10 portrait:min-w-[200%] portrait:-translate-x-[25%] scale-y-112" alt='' src={noteheader}/>
-                    <div className={`ks_card mx-auto grid ${screenState.ratio<=breakpoints.bp1?"grid-rows-4 grid-cols-1":"grid-cols-2 grid-rows-1"} p-10 landscape:px-15 place-items-center place-content-center gap-4`}>
-                        {team.map((member, index) => (
-                            <Hero key={index} id={member.id} name={member.name} title={member.title} description={member.description} src={member.src}/>
-                        ))}
+                    <img className="-z-10 portrait:min-w-[200%] portrait:-translate-x-[25%] scale-y-125 scale-x-125 " alt='' src={noteheader}/>
+                    <div className={`ks_card scale-x-133`}>
+                        <div className={`scale-x-75 grid grid-cols-2 m-auto grid-flow-row-dense p-10 place-items-center place-content-center gap-y-4`}>
+                            {team.map((member, index) => (
+                                <Hero key={index} id={member.id} name={member.name} title={member.title} description={member.description} src={member.src}/>
+                            ))}
+                        </div>
                     </div>
-                    <img className="-z-10 portrait:min-w-[200%] portrait:-translate-x-[25%] scale-y-112 rotate-180" alt='' src={noteheader}/>
+                    <img className="-z-10 portrait:min-w-[200%] portrait:-translate-x-[25%] scale-y-125 scale-x-125 rotate-180" alt='' src={noteheader}/>
                 </div>
             </div>
         </>)

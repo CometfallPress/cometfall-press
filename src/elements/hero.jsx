@@ -6,7 +6,7 @@ function Hero(props) {
 	const { screenState, breakpoints } = useAppContext();
 
 	return (
-		<div id={props.id} className="flex flex-col mt-2 text-white scale-x-90">
+		<div id={props.id} className={`${screenState.ratio<=breakpoints.bp1?"col-span-2":"col-span-1"}  mt-2 text-white scale-x-90`}>
 			<img className={`drop-shadow-lg ${screenState.ratio<=breakpoints.bp1?"w-[33vw]":"w-[50%]"} m-auto`} src={props.src} alt={props.name}/>
 			<div className={`font-semibold text-center mt-5 ${screenState.ratio<=breakpoints.bp1?"text-[4.5vw]":"text-[3.5vh]"}`}>{props.name}</div>
 			<div className="text-center">{props.title}</div>
