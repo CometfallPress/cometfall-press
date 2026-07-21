@@ -12,6 +12,7 @@ const socialLinks = {
     kickstarter: `${import.meta.env.VITE_REDIRECT_URL}/kickstarter/`,
     instagram: "https://www.instagram.com/cometfallpress/",
     twitter: "https://twitter.com/CometfallPress",
+    envelope: "mailto:aaron.kumar@cometfallpress.com",
 };
 function Navbar() {
 

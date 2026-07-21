@@ -27,6 +27,7 @@ import Modal from "./elements/modal.jsx";
 function App() {
 
 	const [user, setUser] = useState(null)
+	const [userLoaded, setUserLoaded] = useState(false)
 	const [modal, setModal] = useState(null)
 	const scrollState = ScrollContext()
 	const screenState = ScreenContext()
@@ -62,6 +63,7 @@ function App() {
 				console.log(err);
 				setUser(null);
 			}
+			setUserLoaded(true)
 		};
 		boot();
 	}, []);
@@ -70,6 +72,7 @@ function App() {
 		<AppContext.Provider value={
 			{
 				user,
+				userLoaded,
 				scrollState,
 				screenState,
 				mouseState,

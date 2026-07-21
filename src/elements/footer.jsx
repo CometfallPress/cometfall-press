@@ -2,7 +2,6 @@ import 'react';
 import '../index.css'
 import SocialIcons from "./media-icons.jsx";
 
-// Social Media Links JSON
 const socialLinks = {
     bluesky: "https://bsky.app/profile/cometfallpress.bsky.social",
     instagram: "https://www.instagram.com/cometfallpress/",
@@ -11,6 +10,7 @@ const socialLinks = {
     facebook: "https://www.facebook.com/profile.php?id=61572637307560",
     discord: "https://discord.gg/afgrQbd7St",
     kickstarter: `${import.meta.env.VITE_REDIRECT_URL}/kickstarter/`,
+    envelope: "mailto:aaron.kumar@cometfallpress.com",
 };
 
 function Footer() {

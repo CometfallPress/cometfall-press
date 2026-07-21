@@ -41,6 +41,20 @@
   }
 }
 
+@theme {
+  --font-title: "Oswald", sans-serif;
+}
+
+@utility font-outline-black-* {
+  -webkit-text-stroke: --value([length]) #292929;
+  paint-order: stroke fill;
+}
+
+@utility font-outline-white-* {
+  -webkit-text-stroke: --value([length]) #f1f1f1;
+  paint-order: stroke fill;
+}
+
 html { scroll-behavior: smooth; }
 
 .paused{

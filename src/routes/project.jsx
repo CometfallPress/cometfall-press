@@ -1,14 +1,12 @@
-"use client";
-
 import '../index.css'
 import initbg from '../assets/WebsiteBanner2.webp'
 import world from '../assets/WebsiteTheWorld.webp'
-import map from '../assets/KasaaqMapClean.webp'
-import overlay from '../assets/WebsiteWorldMap_outer.webp'
-import mapmask from '../assets/WebsiteWorldMapMask.webp'
+// import map from '../assets/KasaaqMapClean.webp'
+// import overlay from '../assets/WebsiteWorldMap_outer.webp'
+// import mapmask from '../assets/WebsiteWorldMapMask.webp'
 import bannermask from '../assets/WebsiteBannerMask3.webp'
-import houses from '../assets/WebsiteHouseBanners.webp'
-import housesmask from '../assets/WebsiteHouseBannersMask.webp'
+// import houses from '../assets/WebsiteHouseBanners.webp'
+// import housesmask from '../assets/WebsiteHouseBannersMask.webp'
 import races from '../assets/WebsiteRaces.webp'
 import worldtitle from '../assets/WebsiteText1.png'
 import racesitle from '../assets/WebsiteText2.png'
@@ -17,43 +15,48 @@ import subclasses from '../assets/WebsiteSubclasses.webp'
 import book from '../assets/WebsiteBook.webp'
 import sunlessdunesLogo from "../assets/SunlessDunesLogo.svg"
 import booksarragned from '../assets/BooksArranged.webp'
-import {TransformWrapper, TransformComponent, KeepScale, useControls} from "react-zoom-pan-pinch";
-import KickstarterCard from '../elements/kickstarter.jsx';
+// import {TransformWrapper, TransformComponent, KeepScale, useControls} from "react-zoom-pan-pinch";
+// import KickstarterCard from '../elements/kickstarter.jsx';
 import { useAppContext } from "../contexts/AppContext.jsx";
 import ParallaxImg from "../elements/parallaxImg.jsx";
-import MapPoints from "../elements/mapPoints.tsx";
-import { MagnifyingGlassPlusIcon, MagnifyingGlassMinusIcon, ArrowPathIcon  } from "@heroicons/react/24/outline";
+// import MapPoints from "../elements/mapPoints.tsx";
+// import { MagnifyingGlassPlusIcon, MagnifyingGlassMinusIcon, ArrowPathIcon  } from "@heroicons/react/24/outline";
 import {FollowUsOnKickstarter} from "../elements/followUsOnKickstarter.jsx";
 import NewsletterAd from "../elements/newsletterad.jsx";
 
 
-const Controls = () => {
-    const { zoomIn, zoomOut, resetTransform } = useControls();
-
-    return (
-        <div className="grid p-2 place-items-center gap-4 z-50 -translate-y-[150%] bg-[#000000aa] rounded-xl">
-            <button className="row-1" type="button" onClick={() => zoomIn()}>
-                <MagnifyingGlassPlusIcon className="landscape:w-[4vw] portrait:w-[5vh] p-3 text-white bg-[#ffffff00] hover:bg-[#ffffffaa] rounded-[50%]"/>
-            </button>
-            <button className="row-1" type="button" onClick={() => zoomOut()}>
-                <MagnifyingGlassMinusIcon className="landscape:w-[4vw] portrait:w-[5vh] p-3 text-white bg-[#ffffff00] hover:bg-[#ffffffaa] rounded-[50%]"/>
-            </button>
-            <button className="row-1" type="button" onClick={() => resetTransform()}>
-                <ArrowPathIcon className="landscape:w-[4vw] portrait:w-[5vh] p-3 text-white bg-[#ffffff00] hover:bg-[#ffffffaa] rounded-[50%]"/>
-            </button>
-        </div>
-    );
-};
+// const Controls = () => {
+//     const { zoomIn, zoomOut, resetTransform } = useControls();
+//
+//     return (
+//         <div className="grid p-2 place-items-center gap-4 z-50 -translate-y-[150%] bg-[#000000aa] rounded-xl">
+//             <button className="row-1" type="button" onClick={() => zoomIn()}>
+//                 <MagnifyingGlassPlusIcon className="landscape:w-[4vw] portrait:w-[5vh] p-3 text-white bg-[#ffffff00] hover:bg-[#ffffffaa] rounded-[50%]"/>
+//             </button>
+//             <button className="row-1" type="button" onClick={() => zoomOut()}>
+//                 <MagnifyingGlassMinusIcon className="landscape:w-[4vw] portrait:w-[5vh] p-3 text-white bg-[#ffffff00] hover:bg-[#ffffffaa] rounded-[50%]"/>
+//             </button>
+//             <button className="row-1" type="button" onClick={() => resetTransform()}>
+//                 <ArrowPathIcon className="landscape:w-[4vw] portrait:w-[5vh] p-3 text-white bg-[#ffffff00] hover:bg-[#ffffffaa] rounded-[50%]"/>
+//             </button>
+//         </div>
+//     );
+// };
 
 function Project() {
 
     const { scrollState, screenState, breakpoints } = useAppContext();
-    const points = MapPoints();
+    const font_size_port = (3.6*(1+(screenState.dpr)/15)).toPrecision(2)
+    const font_size_land = (2.6*(1+(screenState.dpr)/15)).toPrecision(2)
 
     return (
         <>
             <div
-                className={`scroll-smooth w-screen -z-20 leading-relaxed place-items-center place-content-center text-base ${screenState.ratio>breakpoints.bp1?"text-[3vw]":"portrait:text-[3vw]"} landscape:text-[2.4vh]`}>
+                className={`scroll-smooth w-screen -z-20 leading-relaxed place-items-center place-content-center text-base`}
+                style={{
+                    fontSize: screenState.ratio > breakpoints.bp4 ? `${font_size_land}vh` : `${font_size_port}vw`,
+                }}
+            >
                 <div
                     className='grid w-screen h-auto -top-10 overflow-y-clip landscape:origin-[50%_20%] landscape:scale-135  origin-[50%_15%] scale-170 object-fill'
                     style={{
@@ -102,13 +105,14 @@ function Project() {
                                     <img src={book} className='m-auto drop-shadow-2xl' alt='Book Sample' />
                                 </div>)}
                         </div>
-
-                        <NewsletterAd />
+                        <div id='newsletter'>
+                            <NewsletterAd />
+                        </div>
                         <div className='relative flex flex-col mt-10 md:mt-15 w-[90vw] mx-auto mb-15'>
                             <ParallaxImg
                                 src={worldtitle}
                                 alt='World Title'
-                                classes={`relative drop-shadow-[0_0_10px_rgba(50,0,0,0.33)] ${screenState.ratio>breakpoints.bp2?"w-[60vw]":"w-[90vw]"} m-auto z-20 p-2 mt-20 flex justify-center items-center`}
+                                classes={`relative drop-shadow-[0_0_10px_rgba(50,0,0,0.33)] ${screenState.ratio>breakpoints.bp2?"w-[60vw]":"w-[90vw] scale-100 portrait:scale-130 origin-center"} m-auto z-20 p-2 mt-20 flex justify-center items-center`}
                                 intensity={0}
                                 scrollPosition={scrollState.scrollPosition}
                             />
@@ -118,13 +122,13 @@ function Project() {
                                     Abmarah is shaped by the hands of divine forces leading to a world enriched with myths, lore and constant new beginnings.
                                     <br/>
                                     <br/>
-                                    In an era of steam where new technology seeks to threaten the old empires of Kasaaq while the Sun herself returns with vengeance, you must choose carefully to decide the fate of a nation.
+                                    In an era of steam where new technology seeks to threaten the old empires of Kasaaq, while the Sun herself returns with vengeance, you must choose carefully to decide the fate of a nation.
                                 </p>
 
                                 <ParallaxImg
                                     src={world}
                                     alt='Characters in the world'
-                                    classes={`${screenState.ratio>breakpoints.bp2?"w-1/2":"w-[90%]"} scale-90 z-20 p-2 m-2 mt-0 drop-shadow-[0_0_0.75rem_rgba(0,0,0,0.25)]`}
+                                    classes={`${screenState.ratio>breakpoints.bp2?"w-1/2":"w-[90%]"} scale-100 portrait:scale-110 z-20 p-2 m-2 mt-0 drop-shadow-[0_0_0.75rem_rgba(0,0,0,0.25)]`}
                                     intensity={0}
                                     scrollPosition={scrollState.scrollPosition}
                                 />
@@ -218,7 +222,7 @@ function Project() {
                         <ParallaxImg
                             src={subclasstitle}
                             alt='Subclass Title'
-                            classes={`relative drop-shadow-[0_0_10px_rgba(50,0,0,0.33)] ${screenState.ratio>breakpoints.bp2?"w-[60vw]":"w-[90vw]"} m-auto z-20 p-2 mt-10 flex justify-center items-center`}
+                            classes={`relative drop-shadow-[0_0_10px_rgba(50,0,0,0.33)] ${screenState.ratio>breakpoints.bp2?"w-[60vw]":"w-[90vw] scale-100 portrait:scale-130 origin-center"} m-auto z-20 p-2 mt-10 flex justify-center items-center`}
                             intensity={0}
                             scrollPosition={scrollState.scrollPosition}
                         />
@@ -228,7 +232,7 @@ function Project() {
                             <ParallaxImg
                                 src={subclasses}
                                 alt='Subclass'
-                                classes={`${screenState.ratio>breakpoints.bp2?"w-1/2":"w-4/5"} scale-90 z-20 p-2 mt-5`}
+                                classes={`${screenState.ratio>breakpoints.bp2?"w-1/2":"w-4/5"} scale-100 portrait:scale-110 z-20 p-2 mt-5`}
                                 img_classes='min-w-full drop-shadow-2xl'
                                 intensity={0}
                                 scrollPosition={scrollState.scrollPosition}
@@ -246,7 +250,7 @@ function Project() {
                             <ParallaxImg
                                 src={racesitle}
                                 alt='Race Title'
-                                classes={`relative drop-shadow-[0_0_10px_rgba(50,0,0,0.33)] ${screenState.ratio>breakpoints.bp2?"w-[60vw]":"w-[90vw]"} m-auto z-20 p-2 mt-10 flex justify-center items-center`}
+                                classes={`relative drop-shadow-[0_0_10px_rgba(50,0,0,0.33)] ${screenState.ratio>breakpoints.bp2?"w-[60vw]":"w-[90vw] scale-100 portrait:scale-130 origin-center"} m-auto z-20 p-2 mt-10 flex justify-center items-center`}
                                 intensity={0}
                                 scrollPosition={scrollState.scrollPosition}
                             />
@@ -254,7 +258,7 @@ function Project() {
                                 <ParallaxImg
                                     src={races}
                                     alt='Races'
-                                    classes='landscape:w-[75%] portrait:w-[90%] scale-90 z-20 p-2 mx-auto mt-5 '
+                                    classes='landscape:w-[75%] portrait:w-[90%] scale-100 portrait:scale-110 z-20 p-2 mx-auto mt-5 '
                                     img_classes='min-w-full drop-shadow-2xl'
                                     intensity={0}
                                     scrollPosition={scrollState.scrollPosition}
@@ -315,7 +319,7 @@ function Project() {
                             href={`${import.meta.env.VITE_REDIRECT_URL}/kickstarter`}
                             target="_blank"
                             rel="noreferrer"
-                            className={`block ${screenState.ratio>breakpoints.bp1?'w-[33%] text-[1.4vw]':'w-[60%] text-[2.4vw] '} text-center items-center rounded-full bg-linear-to-t from-emerald-500 hover:from-emerald-400 to-emerald-500 px-5 py-4 m-auto my-20 text-white! hover:scale-101 duration-100 transition-all`}
+                            className={`block ${screenState.ratio>breakpoints.bp1?'w-fit text-[3.5vh]':'w-fit text-[4.7vw] '} text-center items-center rounded-full bg-linear-to-t from-emerald-500 hover:from-emerald-400 to-emerald-500 py-3 px-8 m-auto my-20 text-white! hover:scale-101 duration-100 transition-all`}
                         >
                             <p className="m-auto">
                                 Our prelaunch is live on Kickstarter!

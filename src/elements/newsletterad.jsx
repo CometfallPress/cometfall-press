@@ -45,36 +45,40 @@ export default function NewsletterAd() {
 			<img className="-z-10 scale-y-110" alt='border' src={noteheader}/>
 			<div className={``}>
 				<div className="bg-linear-to-br from-sky-300 to-cyan-50 mx-auto w-screen origin-center">
-					<img className="absolute h-[100%] object-contain z-10 scale-x-90 origin-left" alt='Vetala' src={vetala}/>
-					<div className="w-screen grid grid-cols-3 py-5">
-						<div className={`${screenState.ratio<=breakpoints.bp4? 'col-span-3 col-start-1 origin-center' : `col-span-2 col-start-2 ${screenState.ratio<breakpoints.bp1?'origin-center':'origin-left'}` } z-20 h-fit p-2 space-y-5 m-auto place-items-center scale-y-90 scale-x-75 place-content-center`}>
-							<div className={`flex flex-col my-auto text-zinc-900 bg-[#ffffffcc] p-4 pt-10 pb-4 mb-2 ${screenState.ratio<breakpoints.bp1?'rounded-[2vh]':'rounded-[2vw]'} place-items-center place-content-center`}>
-								<p className={`${screenState.ratio<breakpoints.bp1?'text-[2vh]':'text-[1.5vw]'} font-medium p-1 text-shadow-md mb-4`}>
-									Subscribe to our newsletter to get updates and exclusive rewards
+					<img className={`absolute ${screenState.ratio<=0.6?'w-[90%]' : `${screenState.ratio<=0.75?'w-[70%]' : `h-[110%]`}`} object-contain overflow-visible object-cover z-10 scale-x-90 origin-top-left`} alt='Vetala' src={vetala}/>
+					<div className="w-screen grid grid-cols-4 py-5">
+						<div className={`col-span-4 col-start-1 z-20 h-fit px-2 space-y-5 m-auto place-items-center scale-y-90 scale-x-75 place-content-center`}>
+							<div className={`flex ${screenState.ratio<breakpoints.bp4?'':''} flex-col my-auto text-zinc-900 bg-[#ffffff00] p-4 pb-4 mb-2 rounded-full place-items-center place-content-center`}>
+								<p className={`${screenState.ratio<breakpoints.bp4?'text-[8vw]':'text-[4vh]'} text-black portrait:text-white font-bold p-1 text-shadow-md mb-30`}
+								   style={{
+									   backgroundClip: 'text',
+								   }}
+								>
+									Join Our Newsletter!
 								</p>
 								<form className='w-full' onSubmit={handleSubmit}>
 									<div className="text-left space-y-6">
-										<label htmlFor="name" className="block mb-2.5 ml-2 text-sm font-medium text-shadow-md">
+										<label htmlFor="name" className="block mb-2.5 ml-2 text-base text-black portrait:text-white font-medium text-shadow-md">
 											Name
 										</label>
 										<input type="text"
 										       id="name"
 										       value={name}
 										       onChange={(e) => setName(e.target.value)}
-										       className="bg-white text-heading text-sm text-black rounded-xl outline-1 focus-within:outline-2 focus-within:outline-[#7459a5] outline-[#7459a5] block w-full px-3 py-2.5 placeholder:text-body"
+										       className="bg-white text-heading text-base text-black rounded-xl outline-1 focus-within:outline-2 focus-within:outline-[#7459a5] outline-[#7459a5] block w-full px-3 py-2.5 placeholder:text-body"
 										       placeholder="Your name (optional)"
 										/>
-										<label htmlFor="email" className="block mb-2.5 ml-2 text-sm font-medium text-shadow-md">
-											Email address
+										<label htmlFor="email" className="block mb-2.5 ml-2 text-base text-black portrait:text-white font-medium text-shadow-md">
+											Email Address
 										</label>
 										<input type="email"
 										       id="email"
 										       value={email}
 										       onChange={(e) => setEmail(e.target.value)}
-										       className="bg-white text-heading text-sm text-black rounded-xl outline-1 focus-within:outline-2 focus-within:outline-[#7459a5] outline-[#7459a5] block w-full px-3 py-2.5 placeholder:text-body"
+										       className="bg-white text-heading text-base text-black rounded-xl outline-1 focus-within:outline-2 focus-within:outline-[#7459a5] outline-[#7459a5] block w-full px-3 py-2.5 placeholder:text-body"
 										       placeholder="email@example.com" required
 										/>
-										<button type="submit" className="block text-[1.2vw] text-center portrait:text-[1.5vh] items-center rounded-2xl border bg-zinc-100 active:bg-zinc-300 m-auto border-zinc-300 px-5 py-4 text-black! hover:text-pink-700! hover:scale-102 duration-100 transition-all" >
+										<button type="submit" className="block text-2xl font-bold text-center portrait:text-lg items-center rounded-full border bg-[#56ADAD] hover:bg-[#68bdbd] m-auto border-zinc-300 px-8 py-3 text-white! hover:scale-102 duration-100 transition-all" >
 											{processing ? (
 												<div className="place-items-center items-center place-content-center content-center text-center">
 													<svg className="animate-spin h-5 w-5 text-[#7459a5]" xmlns="http://www.w3.org/2000/svg"

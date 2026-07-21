@@ -10,17 +10,17 @@ import {useEffect} from "react";
 
 function Layout() {
 
-    const { scrollState, screenState, user } = useAppContext();
+    const { scrollState, screenState, user, userLoaded } = useAppContext();
     const location = useLocation();
     const navigate = useNavigate();
     const scale = 0.75 + ( 0.2 * screenState.dpr / 5 )
 
     useEffect(() => {
-        if (user==="loading") return
+        if (userLoaded===false) return
         if (location.pathname.includes("admin")&&user===null) {
             navigate("/");
         }
-    }, [user])
+    }, [user, userLoaded])
 
     return (
         <>
