@@ -208,8 +208,8 @@ function NewsletterEditor() {
 									})
 									setModal(null)
 								}
+								// eslint-disable-next-line no-unused-vars
 								catch (e) {
-									console.error(e);
 									toastState.addToast(`An error occurred while creating a new newsletter, please try again later!`, "error");
 								}
 							}
@@ -265,8 +265,8 @@ function NewsletterEditor() {
 							await publish("draft")
 							setModal(null)
 						}
+						// eslint-disable-next-line no-unused-vars
 						catch (e) {
-							console.error(e);
 							toastState.addToast(`An error occurred while publishing the newsletter!`, "error");
 							setModal(null)
 						}
@@ -280,8 +280,8 @@ function NewsletterEditor() {
 							await publish("publish")
 							setModal(null)
 						}
+						// eslint-disable-next-line no-unused-vars
 						catch (e) {
-							console.error(e);
 							toastState.addToast(`An error occurred while publishing the newsletter!`, "error");
 							setModal(null)
 						}
