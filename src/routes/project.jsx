@@ -122,7 +122,7 @@ function Project() {
                                     Abmarah is shaped by the hands of divine forces leading to a world enriched with myths, lore and constant new beginnings.
                                     <br/>
                                     <br/>
-                                    In an era of steam where new technology seeks to threaten the old empires of Kasaaq, while the Sun herself returns with vengeance, you must choose carefully to decide the fate of a nation.
+                                    In an era of steam where new technology seeks to threaten the old empires of Kasaaq and the Sun herself returns with vengeance, you must choose carefully to decide the fate of a nation.
                                 </p>
 
                                 <ParallaxImg
